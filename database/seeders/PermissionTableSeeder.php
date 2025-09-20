@@ -19,6 +19,12 @@ class PermissionTableSeeder extends Seeder
             'role-edit',
             'role-delete',
 
+            // Users
+            'user-list',
+            'user-create',
+            'user-edit',
+            'user-delete',
+
             // Products
             'product-list',
             'product-create',

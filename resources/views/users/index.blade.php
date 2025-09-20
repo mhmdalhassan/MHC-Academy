@@ -1,21 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
+    <div class="row mb-2">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
                 <h2>Users Management</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success mb-2" href="{{ route('users.create') }}"><i class="fa fa-plus"></i> Create New
-                    User</a>
+                @can('user-create')
+                    <a class="btn btn-success btn-sm" href="{{ route('users.create') }}">
+                        <i class="fa fa-plus"></i> Create New User
+                    </a>
+                @endcan
             </div>
         </div>
     </div>
 
     @session('success')
-        <div class="alert alert-success" role="alert">
-            {{ $value }}
+        <div class="alert alert-success">
+            {{ session('success') }}
         </div>
     @endsession
 
@@ -27,33 +30,41 @@
             <th>Roles</th>
             <th width="280px">Action</th>
         </tr>
-        @foreach ($data as $key => $user)
+        @foreach ($data as $user)
             <tr>
                 <td>{{ ++$i }}</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>
                     @if(!empty($user->getRoleNames()))
-                        @foreach($user->getRoleNames() as $v)
-                            <label class="badge bg-success">{{ $v }}</label>
+                        @foreach($user->getRoleNames() as $role)
+                            <label class="badge bg-success">{{ $role }}</label>
                         @endforeach
                     @endif
                 </td>
                 <td>
-                    <a class="btn btn-info btn-sm" href="{{ route('users.show', $user->id) }}"><i class="fa-solid fa-list"></i>
-                        Show</a>
-                    <a class="btn btn-primary btn-sm" href="{{ route('users.edit', $user->id) }}"><i
-                            class="fa-solid fa-pen-to-square"></i> Edit</a>
-                    <form method="POST" action="{{ route('users.destroy', $user->id) }}" style="display:inline"
+                    <form action="{{ route('users.destroy', $user->id) }}" method="POST"
                         onsubmit="return confirm('Are you sure you want to delete this user?');">
+
+                        <a class="btn btn-info btn-sm" href="{{ route('users.show', $user->id) }}">
+                            <i class="fa-solid fa-list"></i> Show
+                        </a>
+
+                        @can('user-edit')
+                            <a class="btn btn-primary btn-sm" href="{{ route('users.edit', $user->id) }}">
+                                <i class="fa-solid fa-pen-to-square"></i> Edit
+                            </a>
+                        @endcan
+
                         @csrf
                         @method('DELETE')
 
-                        <button type="submit" class="btn btn-danger btn-sm">
-                            <i class="fa-solid fa-trash"></i> Delete
-                        </button>
+                        @can('user-delete')
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fa-solid fa-trash"></i> Delete
+                            </button>
+                        @endcan
                     </form>
-
                 </td>
             </tr>
         @endforeach
@@ -61,5 +72,5 @@
 
     {!! $data->links('pagination::bootstrap-5') !!}
 
-    <p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>
+    <p class="text-center text-primary"><small>Users Module</small></p>
 @endsection
