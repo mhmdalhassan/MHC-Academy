@@ -1,32 +1,36 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2> Show Role</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('roles.index') }}"> Back</a>
+    <div class="container-fluid">
+        <div class="row mb-3">
+            <div
+                class="col-12 d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+                <h2>Show Role</h2>
+                <a class="btn btn-primary btn-sm mt-2 mt-md-0" href="{{ route('roles.index') }}">Back</a>
             </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Name:</strong>
-                {{ $role->name }}
+        <div class="row g-3">
+            <div class="col-12 col-md-6">
+                <div class="p-3 border rounded">
+                    <strong>Name:</strong>
+                    <p class="mb-0">{{ $role->name }}</p>
+                </div>
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Permissions:</strong>
-                @if(!empty($rolePermissions))
-                    @foreach($rolePermissions as $v)
-                        <label class="label label-success">{{ $v->name }},</label>
-                    @endforeach
-                @endif
+
+            <div class="col-12">
+                <div class="p-3 border rounded">
+                    <strong>Permissions:</strong>
+                    <div class="mt-1">
+                        @if(!empty($rolePermissions))
+                            @foreach($rolePermissions as $permission)
+                                <span class="badge bg-success me-1">{{ $permission->name }}</span>
+                            @endforeach
+                        @else
+                            <span class="text-muted">No Permissions Assigned</span>
+                        @endif
+                    </div>
+                </div>
             </div>
         </div>
     </div>
