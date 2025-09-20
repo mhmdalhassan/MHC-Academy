@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Product extends Model
+class Blog extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +17,8 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'detail'
+        'title',
+        'content',
+        'image',
     ];
 }

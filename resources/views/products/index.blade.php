@@ -34,21 +34,28 @@
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->detail }}</td>
                 <td>
-                    <form action="{{ route('products.destroy', $product->id) }}" method="POST">
-                        <a class="btn btn-info btn-sm" href="{{ route('products.show', $product->id) }}"><i
-                                class="fa-solid fa-list"></i> Show</a>
+                    <form action="{{ route('products.destroy', $product->id) }}" method="POST"
+                        onsubmit="return confirm('Are you sure you want to delete this product?');">
+                        <a class="btn btn-info btn-sm" href="{{ route('products.show', $product->id) }}">
+                            <i class="fa-solid fa-list"></i> Show
+                        </a>
+
                         @can('product-edit')
-                            <a class="btn btn-primary btn-sm" href="{{ route('products.edit', $product->id) }}"><i
-                                    class="fa-solid fa-pen-to-square"></i> Edit</a>
+                            <a class="btn btn-primary btn-sm" href="{{ route('products.edit', $product->id) }}">
+                                <i class="fa-solid fa-pen-to-square"></i> Edit
+                            </a>
                         @endcan
 
                         @csrf
                         @method('DELETE')
 
                         @can('product-delete')
-                            <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i> Delete</button>
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fa-solid fa-trash"></i> Delete
+                            </button>
                         @endcan
                     </form>
+
                 </td>
             </tr>
         @endforeach

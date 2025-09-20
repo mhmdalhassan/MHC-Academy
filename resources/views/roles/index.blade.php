@@ -40,11 +40,14 @@
                     @endcan
 
                     @can('role-delete')
-                        <form method="POST" action="{{ route('roles.destroy', $role->id) }}" style="display:inline">
+                        <form method="POST" action="{{ route('roles.destroy', $role->id) }}" style="display:inline"
+                            onsubmit="return confirm('Are you sure you want to delete this role?');">
                             @csrf
                             @method('DELETE')
 
-                            <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i> Delete</button>
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fa-solid fa-trash"></i> Delete
+                            </button>
                         </form>
                     @endcan
                 </td>

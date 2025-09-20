@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 
@@ -14,18 +13,27 @@ class PermissionTableSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
+            // Roles
             'role-list',
             'role-create',
             'role-edit',
             'role-delete',
+
+            // Products
             'product-list',
             'product-create',
             'product-edit',
-            'product-delete'
+            'product-delete',
+
+            // Blogs
+            'blog-list',
+            'blog-create',
+            'blog-edit',
+            'blog-delete',
         ];
 
         foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
+            Permission::firstOrCreate(['name' => $permission]); // prevent duplicates
         }
     }
 }
