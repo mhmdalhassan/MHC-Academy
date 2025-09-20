@@ -11,6 +11,8 @@ use DB;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 
+
+
 class RoleController extends Controller
 {
     /**
@@ -64,7 +66,8 @@ class RoleController extends Controller
 
         $permissionsID = array_map(
             function ($value) {
-                return (int) $value; },
+                return (int) $value;
+            },
             $request->input('permission')
         );
 
@@ -127,7 +130,8 @@ class RoleController extends Controller
 
         $permissionsID = array_map(
             function ($value) {
-                return (int) $value; },
+                return (int) $value;
+            },
             $request->input('permission')
         );
 

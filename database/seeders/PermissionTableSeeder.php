@@ -30,6 +30,18 @@ class PermissionTableSeeder extends Seeder
             'blog-create',
             'blog-edit',
             'blog-delete',
+
+            // Features
+            'feature-list',
+            'feature-create',
+            'feature-edit',
+            'feature-delete',
+
+            // Offers
+            'offer-list',
+            'offer-create',
+            'offer-edit',
+            'offer-delete',
         ];
 
         foreach ($permissions as $permission) {

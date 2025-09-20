@@ -7,6 +7,9 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\FeatureController;
+use App\Http\Controllers\OfferController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,4 +24,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
     Route::resource('blogs', BlogController::class);
+    Route::resource('features', FeatureController::class);
+    Route::resource('offers', OfferController::class);
 });
