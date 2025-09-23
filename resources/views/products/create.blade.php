@@ -55,8 +55,9 @@
                         <option value="Web Development">Web Development</option>
                         <option value="Mobile Application">Mobile Application</option>
                         <option value="Artificial Intelligence">Artificial Intelligence</option>
-                        <option value="UI/UX Design">UI/UX Design</option>
-                        <option value="Data Science">Data Science</option>
+                        <option value="Computer Engineering">Computer Engineering</option>
+                        <option value="Data Analysis">Data Analysis</option>
+                        <option value="Cybersecurity">Cybersecurity</option>
                     </select>
                 </div>
             </div>

@@ -88,7 +88,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/course">Courses</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Blogs</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
@@ -104,9 +104,60 @@
 
 
     <!-- Footer -->
-    <footer>
-        <p>© 2025 MH-Code Academy. All rights reserved.</p>
+    <!-- ================== FOOTER ================== -->
+    <footer class="footer mt-2 text-white pt-4 pb-3"
+        style="background: linear-gradient(135deg, #07103a 0%, #0b254d 100%);">
+        <div class="container">
+            <div class="row gy-4 align-items-center">
+
+                <!-- Left: About -->
+                <div class="col-lg-4 col-md-6 text-center text-md-start">
+                    <h5 class="fw-bold mb-2">MH-Code Academy</h5>
+                    <p class="small mb-0">
+                        Building careers through coding, mentorship, and real-world projects.
+                    </p>
+                </div>
+
+                <!-- Middle: Quick Links -->
+                <div class="col-lg-4 col-md-6 text-center">
+                    <h6 class="fw-bold mb-2">Quick Links</h6>
+                    <ul class="list-unstyled mb-0">
+                        <li><a href="#" class="text-white-50 text-decoration-none">Courses</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">About Us</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Services</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Right: Social Icons -->
+                <div class="col-lg-4 text-center text-lg-end">
+                    <h6 class="fw-bold mb-2">Follow Us</h6>
+                    <div class="d-flex justify-content-center justify-content-lg-end gap-3">
+                        <a href="#" class="text-white fs-5"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="text-white fs-5"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white fs-5"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white fs-5"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="text-white fs-5"><i class="bi bi-youtube"></i></a>
+                        <a href="#" class="text-white fs-5"><i class="bi bi-github"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom line -->
+            <div class="text-center mt-4 pt-3 border-top border-secondary small">
+                © {{ date('Y') }} MH-Code Academy. All Rights Reserved.
+            </div>
+        </div>
     </footer>
+
+    <!-- ====== Footer Styles ====== -->
+    <style>
+        .footer a:hover {
+            color: #ffb347 !important;
+            /* orange hover */
+        }
+    </style>
+
 
     <!-- Bootstrap + JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
