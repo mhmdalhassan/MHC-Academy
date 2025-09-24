@@ -9,15 +9,18 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\OfferController;
+use App\Models\Product;
 
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/course', function () {
-    return view('course');
-});
+
+
+Route::get('/course', [ProductController::class, 'courses'])->name('course');
+Route::get('/course-description/{product}', [ProductController::class, 'description'])->name('course.description');
+
 
 Auth::routes();
 

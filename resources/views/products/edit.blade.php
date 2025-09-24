@@ -39,6 +39,15 @@
                 <input type="number" name="price" value="{{ $product->price }}" class="form-control" step="0.01" required>
             </div>
 
+            <div class="col-md-6 mb-2">
+                <strong>Duration :</strong>
+                <div class="input-group">
+                    <input type="number" name="duration" value="{{ $product->duration }}" class="form-control" required>
+                    <span class="input-group-text">Months</span>
+                </div>
+            </div>
+
+
             <div class="col-md-12 mb-2">
                 <strong>Detail:</strong>
                 <textarea name="detail" class="form-control" rows="4">{{ $product->detail }}</textarea>
@@ -59,9 +68,12 @@
                 <option value="Mobile Application" {{ $product->category == 'Mobile Application' ? 'selected' : '' }}>Mobile
                     Application</option>
                 <option value="Artificial Intelligence" {{ $product->category == 'Artificial Intelligence' ? 'selected' : '' }}>Artificial Intelligence</option>
-                <option value="UI/UX Design" {{ $product->category == 'UI/UX Design' ? 'selected' : '' }}>UI/UX Design
+                <option value="Computer Engineering" {{ $product->category == 'Computer Engineering' ? 'selected' : '' }}>
+                    Computer Engineering
                 </option>
-                <option value="Data Science" {{ $product->category == 'Data Science' ? 'selected' : '' }}>Data Science
+                <option value="Data Analysis" {{ $product->category == 'Data Analysis' ? 'selected' : '' }}>Data Analysis
+                </option>
+                <option value="Cybersecurity" {{ $product->category == 'Cybersecurity' ? 'selected' : '' }}>Cybersecurity
                 </option>
             </select>
 

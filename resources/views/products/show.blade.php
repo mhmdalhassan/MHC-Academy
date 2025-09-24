@@ -27,6 +27,14 @@
                 </div>
             </div>
 
+            <div class="col-12 col-md-6">
+                <div class="p-3 border rounded">
+                    <strong>Duration:</strong>
+                    <p class="mb-0">{{ $product->duration }} Months</p>
+                </div>
+            </div>
+
+
             <div class="col-12">
                 <div class="p-3 border rounded">
                     <strong>Detail:</strong>

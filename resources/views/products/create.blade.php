@@ -37,6 +37,15 @@
                 <input type="number" name="price" class="form-control" step="0.01" placeholder="Price" required>
             </div>
 
+            <div class="col-md-6 mb-2">
+                <strong>Duration :</strong>
+                <div class="input-group">
+                    <input type="number" name="duration" class="form-control" placeholder="Duration" required>
+                    <span class="input-group-text">Months</span>
+                </div>
+            </div>
+
+
             <div class="col-md-12 mb-2">
                 <strong>Detail:</strong>
                 <textarea name="detail" class="form-control" rows="4" placeholder="Detail"></textarea>

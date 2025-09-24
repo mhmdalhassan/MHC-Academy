@@ -20,6 +20,7 @@ class Product extends Model
         'detail',
         'image',
         'price',
-        'category'
+        'category',
+        'duration'
     ];
 }

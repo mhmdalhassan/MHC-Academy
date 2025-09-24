@@ -87,12 +87,24 @@
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/course">Courses</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Blogs</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="{{ url('/') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('course') ? 'active' : '' }}"
+                            href="{{ route('course') }}">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('blogs') ? 'active' : '' }}" href="#">Blogs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="#">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('contact') ? 'active' : '' }}" href="#">Contact Us</a>
+                    </li>
                 </ul>
+
             </div>
         </div>
     </nav>
