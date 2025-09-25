@@ -9,7 +9,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\OfferController;
-use App\Models\Product;
+use App\Http\Controllers\ContactController;
+
 
 
 Route::get('/', function () {
@@ -20,6 +21,20 @@ Route::get('/', function () {
 
 Route::get('/course', [ProductController::class, 'courses'])->name('course');
 Route::get('/course-description/{product}', [ProductController::class, 'description'])->name('course.description');
+
+
+
+Route::get('/blog', [BlogController::class, 'clientIndex'])->name('client.blog');
+
+
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
+
+Route::get('/contact-us', [ContactController::class, 'index'])->name('contact.index');
+Route::post('/contact-us', [ContactController::class, 'store'])->name('contact.store');
+Route::get('/contact-us/products', [ContactController::class, 'getProducts'])->name('contact.products'); // AJAX
 
 
 Auth::routes();

@@ -23,4 +23,10 @@ class Product extends Model
         'category',
         'duration'
     ];
+
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class);
+    }
+
 }

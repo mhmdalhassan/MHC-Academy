@@ -25,6 +25,14 @@ class BlogController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
+    public function clientIndex()
+    {
+        $blogs = Blog::latest()->get(); // all blogs
+        return view('blog', compact('blogs'));
+    }
+
+
+
     public function create(): View
     {
         return view('blogs.create');

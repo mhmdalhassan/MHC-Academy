@@ -115,19 +115,30 @@
                                 </li>
                             @endif
                         @else
-                            <li><a class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}"
-                                    href="{{ route('users.index') }}">Manage Users</a></li>
-                            <li><a class="nav-link {{ request()->routeIs('roles.*') ? 'active' : '' }}"
-                                    href="{{ route('roles.index') }}">Manage Role</a></li>
-                            <li><a class="nav-link {{ request()->routeIs('products.*') ? 'active' : '' }}"
-                                    href="{{ route('products.index') }}">Manage Product</a></li>
-                            <li><a class="nav-link {{ request()->routeIs('blogs.*') ? 'active' : '' }}"
-                                    href="{{ route('blogs.index') }}">Manage Blogs</a></li>
-                            <li><a class="nav-link {{ request()->routeIs('features.*') ? 'active' : '' }}"
-                                    href="{{ route('features.index') }}">Manage Features</a></li>
-                            <li><a class="nav-link {{ request()->routeIs('offers.*') ? 'active' : '' }}"
-                                    href="{{ route('offers.index') }}">Manage Offers</a></li>
-
+                            @can('user-list')
+                                <li><a class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}"
+                                        href="{{ route('users.index') }}">Manage Users</a></li>
+                            @endcan
+                            @can('role-list')
+                                <li><a class="nav-link {{ request()->routeIs('roles.*') ? 'active' : '' }}"
+                                        href="{{ route('roles.index') }}">Manage Role</a></li>
+                            @endcan
+                            @can('product-list')
+                                <li><a class="nav-link {{ request()->routeIs('products.*') ? 'active' : '' }}"
+                                        href="{{ route('products.index') }}">Manage Product</a></li>
+                            @endcan
+                            @can('blog-list')
+                                <li><a class="nav-link {{ request()->routeIs('blogs.*') ? 'active' : '' }}"
+                                        href="{{ route('blogs.index') }}">Manage Blogs</a></li>
+                            @endcan
+                            @can('feature-list')
+                                <li><a class="nav-link {{ request()->routeIs('features.*') ? 'active' : '' }}"
+                                        href="{{ route('features.index') }}">Manage Features</a></li>
+                            @endcan
+                            @can('offer-list')
+                                <li><a class="nav-link {{ request()->routeIs('offers.*') ? 'active' : '' }}"
+                                        href="{{ route('offers.index') }}">Manage Offers</a></li>
+                            @endcan
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

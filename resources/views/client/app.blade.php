@@ -95,14 +95,23 @@
                             href="{{ route('course') }}">Courses</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('blogs') ? 'active' : '' }}" href="#">Blogs</a>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('blog') ? 'active' : '' }}"
+                            href="{{ route('client.blog') }}">Blogs</a>
+
+                    </li>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="#">About Us</a>
+                        <a class="nav-link {{ request()->is('about') ? 'active' : '' }}"
+                            href="{{ route('about') }}">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('contact') ? 'active' : '' }}" href="#">Contact Us</a>
+                        <a class="nav-link {{ request()->is('contact-us') ? 'active' : '' }}"
+                            href="{{ route('contact.index') }}">
+                            Contact Us
+                        </a>
                     </li>
+
                 </ul>
 
             </div>
