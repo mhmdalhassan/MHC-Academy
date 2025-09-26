@@ -88,9 +88,10 @@
     <div id="app">
         <nav class="navbar navbar-expand-md shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Logo
-                </a>
+               <a class="navbar-brand" href="/">
+                <img src="{{ asset('images/logo.png') }}" alt="MH-Code Academy Logo" width="120" height="55">
+                
+            </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -134,7 +135,7 @@
                              @can('request-list')
                                 <li><a class="nav-link" href="{{ route('requests.index') }}">Requests</a></li>
                             @endcan
-                            
+
                             @can('feature-list')
                                 <li><a class="nav-link {{ request()->routeIs('features.*') ? 'active' : '' }}"
                                         href="{{ route('features.index') }}">Manage Features</a></li>
