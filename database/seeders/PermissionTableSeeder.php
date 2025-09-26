@@ -43,12 +43,11 @@ class PermissionTableSeeder extends Seeder
             'feature-edit',
             'feature-delete',
 
-            // Offers
-            'offer-list',
-            'offer-create',
-            'offer-edit',
-            'offer-delete',
+            // request
+             'request-list',
+           
         ];
+        
 
         foreach ($permissions as $permission) {
             Permission::firstOrCreate(['name' => $permission]); // prevent duplicates

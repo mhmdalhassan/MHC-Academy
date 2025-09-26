@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class ContactController extends Controller
 {
@@ -14,10 +13,17 @@ class ContactController extends Controller
      */
     public function index()
     {
-        // Fetch all products as id => name (for subject input)
         $products = Product::pluck('name', 'id');
-
         return view('contact-us', compact('products'));
+    }
+
+    /**
+     * Show all contact requests in admin
+     */
+    public function adminRequests()
+    {
+        $requests = Contact::latest()->get(); // أحدث الرسائل أولاً
+        return view('requests.index', compact('requests'));
     }
 
     /**
@@ -29,23 +35,21 @@ class ContactController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'nullable|regex:/^\+?[0-9]+$/|max:20',
-            'subject' => 'required|string|max:255',  // product name instead of ID
+            'subject' => 'required|string|max:255',  // product name
             'description' => 'nullable|string|max:1000',
         ]);
 
-        // Look up product by name
         $product = Product::where('name', $validated['subject'])->first();
 
-        // fallback if product not found (shouldn't happen if dropdown is used)
         if (!$product) {
             return redirect()->back()->withErrors(['subject' => 'Invalid product selected']);
         }
 
-        $contact = Contact::create([
+        Contact::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'phone' => $validated['phone'] ?? null,
-            'product_id' => $product->id,      // still keep product_id link
+            'product_id' => $product->id,
             'category' => $product->category,
             'description' => $validated['description'] ?? null,
         ]);
@@ -55,8 +59,6 @@ class ContactController extends Controller
 
     /**
      * (Optional) AJAX method to filter products by category
-     * Not used now since you removed category from form,
-     * but kept for flexibility.
      */
     public function getProducts(Request $request)
     {

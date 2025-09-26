@@ -131,14 +131,17 @@
                                 <li><a class="nav-link {{ request()->routeIs('blogs.*') ? 'active' : '' }}"
                                         href="{{ route('blogs.index') }}">Manage Blogs</a></li>
                             @endcan
+                             @can('request-list')
+                                <li><a class="nav-link" href="{{ route('requests.index') }}">Requests</a></li>
+                            @endcan
+                            
                             @can('feature-list')
                                 <li><a class="nav-link {{ request()->routeIs('features.*') ? 'active' : '' }}"
                                         href="{{ route('features.index') }}">Manage Features</a></li>
                             @endcan
-                            @can('offer-list')
-                                <li><a class="nav-link {{ request()->routeIs('offers.*') ? 'active' : '' }}"
-                                        href="{{ route('offers.index') }}">Manage Offers</a></li>
-                            @endcan
+                           
+                          
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
