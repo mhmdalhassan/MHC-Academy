@@ -34,7 +34,9 @@ Route::get('/about', function () {
 
 Route::get('/contact-us', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact-us', [ContactController::class, 'store'])->name('contact.store');
-Route::get('/contact-us/products', [ContactController::class, 'getProducts'])->name('contact.products'); // AJAX
+
+// optional if you still want ajax filtering later:
+Route::get('/contact-us/products', [ContactController::class, 'getProducts'])->name('contact.products');
 
 
 Auth::routes();
