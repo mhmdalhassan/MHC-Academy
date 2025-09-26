@@ -86,9 +86,11 @@ class ProductController extends Controller
             'category' => 'required|string',
             'duration' => 'required|numeric',
             'image' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'difficulty' => 'required|in:Beginner,Intermediate,Advanced',
+            'lessons' => 'required|integer|min:0',
         ]);
 
-        $data = $request->only(['name', 'price', 'detail', 'category', 'duration']);
+        $data = $request->only(['name', 'price', 'detail', 'category', 'duration', 'difficulty', 'lessons']);
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('products', 'public');
@@ -119,9 +121,11 @@ class ProductController extends Controller
             'category' => 'required|string',
             'duration' => 'required|numeric',
             'image' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'difficulty' => 'required|in:Beginner,Intermediate,Advanced',
+            'lessons' => 'required|integer|min:0',
         ]);
 
-        $data = $request->only(['name', 'price', 'detail', 'category', 'duration']);
+        $data = $request->only(['name', 'price', 'detail', 'category', 'duration', 'difficulty', 'lessons']);
 
         if ($request->hasFile('image')) {
             // Delete old image if exists

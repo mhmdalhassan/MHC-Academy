@@ -21,7 +21,9 @@ class Product extends Model
         'image',
         'price',
         'category',
-        'duration'
+        'duration',
+        'difficulty',
+        'lessons',
     ];
 
     public function contacts()
