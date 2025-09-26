@@ -2,8 +2,8 @@
 
 @section('content')
 
-    {{-- ================== SECTION 1 ================== --}}
-    <section class="d-flex align-items-center hero-section py-4">
+{{-- ================== SECTION 1 ================== --}}
+ <section class="d-flex align-items-center hero-section py-4">
         <div class="container">
             <div class="row align-items-center">
                 <!-- LEFT TEXT -->
@@ -490,7 +490,7 @@
 
 
     {{-- ================== SECTION 7: Statistics ================== --}}
-    <section class="mh-section mt-2 " style="overflow:hidden;">
+            <section class="mh-section mt-2 " style="overflow:hidden;">
         <div class=" rounded-5 p-5 shadow-lg"
             style="background: linear-gradient(135deg, #2c3e91 0%, #3d5cb8 100%); color:#fff;">
 

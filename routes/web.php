@@ -8,9 +8,12 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\FeatureController;
-use App\Http\Controllers\OfferController;
 use App\Http\Controllers\ContactController;
+<<<<<<< HEAD
 use App\Models\Feature;
+=======
+use App\Http\Controllers\RequestController;
+>>>>>>> origin/mohammad
 
 
 Route::get('/', function () {
@@ -36,8 +39,19 @@ Route::get('/about', function () {
 Route::get('/contact-us', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact-us', [ContactController::class, 'store'])->name('contact.store');
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/requests', [RequestController::class, 'index'])->name('requests.index');
+    Route::post('/admin/requests/send-mail/{id}', [RequestController::class, 'sendMail'])->name('requests.sendMail');
+});
+
+
 // optional if you still want ajax filtering later:
 Route::get('/contact-us/products', [ContactController::class, 'getProducts'])->name('contact.products');
+
+
+
+
+
 
 
 Auth::routes();
@@ -50,5 +64,4 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('products', ProductController::class);
     Route::resource('blogs', BlogController::class);
     Route::resource('features', FeatureController::class);
-    Route::resource('offers', OfferController::class);
 });
