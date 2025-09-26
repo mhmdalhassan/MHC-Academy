@@ -27,6 +27,14 @@ class FeatureController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
+    public function featuresSection()
+    {
+        // Get only active features
+        $features = Feature::where('is_active', true)->get();
+
+        return view('home', compact('features')); // or the view where your section is
+    }
+
     public function create(): View
     {
         return view('features.create');

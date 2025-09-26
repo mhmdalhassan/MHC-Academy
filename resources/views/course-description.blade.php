@@ -22,8 +22,9 @@
                         <span
                             class="badge bg-accent text-dark fw-bold mb-2">{{ $product->category ?? 'Premium Course' }}</span>
                         <h1 class="display-5 fw-bold mb-3">{{ $product->name }}</h1>
-                        <p class="lead text-muted">
-                            {{ $product->tagline ?? 'Master in-demand skills with hands-on projects' }}</p>
+                        <p class="lead text-white">
+                            {{ $product->tagline ?? 'Master in-demand skills with hands-on projects' }}
+                        </p>
                     </div>
 
                     <!-- Course Stats -->
@@ -66,12 +67,12 @@
                                 <i class="bi bi-star-half"></i>
                             </div>
                             <span class="fw-bold me-2">4.7</span>
-                            <span class="text-muted">({{ $product->reviews ?? '356' }} reviews)</span>
+                            <span class="text-white">({{ $product->reviews ?? '356' }} reviews)</span>
                         </div>
                         <div class="progress mb-1" style="height: 6px;">
                             <div class="progress-bar bg-accent" style="width: 85%"></div>
                         </div>
-                        <small class="text-muted">98% of students recommend this course</small>
+                        <small class="text-white">98% of students recommend this course</small>
                     </div>
 
                     <!-- Price & CTA -->
@@ -87,7 +88,7 @@
                         </div>
 
                         <div class="d-flex flex-wrap gap-3">
-                            <a href="#" class="btn btn-accent btn-lg px-4">
+                            <a href="{{ route('contact.index') }}" class="btn btn-accent btn-lg px-4">
                                 <i class="bi bi-cart-plus me-2"></i>Enroll Now
                             </a>
                             <a href="#" class="btn btn-outline-accent btn-lg px-4">
@@ -99,7 +100,7 @@
                         </div>
 
                         <div class="mt-3">
-                            <small class="text-muted">
+                            <small class="text-white">
                                 <i class="bi bi-shield-check me-1"></i>
                                 30-day money-back guarantee • Lifetime access
                             </small>

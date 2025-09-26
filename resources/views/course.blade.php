@@ -98,7 +98,6 @@
                 <div class="col-md-8">
                     <h2 class="fw-bold mb-2">Featured Courses</h2>
                     <p class="text-white">Hands-on courses designed to get you job-ready</p>
-
                 </div>
                 <div class="col-md-4 text-md-end">
                     <div class="d-inline-block bg-primary-dark rounded-pill px-3 py-1">
@@ -111,9 +110,22 @@
             <div class="row g-4" id="coursesContainer">
                 @forelse($products as $product)
                     @php
-                        // determine difficulty value (support both 'difficulty' and older 'level' fields)
                         $difficulty = $product->difficulty ?? $product->level ?? 'Beginner';
                         $difficultySlug = strtolower($difficulty);
+
+                        // Determine correct image path
+                        if ($product->image) {
+                            // Seeder images
+                            $seederImages = ['full-stack-web-development.jpg', 'data-sc.jpeg', 'ui-ux.jpg', 'python.jpg'];
+                            if (in_array($product->image, $seederImages)) {
+                                $imagePath = asset('images/products/' . $product->image);
+                            } else {
+                                // Uploaded images
+                                $imagePath = asset('storage/' . $product->image);
+                            }
+                        } else {
+                            $imagePath = null;
+                        }
                     @endphp
 
                     <div class="col-12 col-sm-6 col-lg-4 col-xl-3 course-card-wrapper" data-aos="fade-up"
@@ -123,24 +135,15 @@
                             <a href="{{ route('course.description', $product->id) }}" class="text-decoration-none">
                                 <!-- Image -->
                                 <div class="course-image-container position-relative">
-                                    @if($product->image)
-                                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
-                                            class="course-image" loading="lazy">
+                                    @if($imagePath)
+                                        <img src="{{ $imagePath }}" alt="{{ $product->name }}" class="course-image" loading="lazy">
                                     @else
                                         <div class="course-image-placeholder">
                                             <i class="bi bi-laptop display-4"></i>
                                         </div>
                                     @endif
-
-                                    <!-- Category Badge -->
-                                    <div class="course-badge">
-                                        {{ $product->category ?? 'Development' }}
-                                    </div>
-
-                                    <!-- Difficulty Badge (same color as category) -->
-                                    <div class="course-level">
-                                        {{ $difficulty }}
-                                    </div>
+                                    <div class="course-badge">{{ $product->category ?? 'Development' }}</div>
+                                    <div class="course-level">{{ $difficulty }}</div>
                                 </div>
 
                                 <!-- Content -->
@@ -149,26 +152,16 @@
                                     <p class="course-description small mb-3">
                                         {{ Str::limit($product->detail ?? 'Learn essential skills through hands-on projects and expert guidance.', 80) }}
                                     </p>
-
-                                    <!-- Instructor -->
                                     <div class="instructor-info small mb-3">
                                         <i class="bi bi-person me-1"></i>
                                         <span>By {{ $product->instructor ?? 'Industry Expert' }}</span>
                                     </div>
-
-                                    <!-- Meta Info -->
-                                    <div class="course-meta">
-                                        <span>
-                                            <i class="bi bi-clock me-1"></i>
-                                            {{ $product->duration }} {{ $product->duration > 1 ? 'months' : 'month' }}
-                                        </span>
-                                        <span>
-                                            <i class="bi bi-bar-chart me-1"></i>
-                                            {{ $product->lessons ?? 0 }} lessons
-                                        </span>
+                                    <div class="course-meta mb-3">
+                                        <span><i class="bi bi-clock me-1"></i>{{ $product->duration }}
+                                            {{ $product->duration > 1 ? 'months' : 'month' }}</span>
+                                        <span class="ms-3"><i class="bi bi-bar-chart me-1"></i>{{ $product->lessons ?? 0 }}
+                                            lessons</span>
                                     </div>
-
-                                    <!-- Rating -->
                                     <div class="rating mb-3">
                                         <span class="rating-stars">
                                             <i class="bi bi-star-fill"></i>
@@ -179,11 +172,8 @@
                                         </span>
                                         <span class="small text-white ms-1">({{ $product->rating ?? '4.5' }})</span>
                                     </div>
-
-                                    <!-- Price & Action -->
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <div class="course-price fw-bold text-accent">
-                                            ${{ number_format($product->price, 2) }}
+                                        <div class="course-price fw-bold text-accent">${{ number_format($product->price, 2) }}
                                         </div>
                                         <div class="enroll-btn">
                                             <span class="btn btn-sm btn-outline-accent">View Course</span>
@@ -213,6 +203,10 @@
             @endif
         </div>
     </section>
+
+
+
+
 
     <!-- CTA Section -->
     <section class="cta-section py-5">

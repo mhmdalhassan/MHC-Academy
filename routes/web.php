@@ -10,11 +10,12 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\ContactController;
-
+use App\Models\Feature;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    $features = Feature::where('is_active', true)->get();
+    return view('welcome', compact('features'));
 });
 
 

@@ -52,15 +52,15 @@
                         </span>
                     </div>
 
-                    <!-- Blog Body Preview -->
-                    <p class="text-white mb-4" style="line-height: 1.8;">
-                        {{ Str::limit(strip_tags($blog->content), 200) }}
-                    </p>
+                    <!-- Full Blog Content -->
+                    <div class="text-white mb-4" style="line-height: 1.8;">
+                        {!! $blog->content !!}
+                    </div>
 
                     <!-- Tags -->
                     <div class="mt-3">
                         <span class="badge bg-light text-dark me-2 mb-2 px-3 py-2">
-                            <i class="bi bi-code-slash me-1"></i> Laravel
+                            <i class="bi bi-code-slash me-1"></i> AI
                         </span>
                         <span class="badge bg-info text-dark me-2 mb-2 px-3 py-2">
                             <i class="bi bi-laptop me-1"></i> Web Dev
@@ -68,12 +68,17 @@
                         <span class="badge bg-warning text-dark mb-2 px-3 py-2">
                             <i class="bi bi-lightbulb me-1"></i> Tips
                         </span>
-                    </div>
+                        <!-- Cybersecurity Badge -->
+                        <span class="badge mb-2 px-3 py-2" style="background-color: #FF4D4F; color: #FFFFFF;">
+                            <i class="bi bi-shield-lock me-1"></i> Cybersecurity
+                        </span>
 
-                    <!-- Read More Button -->
-                    <button class="btn btn-outline-info mt-3 px-4 py-2 fw-bold">
-                        <i class="bi bi-arrow-right me-2"></i>Read Full Article
-                    </button>
+                        <!-- Mobile Application Badge -->
+                        <span class="badge mb-2 px-3 py-2" style="background-color: #1E90FF; color: #FFFFFF;">
+                            <i class="bi bi-phone me-1"></i> Mobile Application
+                        </span>
+
+                    </div>
                 </div>
 
                 <!-- Blog Image -->
@@ -91,6 +96,7 @@
                     </div>
                 </div>
             </section>
+
         @endforeach
 
         <!-- Featured Highlights -->

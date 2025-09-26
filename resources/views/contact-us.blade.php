@@ -3,8 +3,7 @@
 @section('content')
     <!-- Hero Section -->
     <section class="text-center py-5 mb-5"
-             style="background: linear-gradient(135deg, #3B38A0 0%, #1A2A80 100%); border-radius: 20px;"
-             data-aos="fade-down">
+        style="background: linear-gradient(135deg, #3B38A0 0%, #1A2A80 100%); border-radius: 20px;" data-aos="fade-down">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
@@ -63,8 +62,8 @@
                                     <span class="input-group-text bg-info border-info">
                                         <i class="bi bi-person-fill text-white"></i>
                                     </span>
-                                    <input type="text" name="name" value="{{ old('name') }}"
-                                           class="form-control" placeholder="Your Name" required>
+                                    <input type="text" name="name" value="{{ old('name') }}" class="form-control"
+                                        placeholder="Your Name" required>
                                 </div>
                             </div>
 
@@ -74,8 +73,8 @@
                                     <span class="input-group-text bg-info border-info">
                                         <i class="bi bi-envelope-fill text-white"></i>
                                     </span>
-                                    <input type="email" name="email" value="{{ old('email') }}"
-                                           class="form-control" placeholder="your@email.com" required>
+                                    <input type="email" name="email" value="{{ old('email') }}" class="form-control"
+                                        placeholder="your@email.com" required>
                                 </div>
                             </div>
 
@@ -85,8 +84,8 @@
                                     <span class="input-group-text bg-info border-info">
                                         <i class="bi bi-phone-fill text-white"></i>
                                     </span>
-                                    <input type="tel" name="phone" value="{{ old('phone') }}"
-                                           class="form-control" placeholder="+1 (555) 123-4567">
+                                    <input type="tel" name="phone" value="{{ old('phone') }}" class="form-control"
+                                        placeholder="+1 (555) 123-4567">
                                 </div>
                             </div>
 
@@ -114,7 +113,8 @@
                                         <i class="bi bi-pencil-fill text-white mt-1"></i>
                                     </span>
                                     <textarea name="description" class="form-control" rows="5"
-                                              placeholder="Tell us about your inquiry..." required>{{ old('description') }}</textarea>
+                                        placeholder="Tell us about your inquiry..."
+                                        required>{{ old('description') }}</textarea>
                                 </div>
                             </div>
 
@@ -137,37 +137,46 @@
                     </h3>
 
                     <div class="contact-item d-flex align-items-center mb-4">
-                        <div class="contact-icon bg-info rounded-circle d-flex align-items-center justify-content-center me-3">
+                        <div
+                            class="contact-icon bg-info rounded-circle d-flex align-items-center justify-content-center me-3">
                             <i class="bi bi-geo-alt-fill text-white"></i>
                         </div>
                         <div>
                             <h6 class="text-warning mb-1">Our Location</h6>
-                            <p class="text-light small mb-0">123 Coding Street, Tech City<br>Digital Valley, DV 12345</p>
+                            <p class="text-light small mb-0">
+                                Online Academy – Learn from Anywhere<br>
+                                100% Remote & Flexible
+                            </p>
                         </div>
+
                     </div>
 
                     <div class="contact-item d-flex align-items-center mb-4">
-                        <div class="contact-icon bg-info rounded-circle d-flex align-items-center justify-content-center me-3">
+                        <div
+                            class="contact-icon bg-info rounded-circle d-flex align-items-center justify-content-center me-3">
                             <i class="bi bi-telephone-fill text-white"></i>
                         </div>
                         <div>
                             <h6 class="text-warning mb-1">Phone Number</h6>
-                            <p class="text-light small mb-0">+1 (555) 123-CODE<br>Mon-Fri, 9:00 AM - 6:00 PM</p>
+                            <p class="text-light small mb-0">+961 76 179 450<br>Mon-Fri, 9:00 AM - 6:00 PM</p>
                         </div>
                     </div>
 
                     <div class="contact-item d-flex align-items-center mb-4">
-                        <div class="contact-icon bg-info rounded-circle d-flex align-items-center justify-content-center me-3">
+                        <div
+                            class="contact-icon bg-info rounded-circle d-flex align-items-center justify-content-center me-3">
                             <i class="bi bi-envelope-fill text-white"></i>
                         </div>
                         <div>
                             <h6 class="text-warning mb-1">Email Address</h6>
-                            <p class="text-light small mb-0">hello@codingacademy.com<br>support@codingacademy.com</p>
+                            <p class="text-light small mb-0">
+                                mhcacadimy@gmail.com<br>hassanawadk123@gmail.com<br>mhmdalhassan66@gmail.com</p>
                         </div>
                     </div>
 
                     <div class="contact-item d-flex align-items-center">
-                        <div class="contact-icon bg-info rounded-circle d-flex align-items-center justify-content-center me-3">
+                        <div
+                            class="contact-icon bg-info rounded-circle d-flex align-items-center justify-content-center me-3">
                             <i class="bi bi-clock-fill text-white"></i>
                         </div>
                         <div>
@@ -185,25 +194,24 @@
 
                     @php
                         $instructors = [
-                            ['name' => 'John Doe', 'role' => 'Web Development Expert', 'image' => 'https://i.pravatar.cc/150?img=1'],
-                            ['name' => 'Jane Smith', 'role' => 'AI & Machine Learning', 'image' => 'https://i.pravatar.cc/150?img=2'],
-                            ['name' => 'Michael Brown', 'role' => 'UI/UX Design Specialist', 'image' => 'https://i.pravatar.cc/150?img=3'],
+                            ['name' => 'Mohammad Hasan', 'role' => 'Senior in AI & Cybersecurity', 'image' => 'https://i.pravatar.cc/150?img=59'],
+                            ['name' => 'Hassan Awad', 'role' => 'Full Stack Developer & Mentor', 'image' => 'https://i.pravatar.cc/150?img=12'],
+                            ['name' => 'Bilal Saleh', 'role' => 'Backend Developer & Instructor', 'image' => 'https://i.pravatar.cc/150?img=68'],
                         ];
+
                     @endphp
 
                     @foreach($instructors as $index => $inst)
-                    <div class="instructor-card p-3 rounded-2 mb-3" data-aos="zoom-in" data-aos-delay="{{ $index * 100 }}">
-                        <div class="d-flex align-items-center">
-                            <img src="{{ $inst['image'] }}"
-                                 class="instructor-image rounded-circle me-3"
-                                 alt="{{ $inst['name'] }}"
-                                 loading="lazy">
-                            <div>
-                                <h6 class="text-warning mb-1">{{ $inst['name'] }}</h6>
-                                <p class="text-light small mb-0">{{ $inst['role'] }}</p>
+                        <div class="instructor-card p-3 rounded-2 mb-3" data-aos="zoom-in" data-aos-delay="{{ $index * 100 }}">
+                            <div class="d-flex align-items-center">
+                                <img src="{{ $inst['image'] }}" class="instructor-image rounded-circle me-3"
+                                    alt="{{ $inst['name'] }}" loading="lazy">
+                                <div>
+                                    <h6 class="text-warning mb-1">{{ $inst['name'] }}</h6>
+                                    <p class="text-light small mb-0">{{ $inst['role'] }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
                 </div>
             </div>
@@ -221,7 +229,8 @@
                             <i class="bi bi-chat-quote-fill display-4 text-info"></i>
                         </div>
                         <p class="text-light fst-italic mb-3">
-                            "The support team was incredibly helpful! They guided me through the enrollment process and answered all my questions."
+                            "The support team was incredibly helpful! They guided me through the enrollment process and
+                            answered all my questions."
                         </p>
                         <h6 class="text-warning mb-1">Sarah Johnson</h6>
                         <small class="text-info">Web Development Student</small>
@@ -233,7 +242,8 @@
                             <i class="bi bi-chat-quote-fill display-4 text-info"></i>
                         </div>
                         <p class="text-light fst-italic mb-3">
-                            "Professional instructors and excellent support! The career guidance helped me land my dream job."
+                            "Professional instructors and excellent support! The career guidance helped me land my dream
+                            job."
                         </p>
                         <h6 class="text-warning mb-1">Ahmed Khan</h6>
                         <small class="text-info">Data Science Graduate</small>
@@ -261,18 +271,23 @@
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
     <style>
-        .contact-form-wrapper, .contact-info-card, .instructors-card, .testimonials-section {
+        .contact-form-wrapper,
+        .contact-info-card,
+        .instructors-card,
+        .testimonials-section {
             background: linear-gradient(135deg, #3B38A0 0%, #2A2870 100%);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .instructor-card, .testimonial-card {
+        .instructor-card,
+        .testimonial-card {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             transition: transform 0.3s ease;
         }
 
-        .instructor-card:hover, .testimonial-card:hover {
+        .instructor-card:hover,
+        .testimonial-card:hover {
             transform: translateY(-3px);
             background: rgba(255, 255, 255, 0.15);
         }
@@ -300,14 +315,16 @@
             margin: 0 auto;
         }
 
-        .form-control, .form-select {
+        .form-control,
+        .form-select {
             border: none;
             border-radius: 10px;
             padding: 12px 15px;
             transition: all 0.3s ease;
         }
 
-        .form-control:focus, .form-select:focus {
+        .form-control:focus,
+        .form-select:focus {
             box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.2);
         }
 
@@ -330,9 +347,17 @@
         }
 
         @media (max-width: 768px) {
-            .display-4 { font-size: 2.5rem; }
-            .display-5 { font-size: 2rem; }
-            section { padding: 2rem 1rem !important; }
+            .display-4 {
+                font-size: 2.5rem;
+            }
+
+            .display-5 {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 2rem 1rem !important;
+            }
         }
     </style>
 @endpush

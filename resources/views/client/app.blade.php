@@ -39,7 +39,8 @@
 
         main {
             flex: 1;
-            padding-top: 80px; /* Account for fixed navbar */
+            padding-top: 80px;
+            /* Account for fixed navbar */
         }
 
         /* Enhanced Header */
@@ -102,7 +103,8 @@
             margin-top: auto;
         }
 
-        .footer-custom h5, .footer-custom h6 {
+        .footer-custom h5,
+        .footer-custom h6 {
             color: var(--accent-teal);
             margin-bottom: 15px;
         }
@@ -190,7 +192,7 @@
     <nav id="navbar" class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
         <div class="container">
             <a class="navbar-brand" href="/">
-                <img src="{{ asset('images/logo.png') }}" alt="MH-Code Academy Logo" width="55" height="55">
+                <img src="{{ asset('images/logo (1).png') }}" alt="MH-Code Academy Logo" width="55" height="55">
                 <span class="ms-2 fw-bold">MH-Code Academy</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -236,10 +238,11 @@
                 <!-- Brand and Description -->
                 <div class="col-lg-4 col-md-6">
                     <h5>MH-Code Academy</h5>
-                    <p class="mb-3">Empowering the next generation of developers through comprehensive coding education, hands-on projects, and career mentorship.</p>
+                    <p class="mb-3">Empowering the next generation of developers through comprehensive coding education,
+                        hands-on projects, and career mentorship.</p>
                     <div class="d-flex gap-3">
-                        <a href="#" class="btn btn-academy btn-sm">Explore Courses</a>
-                        <a href="#" class="btn btn-outline-light btn-sm">Contact Us</a>
+                        <a href="{{ route('course') }}" class="btn btn-academy btn-sm">Explore Courses</a>
+                        <a href="{{ route('contact.index') }}" class="btn btn-outline-light btn-sm">Contact Us</a>
                     </div>
                 </div>
 
@@ -270,8 +273,8 @@
                 <!-- Contact & Social -->
                 <div class="col-lg-3 col-md-6">
                     <h6>Connect With Us</h6>
-                    <p class="small mb-3"><i class="bi bi-envelope me-2"></i> info@mhcodeacademy.com</p>
-                    <p class="small mb-3"><i class="bi bi-telephone me-2"></i> +1 (555) 123-4567</p>
+                    <p class="small mb-3"><i class="bi bi-envelope me-2"></i> mhcacadimy@gmail.com</p>
+                    <p class="small mb-3"><i class="bi bi-telephone me-2"></i> +961 76 179 450</p>
 
                     <div class="social-icons d-flex gap-3 mt-3">
                         <a href="#"><i class="bi bi-linkedin"></i></a>

@@ -37,8 +37,8 @@
 
                     <!-- Buttons -->
                     <div class="mt-4">
-                        <a href="#" class="btn btn-info btn-lg me-2 mb-2">Courses</a>
-                        <a href="#" class="btn btn-outline-light btn-lg mb-2">About Us</a>
+                        <a href="{{ route('course') }}" class="btn btn-info btn-lg me-2 mb-2">Courses</a>
+                        <a href="{{ route('about') }}" class="btn btn-outline-light btn-lg mb-2">About Us</a>
                     </div>
                 </div>
 
@@ -251,84 +251,50 @@
     </section>
 
 
-    {{-- ================== SECTION 4 ================== --}}
-    <section class="mh-section features-section">
-        <div class="p-4 p-md-5">
-            <div class="text-center mb-5" data-aos="fade-down" data-aos-duration="1200">
-                <h2 class="fw-bold">Why Choose Us / Features</h2>
-                <p class="lead">Discover the advantages that make <span class="text-info fw-bold">MH-Code Academy</span>
-                    unique</p>
-            </div>
+    @php
+    use Illuminate\Support\Str;
+@endphp
 
-            <div class="row g-4">
-                <!-- Feature 1 -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="1000">
-                    <div class="card h-100 text-center feature-card border-0">
-                        <div class="card-body p-4">
-                            <i class="bi bi-people-fill display-4 mb-3"></i>
-                            <h5 class="card-title fw-bold">Mentorship</h5>
-                            <p class="card-text">Get guidance from experienced mentors to grow your skills.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Feature 2 -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="1200">
-                    <div class="card h-100 text-center feature-card border-0">
-                        <div class="card-body p-4">
-                            <i class="bi bi-clock-fill display-4 mb-3"></i>
-                            <h5 class="card-title fw-bold">Flexible Timing</h5>
-                            <p class="card-text">Learn at your own pace with our flexible course schedules.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Feature 3 -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="1400">
-                    <div class="card h-100 text-center feature-card border-0">
-                        <div class="card-body p-4">
-                            <i class="bi bi-kanban-fill display-4 mb-3"></i>
-                            <h5 class="card-title fw-bold">Real Projects</h5>
-                            <p class="card-text">Work on real-life projects to gain hands-on experience.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Feature 4 -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="1600">
-                    <div class="card h-100 text-center feature-card border-0">
-                        <div class="card-body p-4">
-                            <i class="bi bi-laptop-fill display-4 mb-3"></i>
-                            <h5 class="card-title fw-bold">Modern Tools</h5>
-                            <p class="card-text">Learn using the latest software and technologies in the industry.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Feature 5 -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="1800">
-                    <div class="card h-100 text-center feature-card border-0">
-                        <div class="card-body p-4">
-                            <i class="bi bi-award-fill display-4 mb-3"></i>
-                            <h5 class="card-title fw-bold">Certification</h5>
-                            <p class="card-text">Receive recognized certificates to boost your career opportunities.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Feature 6 -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="2000">
-                    <div class="card h-100 text-center feature-card border-0">
-                        <div class="card-body p-4">
-                            <i class="bi bi-people-fill display-4 mb-3"></i>
-                            <h5 class="card-title fw-bold">Community</h5>
-                            <p class="card-text">Join a supportive tech community to learn and grow together.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+{{-- ================== SECTION 4 ================== --}}
+<section class="mh-section features-section">
+    <div class="p-4 p-md-5">
+        <div class="text-center mb-5" data-aos="fade-down" data-aos-duration="1200">
+            <h2 class="fw-bold">Why Choose Us / Features</h2>
+            <p class="lead">
+                Discover the advantages that make <span class="text-info fw-bold">MH-Code Academy</span> unique
+            </p>
         </div>
-    </section>
+
+        <div class="row g-4">
+            @foreach ($features as $index => $feature)
+                @if($feature->is_active)
+                    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-duration="{{ 1000 + ($index * 200) }}">
+                        <div class="card h-100 text-center feature-card border-0">
+                            <div class="card-body p-4">
+                                @if($feature->image)
+                                    @if(Str::startsWith($feature->image, 'features/'))
+                                        {{-- Images uploaded via admin (in storage/app/public/features) --}}
+                                        <img src="{{ asset('storage/' . $feature->image) }}"
+                                             alt="{{ $feature->name }}" style="width:60px;height:60px;">
+                                    @else
+                                        {{-- Seeder images (in public/images/features/) --}}
+                                        <img src="{{ asset('images/features/' . $feature->image) }}"
+                                             alt="{{ $feature->name }}" style="width:60px;height:60px;">
+                                    @endif
+                                @else
+                                    <i class="bi bi-gear-fill display-4 mb-3"></i>
+                                @endif
+                                <h5 class="card-title fw-bold">{{ $feature->name }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+            @endforeach
+        </div>
+    </div>
+</section>
+
+
 
 
     {{-- ================== SECTION 5 ================== --}}
@@ -566,121 +532,119 @@
 
     <!-- ====== Styles ====== -->
     <!-- <style>
-                            body {
-                                overflow-x: hidden;
-                            }
+                                                body {
+                                                    overflow-x: hidden;
+                                                }
 
-                            .hero-section {
-                                min-height: 100vh;
-                                background: linear-gradient(135deg, #07103a 0%, #0b254d 55%, #082033 100%);
-                                color: #fff;
-                                border-radius: 40px;
-                                overflow-x: hidden;
-                                margin: 20px;
-                                position: relative;
-                            }
+                                                .hero-section {
+                                                    min-height: 100vh;
+                                                    background: linear-gradient(135deg, #07103a 0%, #0b254d 55%, #082033 100%);
+                                                    color: #fff;
+                                                    border-radius: 40px;
+                                                    overflow-x: hidden;
+                                                    margin: 20px;
+                                                    position: relative;
+                                                }
 
-                            .hero-section::before {
-                                content: '';
-                                position: absolute;
-                                top: 0;
-                                left: 0;
-                                right: 0;
-                                bottom: 0;
-                                border-radius: 40px;
-                                padding: 2px;
-                                background: linear-gradient(135deg, #06b6d4, #3b82f6);
-                                -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-                                -webkit-mask-composite: xor;
-                                mask-composite: exclude;
-                                pointer-events: none;
-                            }
+                                                .hero-section::before {
+                                                    content: '';
+                                                    position: absolute;
+                                                    top: 0;
+                                                    left: 0;
+                                                    right: 0;
+                                                    bottom: 0;
+                                                    border-radius: 40px;
+                                                    padding: 2px;
+                                                    background: linear-gradient(135deg, #06b6d4, #3b82f6);
+                                                    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+                                                    -webkit-mask-composite: xor;
+                                                    mask-composite: exclude;
+                                                    pointer-events: none;
+                                                }
 
-                            .svg-container {
-                                max-width: 100%;
-                                height: auto;
-                            }
+                                                .svg-container {
+                                                    max-width: 100%;
+                                                    height: auto;
+                                                }
 
-                            .typing {
-                                font-family: monospace;
-                                fill: #9ad6ff;
-                                font-size: 12px;
-                            }
+                                                .typing {
+                                                    font-family: monospace;
+                                                    fill: #9ad6ff;
+                                                    font-size: 12px;
+                                                }
 
-                            .caret {
-                                fill: #9ad6ff;
-                                animation: blink 1s steps(2, end) infinite;
-                            }
+                                                .caret {
+                                                    fill: #9ad6ff;
+                                                    animation: blink 1s steps(2, end) infinite;
+                                                }
 
-                            @keyframes blink {
-                                50% {
-                                    opacity: 0;
-                                }
-                            }
+                                                @keyframes blink {
+                                                    50% {
+                                                        opacity: 0;
+                                                    }
+                                                }
 
-                            .pulse {
-                                animation: pulse 2s infinite;
-                            }
+                                                .pulse {
+                                                    animation: pulse 2s infinite;
+                                                }
 
-                            @keyframes pulse {
-                                0% {
-                                    r: 4;
-                                    opacity: 1;
-                                }
+                                                @keyframes pulse {
+                                                    0% {
+                                                        r: 4;
+                                                        opacity: 1;
+                                                    }
 
-                                50% {
-                                    r: 9;
-                                    opacity: 0.3;
-                                }
+                                                    50% {
+                                                        r: 9;
+                                                        opacity: 0.3;
+                                                    }
 
-                                100% {
-                                    r: 4;
-                                    opacity: 1;
-                                }
-                            }
+                                                    100% {
+                                                        r: 4;
+                                                        opacity: 1;
+                                                    }
+                                                }
 
-                            .trace {
-                                stroke: url(#grad-tech);
-                                stroke-width: 2.5;
-                                stroke-linecap: round;
-                                stroke-dasharray: 6 10;
-                                animation: dash 3s linear infinite;
-                            }
+                                                .trace {
+                                                    stroke: url(#grad-tech);
+                                                    stroke-width: 2.5;
+                                                    stroke-linecap: round;
+                                                    stroke-dasharray: 6 10;
+                                                    animation: dash 3s linear infinite;
+                                                }
 
-                            @keyframes dash {
-                                to {
-                                    stroke-dashoffset: -20;
-                                }
-                            }
+                                                @keyframes dash {
+                                                    to {
+                                                        stroke-dashoffset: -20;
+                                                    }
+                                                }
 
-                            .code-line {
-                                opacity: 0;
-                                animation: fadeIn 0.5s forwards;
-                            }
+                                                .code-line {
+                                                    opacity: 0;
+                                                    animation: fadeIn 0.5s forwards;
+                                                }
 
-                            @keyframes fadeIn {
-                                to {
-                                    opacity: 1;
-                                }
-                            }
+                                                @keyframes fadeIn {
+                                                    to {
+                                                        opacity: 1;
+                                                    }
+                                                }
 
-                            /* Responsive adjustments */
-                            @media (max-width: 768px) {
-                                .hero-section {
-                                    margin: 10px;
-                                    border-radius: 20px;
-                                }
+                                                /* Responsive adjustments */
+                                                @media (max-width: 768px) {
+                                                    .hero-section {
+                                                        margin: 10px;
+                                                        border-radius: 20px;
+                                                    }
 
-                                .hero-section::before {
-                                    border-radius: 20px;
-                                }
+                                                    .hero-section::before {
+                                                        border-radius: 20px;
+                                                    }
 
-                                .display-4 {
-                                    font-size: 2.5rem;
-                                }
-                            }
-
-
+                                                    .display-4 {
+                                                        font-size: 2.5rem;
+                                                    }
+                                                }
 
 
 
@@ -695,40 +659,42 @@
 
 
 
-                            .stat-card {
-                                background: rgba(255, 255, 255, 0.05);
-                                transition: transform .3s ease, box-shadow .3s ease;
-                                cursor: default;
-                            }
 
-                            .stat-card:hover {
-                                transform: scale(1.05);
-                                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-                            }
 
-                            .stat-card h2 {
-                                color: #ffb347;
-                                /* orange accent for numbers */
-                                font-size: 2.8rem;
-                            }
+                                                .stat-card {
+                                                    background: rgba(255, 255, 255, 0.05);
+                                                    transition: transform .3s ease, box-shadow .3s ease;
+                                                    cursor: default;
+                                                }
 
-                            .fade-text {
-                                opacity: 0;
-                                transform: translateY(10px);
-                                transition: all 0.8s ease;
-                            }
+                                                .stat-card:hover {
+                                                    transform: scale(1.05);
+                                                    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+                                                }
 
-                            .fade-text.show {
-                                opacity: 1;
-                                transform: translateY(0);
-                            }
+                                                .stat-card h2 {
+                                                    color: #ffb347;
+                                                    /* orange accent for numbers */
+                                                    font-size: 2.8rem;
+                                                }
 
-                            @media (max-width: 576px) {
-                                .stat-card h2 {
-                                    font-size: 2rem;
-                                }
-                            }
-                        </style> -->
+                                                .fade-text {
+                                                    opacity: 0;
+                                                    transform: translateY(10px);
+                                                    transition: all 0.8s ease;
+                                                }
+
+                                                .fade-text.show {
+                                                    opacity: 1;
+                                                    transform: translateY(0);
+                                                }
+
+                                                @media (max-width: 576px) {
+                                                    .stat-card h2 {
+                                                        font-size: 2rem;
+                                                    }
+                                                }
+                                            </style> -->
 
     <style>
         /* ====== GLOBAL STYLES ====== */
@@ -1130,251 +1096,251 @@
 
 
     <!-- {{-- ================== STYLES ================== --}}
-                        <style>
-                            /* track-card base */
-                            .track-card {
-                                background: rgba(255, 255, 255, 0.02);
-                                transition: transform .35s ease, box-shadow .35s ease;
-                                box-shadow: 0 10px 30px rgba(47, 79, 163, 0.12);
-                                /* shadow base with #2f4fa3 hue */
-                                cursor: pointer;
-                                min-height: 320px;
-                            }
+                                            <style>
+                                                /* track-card base */
+                                                .track-card {
+                                                    background: rgba(255, 255, 255, 0.02);
+                                                    transition: transform .35s ease, box-shadow .35s ease;
+                                                    box-shadow: 0 10px 30px rgba(47, 79, 163, 0.12);
+                                                    /* shadow base with #2f4fa3 hue */
+                                                    cursor: pointer;
+                                                    min-height: 320px;
+                                                }
 
-                            .track-card .card-front,
-                            .track-card .card-back {
-                                width: 100%;
-                                height: 100%;
-                                position: relative;
-                                transition: opacity .28s ease, transform .28s ease, visibility .28s ease;
-                            }
+                                                .track-card .card-front,
+                                                .track-card .card-back {
+                                                    width: 100%;
+                                                    height: 100%;
+                                                    position: relative;
+                                                    transition: opacity .28s ease, transform .28s ease, visibility .28s ease;
+                                                }
 
-                            /* front shows by default */
-                            .track-card .card-front {
-                                z-index: 2;
-                            }
+                                                /* front shows by default */
+                                                .track-card .card-front {
+                                                    z-index: 2;
+                                                }
 
-                            .track-card .card-back {
-                                position: absolute;
-                                top: 0;
-                                left: 0;
-                                z-index: 1;
-                                opacity: 0;
-                                visibility: hidden;
-                                background: rgba(0, 0, 0, 0.6);
-                            }
+                                                .track-card .card-back {
+                                                    position: absolute;
+                                                    top: 0;
+                                                    left: 0;
+                                                    z-index: 1;
+                                                    opacity: 0;
+                                                    visibility: hidden;
+                                                    background: rgba(0, 0, 0, 0.6);
+                                                }
 
-                            /* hover: scale + swap views */
-                            .track-card:hover {
-                                transform: scale(1.1);
-                                box-shadow: 0 18px 40px rgba(47, 79, 163, 0.26);
-                            }
+                                                /* hover: scale + swap views */
+                                                .track-card:hover {
+                                                    transform: scale(1.1);
+                                                    box-shadow: 0 18px 40px rgba(47, 79, 163, 0.26);
+                                                }
 
-                            .track-card:hover .card-front {
-                                opacity: 0;
-                                visibility: hidden;
-                                transform: scale(0.98);
-                            }
+                                                .track-card:hover .card-front {
+                                                    opacity: 0;
+                                                    visibility: hidden;
+                                                    transform: scale(0.98);
+                                                }
 
-                            .track-card:hover .card-back {
-                                opacity: 1;
-                                visibility: visible;
-                                z-index: 3;
-                                transform: none;
-                            }
+                                                .track-card:hover .card-back {
+                                                    opacity: 1;
+                                                    visibility: visible;
+                                                    z-index: 3;
+                                                    transform: none;
+                                                }
 
-                            /* titles on front */
-                            .track-card .track-title {
-                                color: #fff;
-                            }
+                                                /* titles on front */
+                                                .track-card .track-title {
+                                                    color: #fff;
+                                                }
 
-                            /* back content */
-                            .track-card .card-back h5 {
-                                margin-bottom: 6px;
-                            }
+                                                /* back content */
+                                                .track-card .card-back h5 {
+                                                    margin-bottom: 6px;
+                                                }
 
-                            .track-card .card-back p {
-                                font-size: 0.95rem;
-                                color: #ffe8cc;
-                            }
+                                                .track-card .card-back p {
+                                                    font-size: 0.95rem;
+                                                    color: #ffe8cc;
+                                                }
 
-                            /* responsive tweaks */
-                            @media (max-width: 576px) {
-                                .track-card {
-                                    min-height: 260px;
-                                }
+                                                /* responsive tweaks */
+                                                @media (max-width: 576px) {
+                                                    .track-card {
+                                                        min-height: 260px;
+                                                    }
 
-                                .track-card img {
-                                    max-height: 140px;
-                                }
-                            }
-
-
-
-                            @media (max-width: 576px) {
-
-                                /* phones */
-                                .banner-text {
-                                    font-size: 1.5rem;
-                                    /* أصغر من display-4 */
-                                }
-
-                                .banner-text-small {
-                                    font-size: 1rem;
-                                    /* أصغر من lead */
-                                }
-                            }
-
-
-                            .hero-section {
-                                overflow-x: hidden;
-                                padding-left: 0;
-                                padding-right: 0;
-                            }
-
-
-                            .feature-card {
-                                background: rgba(255, 255, 255, 0.05);
-                                color: #fff;
-                                border-radius: 1rem;
-                                transition: all 0.4s ease;
-                                box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-                            }
-
-                            .feature-card i {
-                                transition: color 0.4s ease, transform 0.4s ease;
-                            }
-
-                            .feature-card:hover {
-                                transform: scale(1.05);
-                                background: #000;
-                                color: #ff8c00 !important;
-                            }
-
-                            .feature-card:hover i {
-                                color: #ff8c00 !important;
-                                transform: rotate(-10deg) scale(1.2);
-                            }
+                                                    .track-card img {
+                                                        max-height: 140px;
+                                                    }
+                                                }
 
 
 
-                            .service-card {
-                                background: rgba(255, 255, 255, 0.05);
-                                color: #fff;
-                                border-radius: 1rem;
-                                transition: all 0.4s ease;
-                            }
+                                                @media (max-width: 576px) {
 
-                            .service-card i {
-                                transition: color 0.4s ease, transform 0.4s ease;
-                            }
+                                                    /* phones */
+                                                    .banner-text {
+                                                        font-size: 1.5rem;
+                                                        /* أصغر من display-4 */
+                                                    }
 
-                            .service-card:hover {
-                                transform: scale(1.1);
-                                background: #000;
-                                color: #ff8c00 !important;
-                                /* نصوص برتقالي */
-                            }
+                                                    .banner-text-small {
+                                                        font-size: 1rem;
+                                                        /* أصغر من lead */
+                                                    }
+                                                }
 
-                            .service-card:hover i {
-                                color: #ff8c00 !important;
-                                transform: rotate(-10deg) scale(1.2);
-                            }
 
-                            .svg-tech {
-                                max-width: 100%;
-                                height: auto;
-                            }
+                                                .hero-section {
+                                                    overflow-x: hidden;
+                                                    padding-left: 0;
+                                                    padding-right: 0;
+                                                }
 
-                            .trace {
-                                stroke-dasharray: 200;
-                                stroke-dashoffset: 200;
-                                animation: draw 2s ease forwards;
-                            }
 
-                            @keyframes draw {
-                                to {
-                                    stroke-dashoffset: 0;
-                                }
-                            }
+                                                .feature-card {
+                                                    background: rgba(255, 255, 255, 0.05);
+                                                    color: #fff;
+                                                    border-radius: 1rem;
+                                                    transition: all 0.4s ease;
+                                                    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+                                                }
 
-                            .pulse {
-                                animation: pulse 2s ease-in-out infinite;
-                            }
+                                                .feature-card i {
+                                                    transition: color 0.4s ease, transform 0.4s ease;
+                                                }
 
-                            .pulse.delay1 {
-                                animation-delay: .4s;
-                            }
+                                                .feature-card:hover {
+                                                    transform: scale(1.05);
+                                                    background: #000;
+                                                    color: #ff8c00 !important;
+                                                }
 
-                            .pulse.delay2 {
-                                animation-delay: .8s;
-                            }
+                                                .feature-card:hover i {
+                                                    color: #ff8c00 !important;
+                                                    transform: rotate(-10deg) scale(1.2);
+                                                }
 
-                            .pulse.delay3 {
-                                animation-delay: 1.2s;
-                            }
 
-                            @keyframes pulse {
 
-                                0%,
-                                100% {
-                                    transform: scale(1);
-                                    opacity: .9;
-                                }
+                                                .service-card {
+                                                    background: rgba(255, 255, 255, 0.05);
+                                                    color: #fff;
+                                                    border-radius: 1rem;
+                                                    transition: all 0.4s ease;
+                                                }
 
-                                50% {
-                                    transform: scale(1.3);
-                                    opacity: .5;
-                                }
-                            }
+                                                .service-card i {
+                                                    transition: color 0.4s ease, transform 0.4s ease;
+                                                }
 
-                            .ring {
-                                transform-origin: center;
-                                animation: spin 10s linear infinite;
-                            }
+                                                .service-card:hover {
+                                                    transform: scale(1.1);
+                                                    background: #000;
+                                                    color: #ff8c00 !important;
+                                                    /* نصوص برتقالي */
+                                                }
 
-                            @keyframes spin {
-                                to {
-                                    transform: rotate(360deg);
-                                }
-                            }
+                                                .service-card:hover i {
+                                                    color: #ff8c00 !important;
+                                                    transform: rotate(-10deg) scale(1.2);
+                                                }
 
-                            .animated-line .content {
-                                transition: all .35s ease;
-                                font-size: 1.1rem;
-                                font-weight: 500;
-                            }
+                                                .svg-tech {
+                                                    max-width: 100%;
+                                                    height: auto;
+                                                }
 
-                            .animated-line .content.fade-out {
-                                opacity: 0;
-                                transform: translateY(-8px);
-                            }
+                                                .trace {
+                                                    stroke-dasharray: 200;
+                                                    stroke-dashoffset: 200;
+                                                    animation: draw 2s ease forwards;
+                                                }
 
-                            /* Scroll animations */
-                            [data-animate] {
-                                opacity: 0;
-                                transform: translateY(40px);
-                                transition: all 1s ease;
-                            }
+                                                @keyframes draw {
+                                                    to {
+                                                        stroke-dashoffset: 0;
+                                                    }
+                                                }
 
-                            [data-animate].visible {
-                                opacity: 1;
-                                transform: translateY(0);
-                            }
+                                                .pulse {
+                                                    animation: pulse 2s ease-in-out infinite;
+                                                }
 
-                            [data-animate="fade-right"] {
-                                transform: translateX(-40px);
-                            }
+                                                .pulse.delay1 {
+                                                    animation-delay: .4s;
+                                                }
 
-                            [data-animate="fade-left"] {
-                                transform: translateX(40px);
-                            }
+                                                .pulse.delay2 {
+                                                    animation-delay: .8s;
+                                                }
 
-                            </> {
-                                    {
-                                    --==================SCRIPTS==================--
-                                }
-                            } -->
+                                                .pulse.delay3 {
+                                                    animation-delay: 1.2s;
+                                                }
+
+                                                @keyframes pulse {
+
+                                                    0%,
+                                                    100% {
+                                                        transform: scale(1);
+                                                        opacity: .9;
+                                                    }
+
+                                                    50% {
+                                                        transform: scale(1.3);
+                                                        opacity: .5;
+                                                    }
+                                                }
+
+                                                .ring {
+                                                    transform-origin: center;
+                                                    animation: spin 10s linear infinite;
+                                                }
+
+                                                @keyframes spin {
+                                                    to {
+                                                        transform: rotate(360deg);
+                                                    }
+                                                }
+
+                                                .animated-line .content {
+                                                    transition: all .35s ease;
+                                                    font-size: 1.1rem;
+                                                    font-weight: 500;
+                                                }
+
+                                                .animated-line .content.fade-out {
+                                                    opacity: 0;
+                                                    transform: translateY(-8px);
+                                                }
+
+                                                /* Scroll animations */
+                                                [data-animate] {
+                                                    opacity: 0;
+                                                    transform: translateY(40px);
+                                                    transition: all 1s ease;
+                                                }
+
+                                                [data-animate].visible {
+                                                    opacity: 1;
+                                                    transform: translateY(0);
+                                                }
+
+                                                [data-animate="fade-right"] {
+                                                    transform: translateX(-40px);
+                                                }
+
+                                                [data-animate="fade-left"] {
+                                                    transform: translateX(40px);
+                                                }
+
+                                                </> {
+                                                        {
+                                                        --==================SCRIPTS==================--
+                                                    }
+                                                } -->
 
     <script> // Animated text lines
 

@@ -197,9 +197,9 @@
             <div class="row g-4">
                 @php
                     $teamMembers = [
-                        ['name' => 'John Doe', 'role' => 'Senior Web Developer & Instructor', 'image' => 'https://i.pravatar.cc/300?img=1'],
-                        ['name' => 'Jane Smith', 'role' => 'Full Stack Developer & Mentor', 'image' => 'https://i.pravatar.cc/300?img=2'],
-                        ['name' => 'Alice Brown', 'role' => 'Backend Developer & Instructor', 'image' => 'https://i.pravatar.cc/300?img=3'],
+                        ['name' => 'Mohammad Hasan', 'role' => 'Senior in AI & Cybersecurity', 'image' => 'https://i.pravatar.cc/300?img=59'],
+                        ['name' => 'Hassan Awad', 'role' => 'Full Stack Developer & Mentor', 'image' => 'https://i.pravatar.cc/300?img=12'],
+                        ['name' => 'Bilal Saleh', 'role' => 'Backend Developer & Instructor', 'image' => 'https://i.pravatar.cc/300?img=68'],
                     ];
                 @endphp
 
@@ -232,9 +232,9 @@
             <div class="row g-4">
                 @php
                     $successStories = [
-                        ['name' => 'Emily Johnson', 'role' => 'Frontend Developer @ TechCorp', 'image' => 'https://i.pravatar.cc/300?img=4', 'story' => 'From zero coding knowledge to building my first web app in 6 months!'],
-                        ['name' => 'Michael Lee', 'role' => 'Full Stack Developer @ Startup', 'image' => 'https://i.pravatar.cc/300?img=5', 'story' => 'The project-based approach gave me the confidence to excel in interviews.'],
-                        ['name' => 'Sophia Martinez', 'role' => 'Software Engineer @ GlobalTech', 'image' => 'https://i.pravatar.cc/300?img=6', 'story' => 'Amazing community and mentors who supported me every step of the way.'],
+                        ['name' => 'Michael Lee', 'role' => 'Frontend Developer @ TechCorp', 'image' => 'https://i.pravatar.cc/300?img=8', 'story' => 'From zero coding knowledge to building my first web app in 6 months!'],
+                        ['name' => 'Emily Johnson', 'role' => 'Full Stack Developer @ Startup', 'image' => 'https://i.pravatar.cc/300?img=32', 'story' => 'The project-based approach gave me the confidence to excel in interviews.'],
+                        ['name' => 'Sophia Martinez', 'role' => 'Software Engineer @ GlobalTech', 'image' => 'https://i.pravatar.cc/300?img=16', 'story' => 'Amazing community and mentors who supported me every step of the way.'],
                     ];
                 @endphp
 
