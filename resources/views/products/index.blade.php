@@ -31,6 +31,8 @@
                         <th>Price</th>
                         <th>Category</th>
                         <th>Duration</th>
+                        <th>Difficulty</th>
+                        <th>Lessons</th>
                         <th style="min-width:180px;" class="text-center">Action</th>
                     </tr>
                 </thead>
@@ -49,6 +51,8 @@
                             <td>
                                 {{ $product->duration }} {{ $product->duration > 1 ? 'months' : 'month' }}
                             </td>
+                            <td>{{ $product->difficulty }}</td>
+                            <td>{{ $product->lessons }}</td>
 
                             <td class="text-center">
                                 <div class="d-flex flex-column flex-sm-row justify-content-center gap-1">

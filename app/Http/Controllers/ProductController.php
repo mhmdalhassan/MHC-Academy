@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class ProductController extends Controller
 {
@@ -26,32 +25,35 @@ class ProductController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
+    // Updated courses method for frontend filtering
     public function courses(Request $request)
     {
-        // inputs
-        $q = $request->query('q', null);
+        $q = $request->query('q', null);            // <-- define $q
         $category = $request->query('category', 'All');
+        $level = $request->query('level', 'All');   // optional: if you want to keep level in view
 
-        // base query
         $query = Product::query();
 
-        // search by name (case-insensitive) — supports partial match
+        // Search by name or detail
         if ($q) {
-            $query->where('name', 'like', '%' . $q . '%');
+            $query->where('name', 'like', '%' . $q . '%')
+                ->orWhere('detail', 'like', '%' . $q . '%');
         }
 
-        // filter by category (skip if All)
+        // Filter by category
         if ($category && $category !== 'All') {
             $query->where('category', $category);
         }
 
-        // latest first
+        // Filter by difficulty/level
+        if ($level && $level !== 'All') {
+            $query->where('difficulty', $level);
+        }
+
         $query->orderBy('created_at', 'desc');
 
-        // paginate 12 per page
         $products = $query->paginate(12)->withQueryString();
 
-        // categories list for dropdown (distinct)
         $categories = Product::select('category')
             ->distinct()
             ->whereNotNull('category')
@@ -59,18 +61,13 @@ class ProductController extends Controller
             ->pluck('category')
             ->toArray();
 
-        return view('course', compact('products', 'categories', 'q', 'category'));
+        return view('course', compact('products', 'categories', 'q', 'category', 'level'));
     }
-
 
     public function description(Product $product): View
     {
-        // optional: eager load relations if any, e.g. ->load('teacher')
         return view('course-description', compact('product'));
     }
-
-
-
 
     public function create(): View
     {
@@ -128,7 +125,6 @@ class ProductController extends Controller
         $data = $request->only(['name', 'price', 'detail', 'category', 'duration', 'difficulty', 'lessons']);
 
         if ($request->hasFile('image')) {
-            // Delete old image if exists
             if ($product->image) {
                 Storage::disk('public')->delete($product->image);
             }

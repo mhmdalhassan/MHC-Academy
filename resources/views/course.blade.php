@@ -97,7 +97,8 @@
             <div class="row mb-4">
                 <div class="col-md-8">
                     <h2 class="fw-bold mb-2">Featured Courses</h2>
-                    <p class="text-muted">Hands-on courses designed to get you job-ready</p>
+                    <p class="text-white">Hands-on courses designed to get you job-ready</p>
+
                 </div>
                 <div class="col-md-4 text-md-end">
                     <div class="d-inline-block bg-primary-dark rounded-pill px-3 py-1">
@@ -109,8 +110,15 @@
             <!-- Courses Grid -->
             <div class="row g-4" id="coursesContainer">
                 @forelse($products as $product)
+                    @php
+                        // determine difficulty value (support both 'difficulty' and older 'level' fields)
+                        $difficulty = $product->difficulty ?? $product->level ?? 'Beginner';
+                        $difficultySlug = strtolower($difficulty);
+                    @endphp
+
                     <div class="col-12 col-sm-6 col-lg-4 col-xl-3 course-card-wrapper" data-aos="fade-up"
-                        data-aos-duration="900" data-aos-delay="{{ $loop->index * 100 }}">
+                        data-aos-duration="900" data-aos-delay="{{ $loop->index * 100 }}" data-level="{{ $difficultySlug }}"
+                        data-category="{{ $product->category ?? '' }}">
                         <div class="course-card h-100">
                             <a href="{{ route('course.description', $product->id) }}" class="text-decoration-none">
                                 <!-- Image -->
@@ -124,21 +132,21 @@
                                         </div>
                                     @endif
 
-                                    <!-- Badge -->
+                                    <!-- Category Badge -->
                                     <div class="course-badge">
                                         {{ $product->category ?? 'Development' }}
                                     </div>
 
-                                    <!-- Level Indicator -->
-                                    <div class="course-level level-{{ strtolower($product->level ?? 'beginner') }}">
-                                        {{ $product->level ?? 'Beginner' }}
+                                    <!-- Difficulty Badge (same color as category) -->
+                                    <div class="course-level">
+                                        {{ $difficulty }}
                                     </div>
                                 </div>
 
                                 <!-- Content -->
                                 <div class="course-content p-3">
                                     <h5 class="course-title fw-bold mb-2">{{ $product->name }}</h5>
-                                    <p class="course-description small text-muted mb-3">
+                                    <p class="course-description small mb-3">
                                         {{ Str::limit($product->detail ?? 'Learn essential skills through hands-on projects and expert guidance.', 80) }}
                                     </p>
 
@@ -156,7 +164,7 @@
                                         </span>
                                         <span>
                                             <i class="bi bi-bar-chart me-1"></i>
-                                            {{ $product->lessons ?? '12' }} lessons
+                                            {{ $product->lessons ?? 0 }} lessons
                                         </span>
                                     </div>
 
@@ -169,7 +177,7 @@
                                             <i class="bi bi-star-fill"></i>
                                             <i class="bi bi-star-half"></i>
                                         </span>
-                                        <span class="small text-muted ms-1">({{ $product->rating ?? '4.5' }})</span>
+                                        <span class="small text-white ms-1">({{ $product->rating ?? '4.5' }})</span>
                                     </div>
 
                                     <!-- Price & Action -->
@@ -188,9 +196,9 @@
                 @empty
                     <div class="col-12">
                         <div class="no-courses text-center py-5" data-aos="fade-up">
-                            <i class="bi bi-search display-1 text-muted mb-3"></i>
+                            <i class="bi bi-search display-1 text-white mb-3"></i>
                             <h4 class="fw-bold mb-2">No courses found</h4>
-                            <p class="text-muted">Try adjusting your search filters or browse all categories</p>
+                            <p class="text-white">Try adjusting your search filters or browse all categories</p>
                             <a href="{{ route('course') }}" class="btn btn-accent mt-3">Reset Filters</a>
                         </div>
                     </div>
@@ -238,7 +246,7 @@
             --accent-blue: #4A90E2;
             --accent-teal: #2EC4B6;
             --text-light: #E8F1F8;
-            --text-muted: #A8C6E0;
+            --text-muted: #ffffff;
         }
 
         .hero-section {
@@ -305,23 +313,38 @@
             font-size: 20px;
         }
 
+        /* --- Category / Level selects: dark option background --- */
         .category-select {
             padding: 15px 20px;
             border-radius: 50px;
             border: 2px solid rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
+            background: var(--primary-dark);
+            color: #ffffff;
             font-size: 16px;
             width: 100%;
             cursor: pointer;
             transition: all 0.3s ease;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        /* Option styling (best-effort; browsers vary) */
+        .category-select option {
+            background: var(--primary-dark);
+            color: #ffffff;
         }
 
         .category-select:focus {
             outline: none;
             border-color: var(--accent-teal);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 0 0 3px rgba(46, 196, 182, 0.2);
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow: 0 0 0 3px rgba(46, 196, 182, 0.08);
+        }
+
+        /* Hide default arrow in some browsers (visual improvement) */
+        .category-select::-ms-expand {
+            display: none;
         }
 
         .courses-section {
@@ -369,6 +392,7 @@
             color: white;
         }
 
+        /* Category badge (unchanged) */
         .course-badge {
             position: absolute;
             top: 15px;
@@ -381,29 +405,26 @@
             font-weight: bold;
         }
 
+        /* Level badge: make it visually like the category badge (user requested) */
         .course-level {
             position: absolute;
             top: 15px;
             left: 15px;
-            padding: 3px 10px;
-            border-radius: 15px;
+            padding: 5px 10px;
+            border-radius: 20px;
             font-size: 12px;
             font-weight: 600;
+            background: var(--accent-teal);
+            color: var(--primary-dark);
         }
 
-        .level-beginner {
-            background: rgba(46, 196, 182, 0.2);
-            color: var(--accent-teal);
-        }
-
-        .level-intermediate {
-            background: rgba(74, 144, 226, 0.2);
-            color: var(--accent-blue);
-        }
-
+        /* Keep legacy level classes harmless — we override them above for consistent look */
+        .level-beginner,
+        .level-intermediate,
         .level-advanced {
-            background: rgba(255, 107, 107, 0.2);
-            color: #ff6b6b;
+            /* intentionally minimal so the .course-level rule above controls visuals */
+            background: transparent !important;
+            color: inherit !important;
         }
 
         .course-content {
@@ -418,6 +439,15 @@
             line-height: 1.4;
         }
 
+        /* Make description and other in-card texts teal as requested */
+        .course-description,
+        .instructor-info,
+        .course-meta,
+        .rating,
+        .course-meta span {
+            color: var(--accent-teal) !important;
+        }
+
         .course-description {
             flex-grow: 1;
         }
@@ -426,7 +456,7 @@
             display: flex;
             justify-content: space-between;
             font-size: 14px;
-            color: var(--text-muted);
+            color: var(--accent-teal);
             margin-bottom: 15px;
         }
 

@@ -45,6 +45,21 @@
                 </div>
             </div>
 
+            <div class="col-md-6 mb-2">
+                <strong>Difficulty:</strong>
+                <select name="difficulty" class="form-control" required>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                </select>
+            </div>
+
+            <div class="col-md-6 mb-2">
+                <strong>Lessons:</strong>
+                <input type="number" name="lessons" class="form-control" placeholder="Number of lessons" min="0" required>
+            </div>
+
+
 
             <div class="col-md-12 mb-2">
                 <strong>Detail:</strong>

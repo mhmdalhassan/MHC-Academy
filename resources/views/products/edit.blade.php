@@ -47,6 +47,22 @@
                 </div>
             </div>
 
+            <div class="col-md-6 mb-2">
+                <strong>Difficulty:</strong>
+                <select name="difficulty" class="form-control" required>
+                    <option value="Beginner" {{ $product->difficulty == 'Beginner' ? 'selected' : '' }}>Beginner</option>
+                    <option value="Intermediate" {{ $product->difficulty == 'Intermediate' ? 'selected' : '' }}>Intermediate
+                    </option>
+                    <option value="Advanced" {{ $product->difficulty == 'Advanced' ? 'selected' : '' }}>Advanced</option>
+                </select>
+            </div>
+
+            <div class="col-md-6 mb-2">
+                <strong>Lessons:</strong>
+                <input type="number" name="lessons" value="{{ $product->lessons }}" class="form-control" min="0" required>
+            </div>
+
+
 
             <div class="col-md-12 mb-2">
                 <strong>Detail:</strong>

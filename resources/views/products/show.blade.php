@@ -34,6 +34,21 @@
                 </div>
             </div>
 
+            <div class="col-12 col-md-6">
+                <div class="p-3 border rounded">
+                    <strong>Difficulty:</strong>
+                    <p class="mb-0">{{ $product->difficulty }}</p>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="p-3 border rounded">
+                    <strong>Lessons:</strong>
+                    <p class="mb-0">{{ $product->lessons }}</p>
+                </div>
+            </div>
+
+
 
             <div class="col-12">
                 <div class="p-3 border rounded">
