@@ -40,6 +40,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('requests', [RequestController::class, 'index'])->name('requests.index');
     Route::post('requests/send-mail/{id}', [RequestController::class, 'sendMail'])->name('requests.sendMail');
 });
+Route::resource('requests', RequestController::class)->only(['index','show','destroy']);
 
 
 // optional if you still want ajax filtering later:

@@ -5,6 +5,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
+    <link rel="icon" type="image/png" href="{{ asset('images/favicon-96x96.png') }}" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="{{ asset('images/favicon.svg') }}" />
+    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/apple-touch-icon.png') }}" />
+
+
+
+
+
+
+
+
+
     <title>@yield('title', 'MH-Code Academy')</title>
 
     <!-- Bootstrap -->
@@ -250,13 +264,16 @@
                 <div class="col-lg-2 col-md-6">
                     <h6>Quick Links</h6>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#">Home</a></li>
-                        <li class="mb-2"><a href="#">All Courses</a></li>
-                        <li class="mb-2"><a href="#">Blog</a></li>
-                        <li class="mb-2"><a href="#">About Us</a></li>
-                        <li class="mb-2"><a href="#">Contact</a></li>
+                        <li class="mb-2"><a href="{{ url('/') }}">Home</a></li>
+                        <li class="mb-2"><a href="{{ url('/course') }}">All Courses</a></li>
+                        <li class="mb-2"><a href="{{ url('/blog') }}">Blog</a></li>
+                        <li class="mb-2"><a href="{{ url('/about') }}">About Us</a></li>
+                        <li class="mb-2"><a href="{{ url('/contact-us') }}">Contact</a></li>
                     </ul>
                 </div>
+
+
+
 
                 <!-- Courses -->
                 <div class="col-lg-3 col-md-6">
@@ -273,16 +290,16 @@
                 <!-- Contact & Social -->
                 <div class="col-lg-3 col-md-6">
                     <h6>Connect With Us</h6>
-                    <p class="small mb-3"><i class="bi bi-envelope me-2"></i> mhcacadimy@gmail.com</p>
-                    <p class="small mb-3"><i class="bi bi-telephone me-2"></i> +961 76 179 450</p>
+                    <p class="small mb-3"><i class="bi bi-envelope me-2"></i> mhcodeacademy.com</p>
+                    <p class="small mb-3"><i class="bi bi-telephone me-2"></i> +961 78 910 585</p>
 
                     <div class="social-icons d-flex gap-3 mt-3">
-                        <a href="#"><i class="bi bi-linkedin"></i></a>
-                        <a href="#"><i class="bi bi-facebook"></i></a>
-                        <a href="#"><i class="bi bi-instagram"></i></a>
-                        <a href="#"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#"><i class="bi bi-youtube"></i></a>
-                        <a href="#"><i class="bi bi-github"></i></a>
+                        <a href="https://www.linkedin.com/"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://www.facebook.com/"><i class="bi bi-facebook"></i></a>
+                        <a href="https://www.instagram.com/"><i class="bi bi-instagram"></i></a>
+                        <a href="https://x.com/"><i class="bi bi-twitter-x"></i></a>
+                        <a href="https://www.youtube.com/"><i class="bi bi-youtube"></i></a>
+                        <a href="https://github.com/"><i class="bi bi-github"></i></a>
                     </div>
                 </div>
             </div>
