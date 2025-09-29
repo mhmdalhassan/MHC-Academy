@@ -9,11 +9,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\ContactController;
-<<<<<<< HEAD
 use App\Models\Feature;
-=======
 use App\Http\Controllers\RequestController;
->>>>>>> origin/mohammad
 
 
 Route::get('/', function () {
@@ -40,8 +37,8 @@ Route::get('/contact-us', [ContactController::class, 'index'])->name('contact.in
 Route::post('/contact-us', [ContactController::class, 'store'])->name('contact.store');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/admin/requests', [RequestController::class, 'index'])->name('requests.index');
-    Route::post('/admin/requests/send-mail/{id}', [RequestController::class, 'sendMail'])->name('requests.sendMail');
+    Route::get('requests', [RequestController::class, 'index'])->name('requests.index');
+    Route::post('requests/send-mail/{id}', [RequestController::class, 'sendMail'])->name('requests.sendMail');
 });
 
 

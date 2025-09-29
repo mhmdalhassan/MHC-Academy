@@ -24,7 +24,18 @@ class Product extends Model
         'duration',
         'difficulty',
         'lessons',
+        'rating',
+        'enrolled_count',
+        'welcome_video_url',
+        'overview_video_url',
+        'core_concepts',
     ];
+
+
+    protected $casts = [
+        'core_concepts' => 'array',
+    ];
+
 
     public function contacts()
     {

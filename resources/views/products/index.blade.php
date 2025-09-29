@@ -33,6 +33,7 @@
                         <th>Duration</th>
                         <th>Difficulty</th>
                         <th>Lessons</th>
+                        <th>Enrolled</th>
                         <th style="min-width:180px;" class="text-center">Action</th>
                     </tr>
                 </thead>
@@ -48,11 +49,10 @@
                             </td>
                             <td>${{ number_format($product->price, 2) }}</td>
                             <td>{{ $product->category }}</td>
-                            <td>
-                                {{ $product->duration }} {{ $product->duration > 1 ? 'months' : 'month' }}
-                            </td>
+                            <td>{{ $product->duration }} {{ $product->duration > 1 ? 'months' : 'month' }}</td>
                             <td>{{ $product->difficulty }}</td>
                             <td>{{ $product->lessons }}</td>
+                            <td>{{ $product->enrolled_count }}</td>
 
                             <td class="text-center">
                                 <div class="d-flex flex-column flex-sm-row justify-content-center gap-1">

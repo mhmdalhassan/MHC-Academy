@@ -85,9 +85,30 @@ class ProductController extends Controller
             'image' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
             'difficulty' => 'required|in:Beginner,Intermediate,Advanced',
             'lessons' => 'required|integer|min:0',
+            'rating' => 'nullable|numeric|min:0|max:5',
+            'enrolled_count' => 'nullable|integer|min:0',
+            'welcome_video_url' => 'nullable|url',
+            'overview_video_url' => 'nullable|url',
+            'core_concepts' => 'nullable|array',  // expects array input
+            'core_concepts.*' => 'string',
         ]);
 
-        $data = $request->only(['name', 'price', 'detail', 'category', 'duration', 'difficulty', 'lessons']);
+
+        $data = $request->only([
+            'name',
+            'price',
+            'detail',
+            'category',
+            'duration',
+            'difficulty',
+            'lessons',
+            'rating',
+            'enrolled_count',
+            'welcome_video_url',
+            'overview_video_url',
+            'core_concepts'
+        ]);
+
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('products', 'public');
@@ -120,9 +141,28 @@ class ProductController extends Controller
             'image' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
             'difficulty' => 'required|in:Beginner,Intermediate,Advanced',
             'lessons' => 'required|integer|min:0',
+            'rating' => 'nullable|numeric|min:0|max:5',
+            'enrolled_count' => 'nullable|integer|min:0',
+            'welcome_video_url' => 'nullable|url',
+            'overview_video_url' => 'nullable|url',
+            'core_concepts' => 'nullable|array',  // expects array input
+            'core_concepts.*' => 'string',
         ]);
 
-        $data = $request->only(['name', 'price', 'detail', 'category', 'duration', 'difficulty', 'lessons']);
+        $data = $request->only([
+            'name',
+            'price',
+            'detail',
+            'category',
+            'duration',
+            'difficulty',
+            'lessons',
+            'rating',
+            'enrolled_count',
+            'welcome_video_url',
+            'overview_video_url',
+            'core_concepts'
+        ]);
 
         if ($request->hasFile('image')) {
             if ($product->image) {

@@ -192,13 +192,8 @@
     <nav id="navbar" class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
         <div class="container">
             <a class="navbar-brand" href="/">
-<<<<<<< HEAD
-                <img src="{{ asset('images/logo (1).png') }}" alt="MH-Code Academy Logo" width="55" height="55">
-                <span class="ms-2 fw-bold">MH-Code Academy</span>
-=======
                 <img src="{{ asset('images/logo.png') }}" alt="MH-Code Academy Logo" width="120" height="55">
-                
->>>>>>> origin/mohammad
+
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
