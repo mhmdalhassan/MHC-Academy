@@ -9,7 +9,7 @@ class RequestModel extends Model
 {
     use HasFactory;
 
-    protected $table = 'requests'; // make sure your table is named 'requests'
+    protected $table = 'requests'; 
 
     protected $fillable = [
         'fullname',

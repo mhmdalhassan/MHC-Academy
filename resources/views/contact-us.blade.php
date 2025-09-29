@@ -142,7 +142,7 @@
                         </div>
                         <div>
                             <h6 class="text-warning mb-1">Our Location</h6>
-                            <p class="text-light small mb-0">123 Coding Street, Tech City<br>Digital Valley, DV 12345</p>
+                            <p class="text-light small mb-0">lebanon, saida City<br>Digital Hub, DV 12345</p>
                         </div>
                     </div>
 
@@ -152,7 +152,7 @@
                         </div>
                         <div>
                             <h6 class="text-warning mb-1">Phone Number</h6>
-                            <p class="text-light small mb-0">+1 (555) 123-CODE<br>Mon-Fri, 9:00 AM - 6:00 PM</p>
+                            <p class="text-light small mb-0">+961 78 910 585<br>Mon-Fri, 9:00 AM - 6:00 PM</p>
                         </div>
                     </div>
 
@@ -162,7 +162,7 @@
                         </div>
                         <div>
                             <h6 class="text-warning mb-1">Email Address</h6>
-                            <p class="text-light small mb-0">hello@codingacademy.com<br>support@codingacademy.com</p>
+                            <p class="text-light small mb-0">mhcodeacademy@gmail.com<br>codeacademy@gmail.com</p>
                         </div>
                     </div>
 
