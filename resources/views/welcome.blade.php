@@ -37,14 +37,8 @@
 
                     <!-- Buttons -->
                     <div class="mt-4">
-<<<<<<< HEAD
                         <a href="{{ route('course') }}" class="btn btn-info btn-lg me-2 mb-2">Courses</a>
                         <a href="{{ route('about') }}" class="btn btn-outline-light btn-lg mb-2">About Us</a>
-=======
-                    <a href="{{ route('course') }}" class="btn btn-info btn-lg me-2 mb-2">Courses</a>
-                    <a href="{{ route('about') }}" class="btn btn-info btn-lg me-2 mb-2">About Us</a>
-
->>>>>>> origin/mohammad
                     </div>
                 </div>
 
