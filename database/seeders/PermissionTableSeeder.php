@@ -59,6 +59,19 @@ class PermissionTableSeeder extends Seeder
             'footer-delete',
 
 
+
+            // Instructors
+            'instructor-list',
+            'instructor-create',
+            'instructor-edit',
+            'instructor-delete',
+
+            // students
+            'student-review-list',
+            'student-review-create',
+            'student-review-edit',
+            'student-review-delete',
+
         ];
 
 

@@ -526,20 +526,20 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto"></ul>
 
-                        <ul class="navbar-nav ms-auto">
+                        {{-- <ul class="navbar-nav ms-auto">
                             @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link {{ request()->routeIs('login') ? 'active' : '' }}"
-                                        href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('login') ? 'active' : '' }}"
+                                    href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
                             @endif
                             @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link {{ request()->routeIs('register') ? 'active' : '' }}"
-                                        href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('register') ? 'active' : '' }}"
+                                    href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
                             @endif
-                        </ul>
+                        </ul> --}}
                     </div>
                 </div>
             </nav>
@@ -560,8 +560,12 @@
         @else
             <!-- New dashboard layout for authenticated users -->
             <div class="dashboard-container">
-                <!-- Sidebar -->
+
+
+                <!-- =========================Sidebar====================== -->
                 <div class="sidebar" id="sidebar">
+
+                    {{-- =========================header======================= --}}
                     <div class="sidebar-header">
                         <div class="logo">
                             <img src="{{ asset('images/logo.png') }}" alt="MH-Code Academy Logo">
@@ -572,6 +576,9 @@
                     </div>
 
                     <div class="sidebar-menu">
+
+                        {{-- ======================Manage Users========================== --}}
+
                         @can('user-list')
                             <a href="{{ route('users.index') }}"
                                 class="menu-item {{ request()->routeIs('users.*') ? 'active' : '' }}">
@@ -579,6 +586,8 @@
                                 <span class="menu-text">Manage Users</span>
                             </a>
                         @endcan
+
+                        {{-- =========================Manage Roles======================= --}}
 
                         @can('role-list')
                             <a href="{{ route('roles.index') }}"
@@ -588,6 +597,8 @@
                             </a>
                         @endcan
 
+                        {{-- =========================Manage Products======================= --}}
+
                         @can('product-list')
                             <a href="{{ route('products.index') }}"
                                 class="menu-item {{ request()->routeIs('products.*') ? 'active' : '' }}">
@@ -595,6 +606,8 @@
                                 <span class="menu-text">Manage Products</span>
                             </a>
                         @endcan
+
+                        {{-- =========================Manage Blogs======================= --}}
 
                         @can('blog-list')
                             <a href="{{ route('blogs.index') }}"
@@ -604,6 +617,9 @@
                             </a>
                         @endcan
 
+
+                        {{-- =========================Requests======================= --}}
+
                         @can('request-list')
                             <a href="{{ route('requests.index') }}"
                                 class="menu-item {{ request()->routeIs('requests.*') ? 'active' : '' }}">
@@ -611,6 +627,8 @@
                                 <span class="menu-text">Requests</span>
                             </a>
                         @endcan
+
+                        {{-- =========================Manage Features======================= --}}
 
                         @can('feature-list')
                             <a href="{{ route('features.index') }}"
@@ -637,6 +655,31 @@
                         @endcan
 
 
+                        {{-- =========================Manage instructors======================= --}}
+
+                        @can('instructor-list')
+                            <a href="{{ route('instructors.index') }}"
+                                class="menu-item {{ request()->routeIs('instructors.*') ? 'active' : '' }}">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                <span class="menu-text">Manage instructors</span>
+                            </a>
+                        @endcan
+
+
+                        {{-- =========================Student Reviews======================= --}}
+
+                        @can('student-review-list')
+                            <a href="{{ route('student-reviews.index') }}"
+                                class="menu-item {{ request()->routeIs('student-reviews.*') ? 'active' : '' }}">
+                                <i class="fas fa-user-graduate"></i>
+                                <span class="menu-text">Manage Student Reviews</span>
+                            </a>
+                        @endcan
+
+
+
+
+                        {{-- =========================logout======================= --}}
 
                         <div class="menu-divider"></div>
 

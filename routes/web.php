@@ -13,6 +13,8 @@ use App\Models\Feature;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\InternalCourseController;
 use App\Http\Controllers\FooterController;
+use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\StudentReviewController;
 
 
 Route::get('/', function () {
@@ -66,4 +68,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('features', FeatureController::class);
     Route::resource('internal-courses', InternalCourseController::class);
     Route::resource('footer', FooterController::class);
+    Route::resource('instructors', InstructorController::class);
+    Route::resource('student-reviews', StudentReviewController::class);
 });
+
+
+
+
