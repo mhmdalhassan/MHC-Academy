@@ -245,15 +245,17 @@
         @yield('content')
     </main>
 
+
     <!-- Enhanced Footer -->
     <footer class="footer-custom">
         <div class="container">
             <div class="row gy-4">
                 <!-- Brand and Description -->
                 <div class="col-lg-4 col-md-6">
-                    <h5>MH-Code Academy</h5>
-                    <p class="mb-3">Empowering the next generation of developers through comprehensive coding education,
-                        hands-on projects, and career mentorship.</p>
+                    <h5>{{ $footerData->name ?? 'Your Academy Name' }}</h5>
+                    <p class="mb-3">
+                        {{ $footerData->description ?? 'Your description here...' }}
+                    </p>
                     <div class="d-flex gap-3">
                         <a href="{{ route('course') }}" class="btn btn-academy btn-sm">Explore Courses</a>
                         <a href="{{ route('contact.index') }}" class="btn btn-outline-light btn-sm">Contact Us</a>
@@ -272,9 +274,6 @@
                     </ul>
                 </div>
 
-
-
-
                 <!-- Courses -->
                 <div class="col-lg-3 col-md-6">
                     <h6>Popular Courses</h6>
@@ -290,31 +289,57 @@
                 <!-- Contact & Social -->
                 <div class="col-lg-3 col-md-6">
                     <h6>Connect With Us</h6>
-                    <p class="small mb-3"><i class="bi bi-envelope me-2"></i> mhcodeacademy.com</p>
-                    <p class="small mb-3"><i class="bi bi-telephone me-2"></i> +961 78 910 585</p>
+                    @if(!empty($footerData->email))
+                        <p class="small mb-3"><i class="bi bi-envelope me-2"></i> {{ $footerData->email }}</p>
+                    @endif
+
+                    @if(!empty($footerData->phone_number))
+                        <p class="small mb-3"><i class="bi bi-telephone me-2"></i> {{ $footerData->phone_number }}</p>
+                    @endif
 
                     <div class="social-icons d-flex gap-3 mt-3">
-                        <a href="https://www.linkedin.com/"><i class="bi bi-linkedin"></i></a>
-                        <a href="https://www.facebook.com/"><i class="bi bi-facebook"></i></a>
-                        <a href="https://www.instagram.com/"><i class="bi bi-instagram"></i></a>
-                        <a href="https://x.com/"><i class="bi bi-twitter-x"></i></a>
-                        <a href="https://www.youtube.com/"><i class="bi bi-youtube"></i></a>
-                        <a href="https://github.com/"><i class="bi bi-github"></i></a>
+                        @if($footerData->linkedin)
+                            <a href="{{ $footerData->linkedin }}"><i class="bi bi-linkedin"></i></a>
+                        @endif
+                        @if($footerData->facebook)
+                            <a href="{{ $footerData->facebook }}"><i class="bi bi-facebook"></i></a>
+                        @endif
+                        @if($footerData->instagram)
+                            <a href="{{ $footerData->instagram }}"><i class="bi bi-instagram"></i></a>
+                        @endif
+                        @if($footerData->twitter)
+                            <a href="{{ $footerData->twitter }}"><i class="bi bi-twitter-x"></i></a>
+                        @endif
+                        @if($footerData->youtube)
+                            <a href="{{ $footerData->youtube }}"><i class="bi bi-youtube"></i></a>
+                        @endif
+                        @if($footerData->github)
+                            <a href="{{ $footerData->github }}"><i class="bi bi-github"></i></a>
+                        @endif
+
                     </div>
                 </div>
             </div>
 
             <div class="footer-divider"></div>
 
+            <!-- Footer Bottom Section -->
             <div class="row align-items-center">
                 <div class="col-md-6 text-center text-md-start">
-                    <p class="mb-0 small">&copy; {{ date('Y') }} MH-Code Academy. All Rights Reserved.</p>
+                    <p class="mb-0 small">
+                        &copy; {{ date('Y') }} {{ $footerData->name ?? 'Your Academy Name' }}. All Rights Reserved.
+                    </p>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
-                    <a href="#" class="small me-3">Privacy Policy</a>
-                    <a href="#" class="small">Terms of Service</a>
+                    @if(!empty($footerData->privacy_policy))
+                        <a href="{{ $footerData->privacy_policy }}" class="small me-3">Privacy Policy</a>
+                    @endif
+                    @if(!empty($footerData->terms_of_service))
+                        <a href="{{ $footerData->terms_of_service }}" class="small">Terms of Service</a>
+                    @endif
                 </div>
             </div>
+
         </div>
     </footer>
 

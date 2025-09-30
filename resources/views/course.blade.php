@@ -7,39 +7,45 @@
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="container text-center py-5">
-            <h1 class="fw-bold display-4 mb-3" data-aos="fade-up" data-aos-duration="800">Master In-Demand Tech Skills</h1>
-            <p class="lead fs-5 mb-4" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800">Choose your path,
-                learn hands-on, and build real projects with industry experts.</p>
+            <h1 class="fw-bold display-4 mb-3" data-aos="fade-up" data-aos-duration="800">
+                {{ $internalCourse?->header ?? 'Master In-Demand Tech Skills' }}
+            </h1>
+            <p class="lead fs-5 mb-4" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800">
+                {{ $internalCourse?->description ?? 'Choose your path, learn hands-on, and build real projects with industry experts.' }}
+            </p>
 
             <!-- Stats -->
             <div class="row justify-content-center mt-5" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
                 <div class="col-md-3 col-6 mb-3">
                     <div class="stat-card">
-                        <h3 class="fw-bold text-accent">2,500+</h3>
+                        <h3 class="fw-bold text-accent">{{ $internalCourse?->students_enrolled ?? '0' }}+</h3>
                         <p class="small mb-0">Students Enrolled</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-6 mb-3">
                     <div class="stat-card">
-                        <h3 class="fw-bold text-accent">50+</h3>
+                        <h3 class="fw-bold text-accent">{{ $internalCourse?->expert_instructors ?? '0' }}+</h3>
                         <p class="small mb-0">Expert Instructors</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-6 mb-3">
                     <div class="stat-card">
-                        <h3 class="fw-bold text-accent">98%</h3>
+                        <h3 class="fw-bold text-accent">{{ $internalCourse?->completion_rate ?? '0' }}%</h3>
                         <p class="small mb-0">Completion Rate</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-6 mb-3">
                     <div class="stat-card">
-                        <h3 class="fw-bold text-accent">1,200+</h3>
+                        <h3 class="fw-bold text-accent">{{ $internalCourse?->projects_built ?? '0' }}+</h3>
                         <p class="small mb-0">Projects Built</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+
+
 
     <!-- Search + Filter Section -->
     <section class="search-section py-4">
@@ -162,16 +168,36 @@
                                         <span class="ms-3"><i class="bi bi-bar-chart me-1"></i>{{ $product->lessons ?? 0 }}
                                             lessons</span>
                                     </div>
+
+
+                                    @php
+                                        $rating = $product->rating ?? 0; // example: 4.5
+                                        $fullStars = floor($rating);     // ⭐ count
+                                        $halfStar = ($rating - $fullStars) >= 0.5 ? 1 : 0; // ⯪ if rating has .5
+                                        $emptyStars = 5 - ($fullStars + $halfStar);
+                                    @endphp
+
                                     <div class="rating mb-3">
                                         <span class="rating-stars">
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-half"></i>
+                                            {{-- full stars --}}
+                                            @for ($i = 0; $i < $fullStars; $i++)
+                                                <i class="bi bi-star-fill text-warning"></i>
+                                            @endfor
+
+                                            {{-- half star --}}
+                                            @if ($halfStar)
+                                                <i class="bi bi-star-half text-warning"></i>
+                                            @endif
+
+                                            {{-- empty stars --}}
+                                            @for ($i = 0; $i < $emptyStars; $i++)
+                                                <i class="bi bi-star text-warning"></i>
+                                            @endfor
                                         </span>
-                                        <span class="small text-white ms-1">({{ $product->rating ?? '4.5' }})</span>
+                                        <span class="small text-white ms-1">({{ number_format($rating, 1) }})</span>
                                     </div>
+
+
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="course-price fw-bold text-accent">${{ number_format($product->price, 2) }}
                                         </div>

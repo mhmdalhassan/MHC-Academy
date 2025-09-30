@@ -28,24 +28,21 @@ class ProductController extends Controller
     // Updated courses method for frontend filtering
     public function courses(Request $request)
     {
-        $q = $request->query('q', null);            // <-- define $q
+        $q = $request->query('q', null);
         $category = $request->query('category', 'All');
-        $level = $request->query('level', 'All');   // optional: if you want to keep level in view
+        $level = $request->query('level', 'All');
 
         $query = Product::query();
 
-        // Search by name or detail
         if ($q) {
             $query->where('name', 'like', '%' . $q . '%')
                 ->orWhere('detail', 'like', '%' . $q . '%');
         }
 
-        // Filter by category
         if ($category && $category !== 'All') {
             $query->where('category', $category);
         }
 
-        // Filter by difficulty/level
         if ($level && $level !== 'All') {
             $query->where('difficulty', $level);
         }
@@ -61,8 +58,13 @@ class ProductController extends Controller
             ->pluck('category')
             ->toArray();
 
-        return view('course', compact('products', 'categories', 'q', 'category', 'level'));
+        // ✅ Fetch the internal course for the hero section
+        $internalCourse = \App\Models\InternalCourse::first();
+
+        // Pass everything to the view
+        return view('course', compact('products', 'categories', 'q', 'category', 'level', 'internalCourse'));
     }
+
 
     public function description(Product $product): View
     {

@@ -44,10 +44,23 @@ class PermissionTableSeeder extends Seeder
             'feature-delete',
 
             // request
-             'request-list',
-           
+            'request-list',
+
+            // Internal Courses
+            'internal-course-list',
+            'internal-course-create',
+            'internal-course-edit',
+            'internal-course-delete',
+
+            // Footer
+            'footer-list',
+            'footer-create',
+            'footer-edit',
+            'footer-delete',
+
+
         ];
-        
+
 
         foreach ($permissions as $permission) {
             Permission::firstOrCreate(['name' => $permission]); // prevent duplicates

@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<link rel="icon" type="image/png" href="{{ asset('images/favicon-96x96.png') }}" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="{{ asset('images/favicon.svg') }}" />
-<link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" />
-<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/apple-touch-icon.png') }}" />
+    <link rel="icon" type="image/png" href="{{ asset('images/favicon-96x96.png') }}" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="{{ asset('images/favicon.svg') }}" />
+    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/apple-touch-icon.png') }}" />
 
 
     <!-- CSRF Token -->
@@ -619,6 +619,24 @@
                                 <span class="menu-text">Manage Features</span>
                             </a>
                         @endcan
+
+                        @can('internal-course-list')
+                            <a href="{{ route('internal-courses.index') }}"
+                                class="menu-item {{ request()->routeIs('internal-courses.*') ? 'active' : '' }}">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                <span class="menu-text">Manage Internal Courses</span>
+                            </a>
+                        @endcan
+
+                        @can('footer-list')
+                            <a href="{{ route('footer.index') }}"
+                                class="menu-item {{ request()->routeIs('footer.*') ? 'active' : '' }}">
+                                <i class="fas fa-shoe-prints"></i> {{-- you can change this icon --}}
+                                <span class="menu-text">Manage Footer</span>
+                            </a>
+                        @endcan
+
+
 
                         <div class="menu-divider"></div>
 

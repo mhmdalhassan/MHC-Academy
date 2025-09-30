@@ -11,6 +11,8 @@ use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\ContactController;
 use App\Models\Feature;
 use App\Http\Controllers\RequestController;
+use App\Http\Controllers\InternalCourseController;
+use App\Http\Controllers\FooterController;
 
 
 Route::get('/', function () {
@@ -40,7 +42,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('requests', [RequestController::class, 'index'])->name('requests.index');
     Route::post('requests/send-mail/{id}', [RequestController::class, 'sendMail'])->name('requests.sendMail');
 });
-Route::resource('requests', RequestController::class)->only(['index','show','destroy']);
+Route::resource('requests', RequestController::class)->only(['index', 'show', 'destroy']);
 
 
 // optional if you still want ajax filtering later:
@@ -62,4 +64,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('products', ProductController::class);
     Route::resource('blogs', BlogController::class);
     Route::resource('features', FeatureController::class);
+    Route::resource('internal-courses', InternalCourseController::class);
+    Route::resource('footer', FooterController::class);
 });

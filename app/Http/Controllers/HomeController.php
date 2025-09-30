@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\InternalCourse;
 class HomeController extends Controller
 {
     /**
@@ -23,6 +23,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // Get the single internal course record (assuming only one exists)
+        $internalCourse = InternalCourse::first();
+
+        return view('home', compact('internalCourse'));
     }
 }

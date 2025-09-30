@@ -39,7 +39,7 @@
                         <div class="col-auto">
                             <div class="stat-item d-flex align-items-center">
                                 <i class="bi bi-bar-chart-fill text-accent me-2"></i>
-                                <span class="fw-bold">{{ $product->level ?? 'Beginner' }} Level</span>
+                                <span class="fw-bold">{{ $product->difficulty ?? 'Beginner' }} Level</span>
                             </div>
                         </div>
                         <div class="col-auto">
@@ -51,7 +51,7 @@
                         <div class="col-auto">
                             <div class="stat-item d-flex align-items-center">
                                 <i class="bi bi-person-fill text-accent me-2"></i>
-                                <span class="fw-bold">{{ $product->enrollments ?? '1,200' }}+ Enrolled</span>
+                                <span class="fw-bold">{{ $product->enrolled_count ?? '1,200' }}+ Enrolled</span>
                             </div>
                         </div>
                     </div>
@@ -59,20 +59,40 @@
                     <!-- Rating -->
                     <div class="rating-section mb-4">
                         <div class="d-flex align-items-center mb-2">
-                            <div class="rating-stars me-2">
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-half"></i>
+                            @php
+                                $rating = $product->rating ?? 4.7; // default if no rating
+                                $fullStars = floor($rating);
+                                $halfStar = ($rating - $fullStars) >= 0.5 ? 1 : 0;
+                                $emptyStars = 5 - $fullStars - $halfStar;
+                            @endphp
+
+                            <div class="d-flex align-items-center">
+                                <div class="rating-stars me-2">
+                                    @for ($i = 0; $i < $fullStars; $i++)
+                                        <i class="bi bi-star-fill"></i>
+                                    @endfor
+                                    @if ($halfStar)
+                                        <i class="bi bi-star-half"></i>
+                                    @endif
+                                    @for ($i = 0; $i < $emptyStars; $i++)
+                                        <i class="bi bi-star"></i>
+                                    @endfor
+                                </div>
+                                <span class="fw-bold me-2">{{ number_format($rating, 1) }}</span>
                             </div>
-                            <span class="fw-bold me-2">4.7</span>
-                            <span class="text-white">({{ $product->reviews ?? '356' }} reviews)</span>
+
+                            <span class="text-white">({{ $product->enrolled_count ?? '356' }} reviews)</span>
                         </div>
                         <div class="progress mb-1" style="height: 6px;">
                             <div class="progress-bar bg-accent" style="width: 85%"></div>
                         </div>
-                        <small class="text-white">98% of students recommend this course</small>
+                        @php
+                            $enrolled = $product->enrolled_count ?? 100; // default to 100 if null
+                            $recommended = round($enrolled * 0.75);
+                        @endphp
+
+                        <small class="text-white">{{ $recommended }} of students recommend this course</small>
+
                     </div>
 
                     <!-- Price & CTA -->
@@ -90,9 +110,6 @@
                         <div class="d-flex flex-wrap gap-3">
                             <a href="{{ route('contact.index') }}" class="btn btn-accent btn-lg px-4">
                                 <i class="bi bi-cart-plus me-2"></i>Enroll Now
-                            </a>
-                            <a href="#" class="btn btn-outline-accent btn-lg px-4">
-                                <i class="bi bi-heart me-2"></i>Add to Wishlist
                             </a>
                             <a href="{{ route('course') }}" class="btn btn-outline-light btn-lg px-4">
                                 <i class="bi bi-arrow-left me-2"></i>Back to Courses
@@ -125,10 +142,12 @@
                         @endif
 
                         <!-- Preview Badge -->
-                        <div class="preview-badge">
+                        <div class="preview-badge" style="cursor: pointer;"
+                            onclick="window.open('{{ $product->overview_video_url }}', '_blank')">
                             <i class="bi bi-play-circle me-1"></i>
                             <span>Watch Course Preview</span>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -214,7 +233,7 @@
                             <div class="course-curriculum">
                                 <h3 class="fw-bold mb-4">Course Curriculum</h3>
                                 <div class="accordion" id="curriculumAccordion">
-                                    <!-- Sample Modules - You can dynamic this based on your data -->
+                                    <!-- Module 1: Introduction -->
                                     <div class="accordion-item">
                                         <h2 class="accordion-header">
                                             <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -225,37 +244,63 @@
                                         <div id="module1" class="accordion-collapse collapse show"
                                             data-bs-parent="#curriculumAccordion">
                                             <div class="accordion-body">
-                                                <div
-                                                    class="lesson-item d-flex justify-content-between align-items-center py-2">
-                                                    <span><i class="bi bi-play-circle me-2"></i>Welcome to the Course</span>
-                                                    <span class="text-muted">15 min</span>
-                                                </div>
-                                                <div
-                                                    class="lesson-item d-flex justify-content-between align-items-center py-2">
-                                                    <span><i class="bi bi-play-circle me-2"></i>Course Overview</span>
-                                                    <span class="text-muted">20 min</span>
-                                                </div>
+                                                @if(!empty($product->welcome_video_url))
+                                                    <a href="{{ $product->welcome_video_url }}" target="_blank"
+                                                        class="text-decoration-none">
+                                                        <div
+                                                            class="lesson-item d-flex justify-content-between align-items-center py-2">
+                                                            <span><i class="bi bi-play-circle me-2"></i>Welcome to the
+                                                                Course</span>
+
+                                                        </div>
+                                                    </a>
+                                                @endif
+                                                @if(!empty($product->overview_video_url))
+                                                    <a href="{{ $product->overview_video_url }}" target="_blank"
+                                                        class="text-decoration-none">
+                                                        <div
+                                                            class="lesson-item d-flex justify-content-between align-items-center py-2">
+                                                            <span><i class="bi bi-play-circle me-2"></i>Course Overview</span>
+
+                                                        </div>
+                                                    </a>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
 
+                                    <!-- Module 2: Core Concepts -->
                                     <div class="accordion-item">
                                         <h2 class="accordion-header">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#module2">
+                                            <button class="accordion-button collapsed bg-transparent text-white"
+                                                type="button" data-bs-toggle="collapse" data-bs-target="#module2">
                                                 Module 2: Core Concepts
                                             </button>
                                         </h2>
                                         <div id="module2" class="accordion-collapse collapse"
                                             data-bs-parent="#curriculumAccordion">
-                                            <div class="accordion-body">
-                                                <!-- Lesson items -->
+                                            <div class="accordion-body text-white px-3 py-2">
+                                                @if(!empty($product->core_concepts))
+                                                    <ul class="list-unstyled mb-0">
+                                                        @foreach($product->core_concepts as $concept)
+                                                            <li class="d-flex align-items-start mb-2">
+                                                                <i class="bi bi-check-circle text-success me-2 mt-1"></i>
+                                                                <span class="me-2">{{ $concept }}</span>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                @else
+                                                    <p class="mb-0">No core concepts added yet.</p>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
+
+
                                 </div>
                             </div>
                         </div>
+
 
                         <!-- Instructor Tab -->
                         <div class="tab-pane fade" id="instructor" role="tabpanel">
@@ -326,7 +371,7 @@
                                 </li>
                                 <li class="d-flex justify-content-between py-2">
                                     <span><i class="bi bi-bar-chart text-accent me-2"></i>Level</span>
-                                    <span class="fw-bold">{{ $product->level ?? 'Beginner' }}</span>
+                                    <span class="fw-bold">{{ $product->difficulty ?? 'Beginner' }}</span>
                                 </li>
                                 <li class="d-flex justify-content-between py-2">
                                     <span><i class="bi bi-play-circle text-accent me-2"></i>Lessons</span>
@@ -334,12 +379,16 @@
                                 </li>
                                 <li class="d-flex justify-content-between py-2">
                                     <span><i class="bi bi-person text-accent me-2"></i>Enrolled</span>
-                                    <span class="fw-bold">{{ $product->enrollments ?? '1,200' }}+</span>
+                                    <span class="fw-bold">{{ $product->enrolled_count ?? '1,200' }}+</span>
                                 </li>
+
                                 <li class="d-flex justify-content-between py-2">
                                     <span><i class="bi bi-star text-accent me-2"></i>Rating</span>
-                                    <span class="fw-bold">4.7/5.0</span>
+                                    <span class="fw-bold">
+                                        {{ number_format($product->rating ?? 4.7, 1) }}/5.0
+                                    </span>
                                 </li>
+
                             </ul>
                         </div>
 
@@ -378,7 +427,7 @@
         <div class="container text-center">
             <h2 class="fw-bold mb-3">Ready to Start Learning?</h2>
             <p class="lead mb-4">Join thousands of students who have transformed their careers</p>
-            <a href="#" class="btn btn-accent btn-lg px-5">
+            <a href="{{ route('contact.index') }}" class="btn btn-accent btn-lg px-5">
                 <i class="bi bi-cart-plus me-2"></i>Enroll Now - ${{ number_format($product->price, 2) }}
             </a>
         </div>
