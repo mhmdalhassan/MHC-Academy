@@ -29,17 +29,26 @@ class Product extends Model
         'welcome_video_url',
         'overview_video_url',
         'core_concepts',
+        'instructor_id',
+        'student_review_ids', // ✅ add here
     ];
 
 
     protected $casts = [
         'core_concepts' => 'array',
+        'student_review_ids' => 'array', // ✅ cast JSON to array
     ];
 
-
-    public function contacts()
+    public function instructor()
     {
-        return $this->hasMany(Contact::class);
+        return $this->belongsTo(Instructor::class);
     }
+
+    public function studentReviews()
+    {
+        return $this->hasMany(StudentReview::class, 'product_id');
+    }
+
+
 
 }

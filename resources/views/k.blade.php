@@ -71,10 +71,12 @@
             r: 4;
             opacity: 1;
         }
+
         50% {
             r: 9;
             opacity: 0.3;
         }
+
         100% {
             r: 4;
             opacity: 1;
@@ -371,15 +373,18 @@
 
                 <!-- Animated lines -->
                 <div id="animated-lines" class="mt-3">
-                    <div class="animated-line d-flex align-items-center justify-content-center justify-content-lg-start mb-3">
+                    <div
+                        class="animated-line d-flex align-items-center justify-content-center justify-content-lg-start mb-3">
                         <i class="bi bi-lightning-charge-fill text-info me-2"></i>
                         <span class="content text-white" data-index="0"></span>
                     </div>
-                    <div class="animated-line d-flex align-items-center justify-content-center justify-content-lg-start mb-3">
+                    <div
+                        class="animated-line d-flex align-items-center justify-content-center justify-content-lg-start mb-3">
                         <i class="bi bi-lightning-charge-fill text-info me-2"></i>
                         <span class="content text-white" data-index="0"></span>
                     </div>
-                    <div class="animated-line d-flex align-items-center justify-content-center justify-content-lg-start">
+                    <div
+                        class="animated-line d-flex align-items-center justify-content-center justify-content-lg-start">
                         <i class="bi bi-lightning-charge-fill text-info me-2"></i>
                         <span class="content text-white" data-index="0"></span>
                     </div>
@@ -394,7 +399,8 @@
 
             <!-- RIGHT: NEW TECH SVG -->
             <div class="col-lg-6 col-md-12 text-center svg-container">
-                <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" aria-label="Technology Coding Illustration">
+                <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg"
+                    aria-label="Technology Coding Illustration">
                     <defs>
                         <linearGradient id="grad-tech" x1="0" x2="1">
                             <stop offset="0%" stop-color="#06b6d4" />
@@ -425,11 +431,16 @@
 
                         <!-- Code display -->
                         <g class="code-display">
-                            <text x="-110" y="-45" class="typing code-line" style="animation-delay: 0.5s;">&gt; npm start</text>
-                            <text x="-110" y="-30" class="typing code-line" style="animation-delay: 1s;">Starting development server...</text>
-                            <text x="-110" y="-15" class="typing code-line" style="animation-delay: 1.5s;">Compiled successfully!</text>
-                            <text x="-110" y="0" class="typing code-line" style="animation-delay: 2s;">You can now view app in browser.</text>
-                            <text x="-110" y="15" class="typing code-line" style="animation-delay: 2.5s;">Local: http://localhost:3000</text>
+                            <text x="-110" y="-45" class="typing code-line" style="animation-delay: 0.5s;">&gt; npm
+                                start</text>
+                            <text x="-110" y="-30" class="typing code-line" style="animation-delay: 1s;">Starting
+                                development server...</text>
+                            <text x="-110" y="-15" class="typing code-line" style="animation-delay: 1.5s;">Compiled
+                                successfully!</text>
+                            <text x="-110" y="0" class="typing code-line" style="animation-delay: 2s;">You can now view
+                                app in browser.</text>
+                            <text x="-110" y="15" class="typing code-line" style="animation-delay: 2.5s;">Local:
+                                http://localhost:3000</text>
                             <text x="-110" y="30" class="typing code-line" style="animation-delay: 3s;">&gt; _</text>
                             <rect x="20" y="30" width="8" height="14" class="caret" />
                         </g>
@@ -480,7 +491,8 @@
                     for a successful journey in the world of technology.
                 </p>
                 <ul class="list-unstyled mt-3">
-                    <li class="mb-2"><i class="bi bi-check-circle-fill text-info me-2"></i> Career-focused learning paths</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-info me-2"></i> Career-focused learning
+                        paths</li>
                     <li class="mb-2"><i class="bi bi-check-circle-fill text-info me-2"></i> Project-based courses</li>
                     <li><i class="bi bi-check-circle-fill text-info me-2"></i> Mentorship and community support</li>
                 </ul>
@@ -489,7 +501,8 @@
             <!-- RIGHT: Image -->
             <div class="col-lg-6 text-center" data-aos="fade-left" data-aos-duration="1200">
                 <img src="{{ asset('images/homePage.jpg') }}" alt="Coding Education"
-                    class="img-fluid rounded-4 shadow-lg" loading="lazy" style="max-height: 400px; width: 100%; object-fit: cover;">
+                    class="img-fluid rounded-4 shadow-lg" loading="lazy"
+                    style="max-height: 400px; width: 100%; object-fit: cover;">
             </div>
         </div>
     </div>
@@ -500,7 +513,8 @@
     <div class="p-4 p-md-5">
         <div class="text-center mb-5" data-aos="fade-down" data-aos-duration="1200">
             <h2 class="fw-bold">Our Services / Programs</h2>
-            <p class="lead">Explore the programs and services we provide at <span class="text-info fw-bold">MH-Code Academy</span></p>
+            <p class="lead">Explore the programs and services we provide at <span class="text-info fw-bold">MH-Code
+                    Academy</span></p>
         </div>
 
         <div class="row g-4">
@@ -556,7 +570,8 @@
     <div class="p-4 p-md-5">
         <div class="text-center mb-5" data-aos="fade-down" data-aos-duration="1200">
             <h2 class="fw-bold">Why Choose Us / Features</h2>
-            <p class="lead">Discover the advantages that make <span class="text-info fw-bold">MH-Code Academy</span> unique</p>
+            <p class="lead">Discover the advantages that make <span class="text-info fw-bold">MH-Code Academy</span>
+                unique</p>
         </div>
 
         <div class="row g-4">
@@ -655,7 +670,8 @@
         <!-- Intro -->
         <div class="text-center mb-5" data-aos="fade-down" data-aos-duration="1000">
             <h3 class="fw-bold">Courses / Tracks</h3>
-            <p class="lead mb-0">Choose a track and start building real skills — each track includes hands-on projects and mentorship.</p>
+            <p class="lead mb-0">Choose a track and start building real skills — each track includes hands-on projects
+                and mentorship.</p>
         </div>
 
         <!-- Cards grid -->
@@ -666,14 +682,16 @@
                     <!-- default content: image + title -->
                     <div class="card-front text-center p-4">
                         <img src="{{ asset('images/webDeveloper.jpg') }}" alt="Web Development"
-                            class="img-fluid rounded-3 mb-3" loading="lazy" style="max-height:200px; object-fit:cover; width: 100%;">
+                            class="img-fluid rounded-3 mb-3" loading="lazy"
+                            style="max-height:200px; object-fit:cover; width: 100%;">
                         <h5 class="track-title fw-bold mb-0">Web Development</h5>
                     </div>
 
                     <!-- hover overlay: shown on hover, hides front -->
                     <div class="card-back p-4 d-flex flex-column justify-content-center align-items-center text-center">
                         <!-- SVG (HTML/CSS/JS stack icon) -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="92" height="92" viewBox="0 0 24 24" fill="none" class="mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="92" height="92" viewBox="0 0 24 24" fill="none"
+                            class="mb-3">
                             <path d="M3 3h18v18H3z" fill="#0b254d" opacity="0.03" />
                             <path d="M4 4h16v16H4z" stroke="#ff8c00" stroke-width="1.2" fill="none" />
                             <path d="M7 7h3v10H7z" fill="#ff8c00" />
@@ -693,15 +711,19 @@
                 <div class="track-card position-relative overflow-hidden">
                     <div class="card-front text-center p-4">
                         <img src="{{ asset('images/cyberSecurity.jpg') }}" alt="Cybersecurity"
-                            class="img-fluid rounded-3 mb-3" loading="lazy" style="max-height:200px; object-fit:cover; width: 100%;">
+                            class="img-fluid rounded-3 mb-3" loading="lazy"
+                            style="max-height:200px; object-fit:cover; width: 100%;">
                         <h5 class="track-title fw-bold mb-0">Cybersecurity</h5>
                     </div>
 
                     <div class="card-back p-4 d-flex flex-column justify-content-center align-items-center text-center">
                         <!-- SVG shield -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="92" height="92" viewBox="0 0 24 24" fill="none" class="mb-3">
-                            <path d="M12 2l7 4v6c0 5-4 9-7 10-3-1-7-5-7-10V6l7-4z" stroke="#ff8c00" stroke-width="1.2" fill="none" />
-                            <path d="M9 12l2 2 4-4" stroke="#ff8c00" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="92" height="92" viewBox="0 0 24 24" fill="none"
+                            class="mb-3">
+                            <path d="M12 2l7 4v6c0 5-4 9-7 10-3-1-7-5-7-10V6l7-4z" stroke="#ff8c00" stroke-width="1.2"
+                                fill="none" />
+                            <path d="M9 12l2 2 4-4" stroke="#ff8c00" stroke-width="1.6" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
 
                         <h5 class="fw-bold mb-2">Cybersecurity</h5>
@@ -715,13 +737,15 @@
                 <div class="track-card position-relative overflow-hidden">
                     <div class="card-front text-center p-4">
                         <img src="{{ asset('images/Enginee.jpg') }}" alt="Computer Engineering"
-                            class="img-fluid rounded-3 mb-3" loading="lazy" style="max-height:200px; object-fit:cover; width: 100%;">
+                            class="img-fluid rounded-3 mb-3" loading="lazy"
+                            style="max-height:200px; object-fit:cover; width: 100%;">
                         <h5 class="track-title fw-bold mb-0">Computer Engineering</h5>
                     </div>
 
                     <div class="card-back p-4 d-flex flex-column justify-content-center align-items-center text-center">
                         <!-- SVG chip -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="92" height="92" viewBox="0 0 24 24" fill="none" class="mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="92" height="92" viewBox="0 0 24 24" fill="none"
+                            class="mb-3">
                             <rect x="6" y="6" width="12" height="12" stroke="#ff8c00" stroke-width="1.2" fill="none" />
                             <path d="M12 8v8" stroke="#ff8c00" stroke-width="1.6" stroke-linecap="round" />
                         </svg>
@@ -737,13 +761,15 @@
                 <div class="track-card position-relative overflow-hidden">
                     <div class="card-front text-center p-4">
                         <img src="{{ asset('images/dataAnalysis.jpg') }}" alt="Data Analysis"
-                            class="img-fluid rounded-3 mb-3" loading="lazy" style="max-height:200px; object-fit:cover; width: 100%;">
+                            class="img-fluid rounded-3 mb-3" loading="lazy"
+                            style="max-height:200px; object-fit:cover; width: 100%;">
                         <h5 class="track-title fw-bold mb-0">Data Analysis</h5>
                     </div>
 
                     <div class="card-back p-4 d-flex flex-column justify-content-center align-items-center text-center">
                         <!-- SVG chart -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="92" height="92" viewBox="0 0 24 24" fill="none" class="mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="92" height="92" viewBox="0 0 24 24" fill="none"
+                            class="mb-3">
                             <path d="M4 20h16" stroke="#ff8c00" stroke-width="1.2" />
                             <path d="M7 16v-6" stroke="#ff8c00" stroke-width="1.6" />
                             <path d="M12 16v-10" stroke="#ff8c00" stroke-width="1.6" />

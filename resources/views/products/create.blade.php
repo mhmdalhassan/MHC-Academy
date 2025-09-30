@@ -115,6 +115,40 @@
                 <input type="file" name="image" class="form-control">
             </div>
 
+            {{-- Instructor (single select) --}}
+            <div class="col-md-6 mb-2">
+                <strong>Instructor:</strong>
+                <select name="instructor_id" class="form-control">
+                    <option value="">-- Select Instructor --</option>
+                    @foreach ($instructors as $instructor)
+                        <option value="{{ $instructor->id }}" {{ old('instructor_id') == $instructor->id ? 'selected' : '' }}>
+                            {{ $instructor->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+
+
+            {{-- Student Reviews (multi-select with dynamic add/remove) --}}
+            <div class="col-md-12 mb-2">
+                <strong>Student Reviews:</strong>
+                <div class="input-group mb-2">
+                    <select id="review-select" class="form-control">
+                        <option value="">-- Select Review --</option>
+                        @foreach ($studentReviews as $review)
+                            <option value="{{ $review->id }}">{{ $review->name }} </option>
+                        @endforeach
+                    </select>
+                    <button type="button" id="add-review" class="btn btn-success">+ Add</button>
+                </div>
+
+                <ul id="review-list" class="list-group">
+                    {{-- On edit, prefill assigned reviews --}}
+                </ul>
+            </div>
+
+
             <div class="col-xs-12 col-sm-12 col-md-12 mb-2">
                 <div class="form-group">
                     <strong>Category:</strong>
@@ -236,5 +270,52 @@
                 }
             });
         });
+
+        // STUDENT REVIEWS add/remove
+        const reviewSelect = document.getElementById('review-select');
+        const addReviewBtn = document.getElementById('add-review');
+        const reviewList = document.getElementById('review-list');
+
+        function addReview(id, text) {
+            if (!id) return;
+            // prevent duplicates
+            if (reviewList.querySelector('input[value="' + id + '"]')) return;
+
+            const li = document.createElement('li');
+            li.className = 'list-group-item d-flex justify-content-between align-items-center';
+
+            const hidden = document.createElement('input');
+            hidden.type = 'hidden';
+            hidden.name = 'student_review_ids[]';
+            hidden.value = id;
+
+            const span = document.createElement('span');
+            span.textContent = text;
+
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'btn btn-danger btn-sm remove-review';
+            btn.textContent = 'Remove';
+
+            li.appendChild(hidden);
+            li.appendChild(span);
+            li.appendChild(btn);
+
+            reviewList.appendChild(li);
+        }
+
+        addReviewBtn.addEventListener('click', function () {
+            const id = reviewSelect.value;
+            const text = reviewSelect.options[reviewSelect.selectedIndex]?.text;
+            if (id) addReview(id, text);
+        });
+
+        reviewList.addEventListener('click', function (e) {
+            if (e.target && e.target.classList.contains('remove-review')) {
+                const li = e.target.closest('li');
+                if (li) li.remove();
+            }
+        });
+
     </script>
 @endsection

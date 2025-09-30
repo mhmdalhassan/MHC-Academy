@@ -7,7 +7,9 @@
         <div class="container">
             <div class="row align-items-center">
                 <!-- LEFT TEXT -->
-                <div class="col-lg-6 col-md-12 text-center text-lg-start mb-4 mb-lg-0">
+                 {{-- <div class="col-lg-6 col-md-12 text-center text-lg-start mb-4 mb-lg-0"></div> --}}
+                <div class="col-lg-6 col-md-12 text-center text-lg-start mb-4 mb-lg-0 ps-lg-4">
+
                     <h1 class="display-4 fw-bold mb-3">
                         Welcome to <span class="text-info">MH-Code Academy</span>
                     </h1>

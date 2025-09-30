@@ -133,6 +133,47 @@
                 <input type="file" name="image" class="form-control">
             </div>
 
+            {{-- Instructor (single select) --}}
+            <div class="col-md-6 mb-2">
+                <strong>Instructor:</strong>
+                <select name="instructor_id" class="form-control">
+                    <option value="">-- Select Instructor --</option>
+                    @foreach ($instructors as $instructor)
+                        <option value="{{ $instructor->id }}" {{ (old('instructor_id', $product->instructor_id) == $instructor->id) ? 'selected' : '' }}>
+                            {{ $instructor->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            {{-- Student Reviews (multi-select with dynamic add/remove) --}}
+            <div class="col-md-12 mb-2">
+                <strong>Student Reviews:</strong>
+                <div class="input-group mb-2">
+                    <select id="review-select" class="form-control">
+                        <option value="">-- Select Review --</option>
+                        @foreach ($studentReviews as $review)
+                            <option value="{{ $review->id }}">{{ $review->name }}</option>
+                        @endforeach
+                    </select>
+                    <button type="button" id="add-review" class="btn btn-success">+ Add</button>
+                </div>
+
+                <ul id="review-list" class="list-group">
+                    {{-- Prefill assigned reviews on edit --}}
+                    @if(!empty($product->studentReviews))
+                        @foreach ($product->studentReviews as $review)
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <input type="hidden" name="student_review_ids[]" value="{{ $review->id }}">
+                                <span>{{ $review->name }}</span>
+                                <button type="button" class="btn btn-danger btn-sm remove-review">Remove</button>
+                            </li>
+                        @endforeach
+                    @endif
+                </ul>
+            </div>
+
+
             <div class="col-md-12 mb-2">
                 <strong>Category:</strong>
                 <select name="category" class="form-control">
@@ -161,20 +202,23 @@
         }
     </style>
 
-    {{-- Inline JS so it runs immediately --}}
+    {{-- Inline JS for product form --}}
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // RATING: update star visuals based on checked radio
+            // ----------------------------
+            // STAR RATING
+            // ----------------------------
             function updateStars() {
                 const stars = document.querySelectorAll('.rating-input .fa-star');
                 const checked = document.querySelector('.rating-input input[type="radio"]:checked');
                 const value = checked ? parseInt(checked.value) : 0;
                 stars.forEach((star, idx) => {
-                    if (idx < value) star.classList.add('checked'); else star.classList.remove('checked');
+                    if (idx < value) star.classList.add('checked');
+                    else star.classList.remove('checked');
                 });
             }
 
-            // click on label should set checked radio (browser does it), but also update visuals
+            // Click on label updates rating visuals
             const starLabels = document.querySelectorAll('.rating-input .fa-star');
             starLabels.forEach(label => {
                 label.addEventListener('click', function () {
@@ -185,25 +229,22 @@
                 });
             });
 
-            // in case radio changed by keyboard
+            // Update stars if radio changed (keyboard)
             const radios = document.querySelectorAll('.rating-input input[type="radio"]');
             radios.forEach(r => r.addEventListener('change', updateStars));
 
-            // set initial stars
-            updateStars();
+            updateStars(); // initial
 
-            // CORE CONCEPTS: add / enter / delete with confirm
-            const input = document.getElementById('concept-input');
-            const addBtn = document.getElementById('add-concept');
-            const list = document.getElementById('concept-list');
+            // ----------------------------
+            // CORE CONCEPTS
+            // ----------------------------
+            const conceptInput = document.getElementById('concept-input');
+            const addConceptBtn = document.getElementById('add-concept');
+            const conceptList = document.getElementById('concept-list');
 
             function addConcept(value) {
                 value = (value || '').trim();
-                if (!value) {
-                    // small feedback
-                    input.focus();
-                    return;
-                }
+                if (!value) { conceptInput.focus(); return; }
 
                 const li = document.createElement('li');
                 li.className = 'list-group-item d-flex justify-content-between align-items-center';
@@ -225,23 +266,20 @@
                 li.appendChild(span);
                 li.appendChild(btn);
 
-                list.appendChild(li);
-                input.value = '';
-                input.focus();
+                conceptList.appendChild(li);
+                conceptInput.value = '';
+                conceptInput.focus();
             }
 
-            addBtn.addEventListener('click', function (e) {
-                addConcept(input.value);
+            addConceptBtn.addEventListener('click', function () {
+                addConcept(conceptInput.value);
             });
 
-            input.addEventListener('keydown', function (e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault(); // avoid form submit
-                    addConcept(input.value);
-                }
+            conceptInput.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') { e.preventDefault(); addConcept(conceptInput.value); }
             });
 
-            list.addEventListener('click', function (e) {
+            conceptList.addEventListener('click', function (e) {
                 if (e.target && e.target.classList.contains('remove-concept')) {
                     if (confirm('Are you sure you want to delete this concept?')) {
                         const li = e.target.closest('li');
@@ -249,6 +287,58 @@
                     }
                 }
             });
+
+            // ----------------------------
+            // STUDENT REVIEWS
+            // ----------------------------
+            const reviewSelect = document.getElementById('review-select');
+            const reviewList = document.getElementById('review-list');
+            const addReviewBtn = document.getElementById('add-review');
+
+            function addReview(id, text) {
+                if (!id) return;
+
+                // Prevent duplicates
+                if (reviewList.querySelector(`input[value="${id}"]`)) return;
+
+                const li = document.createElement('li');
+                li.className = 'list-group-item d-flex justify-content-between align-items-center';
+
+                const hidden = document.createElement('input');
+                hidden.type = 'hidden';
+                hidden.name = 'student_review_ids[]';
+                hidden.value = id;
+
+                const span = document.createElement('span');
+                span.textContent = text;
+
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'btn btn-danger btn-sm remove-review';
+                btn.textContent = 'Remove';
+
+                li.appendChild(hidden);
+                li.appendChild(span);
+                li.appendChild(btn);
+
+                reviewList.appendChild(li);
+            }
+
+            addReviewBtn.addEventListener('click', function () {
+                const selectedOption = reviewSelect.options[reviewSelect.selectedIndex];
+                if (selectedOption.value) addReview(selectedOption.value, selectedOption.text);
+            });
+
+            reviewList.addEventListener('click', function (e) {
+                if (e.target && e.target.classList.contains('remove-review')) {
+                    if (confirm('Are you sure you want to remove this review?')) {
+                        const li = e.target.closest('li');
+                        if (li) li.remove();
+                    }
+                }
+            });
+
         });
     </script>
+
 @endsection

@@ -188,6 +188,7 @@
         </section>
 
         <!-- Team Section -->
+        <!-- Team Section -->
         <section class="text-center mb-5" data-aos="fade-up">
             <h2 class="text-info mb-4 display-5 fw-bold">
                 <i class="bi bi-people-fill me-3"></i>Meet Our Team
@@ -196,34 +197,30 @@
 
             <div class="row g-4">
                 @php
-                    $teamMembers = [
-                        ['name' => 'Mohammad Hasan', 'role' => 'Senior in AI & Cybersecurity', 'image' => 'https://i.pravatar.cc/300?img=59'],
-                        ['name' => 'Hassan Awad', 'role' => 'Full Stack Developer & Mentor', 'image' => 'https://i.pravatar.cc/300?img=12'],
-                        ['name' => 'Bilal Saleh', 'role' => 'Backend Developer & Instructor', 'image' => 'https://i.pravatar.cc/300?img=68'],
-                    ];
+                    $teamMembers = \App\Models\Instructor::orderByDesc('students_graduated')->take(3)->get();
                 @endphp
 
                 @foreach($teamMembers as $index => $member)
                     <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="{{ $index * 100 }}">
-                        <div class="team-card p-4 rounded-3 h-100">
+                        <div class="team-card p-4 rounded-3 h-100 text-center">
                             <div class="team-image-container mb-3">
-                                <img src="{{ $member['image'] }}" class="team-image rounded-circle" alt="{{ $member['name'] }}"
-                                    loading="lazy">
+                                <img src="{{ $member->image ? asset('storage/' . $member->image) : 'https://via.placeholder.com/150' }}"
+                                    class="team-image rounded-circle" alt="{{ $member->name }}"
+                                    style="width: 150px; height: 150px; object-fit: cover;" loading="lazy">
                                 <div class="image-overlay"></div>
                             </div>
-                            <h5 class="text-info mb-2">{{ $member['name'] }}</h5>
-                            <p class="text-light small mb-3">{{ $member['role'] }}</p>
-                            <div class="social-links">
-                                <a href="#" class="text-info me-2"><i class="bi bi-linkedin"></i></a>
-                                <a href="#" class="text-info me-2"><i class="bi bi-github"></i></a>
-                                <a href="#" class="text-info"><i class="bi bi-twitter"></i></a>
-                            </div>
+                            <h5 class="text-info mb-2">{{ $member->name }}</h5>
+                            <p class="text-light small mb-3">{{ $member->title }}</p>
+                            <p class="text-light small mb-3">{{ $member->email }}</p>
                         </div>
                     </div>
                 @endforeach
             </div>
         </section>
 
+
+
+        <!-- Student Success -->
         <!-- Student Success -->
         <section class="text-center mb-5 p-5 rounded-3 shadow-lg success-section" data-aos="fade-up">
             <h2 class="text-info mb-4 display-5 fw-bold">Student Success Stories</h2>
@@ -231,26 +228,26 @@
 
             <div class="row g-4">
                 @php
-                    $successStories = [
-                        ['name' => 'Michael Lee', 'role' => 'Frontend Developer @ TechCorp', 'image' => 'https://i.pravatar.cc/300?img=8', 'story' => 'From zero coding knowledge to building my first web app in 6 months!'],
-                        ['name' => 'Emily Johnson', 'role' => 'Full Stack Developer @ Startup', 'image' => 'https://i.pravatar.cc/300?img=32', 'story' => 'The project-based approach gave me the confidence to excel in interviews.'],
-                        ['name' => 'Sophia Martinez', 'role' => 'Software Engineer @ GlobalTech', 'image' => 'https://i.pravatar.cc/300?img=16', 'story' => 'Amazing community and mentors who supported me every step of the way.'],
-                    ];
+                    $successStories = \App\Models\StudentReview::latest()->take(3)->get();
                 @endphp
 
                 @foreach($successStories as $index => $story)
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
-                        <div class="success-card p-4 rounded-3 h-100">
-                            <img src="{{ $story['image'] }}" class="success-image rounded-circle mb-3"
-                                alt="{{ $story['name'] }}" loading="lazy">
-                            <h6 class="text-warning mb-2">{{ $story['name'] }}</h6>
-                            <small class="text-info d-block mb-3">{{ $story['role'] }}</small>
-                            <p class="text-light small fst-italic">"{{ $story['story'] }}"</p>
+                        <div class="success-card p-4 rounded-3 h-100 text-center">
+                            <img src="{{ $story->image ? asset('storage/' . $story->image) : 'https://via.placeholder.com/150' }}"
+                                class="success-image rounded-circle mb-3" alt="{{ $story->name }}"
+                                style="width: 150px; height: 150px; object-fit: cover;" loading="lazy">
+                            <h6 class="text-warning mb-2">{{ $story->name }}</h6>
+                            <small class="text-info d-block mb-3">{{ $story->title }}</small>
+                            <p class="text-light small fst-italic">"{{ $story->details }}"</p>
                         </div>
                     </div>
                 @endforeach
             </div>
         </section>
+
+
+
     </div>
 @endsection
 
