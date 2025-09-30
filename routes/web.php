@@ -11,6 +11,8 @@ use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\ContactController;
 use App\Models\Feature;
 use App\Http\Controllers\RequestController;
+use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\StudentReviewController;
 
 
 Route::get('/', function () {
@@ -62,4 +64,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('products', ProductController::class);
     Route::resource('blogs', BlogController::class);
     Route::resource('features', FeatureController::class);
-});
+    Route::resource('instructors', InstructorController::class);
+ Route::resource('student-reviews', StudentReviewController::class);});
+
+
+

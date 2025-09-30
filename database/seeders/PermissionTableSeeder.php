@@ -45,7 +45,20 @@ class PermissionTableSeeder extends Seeder
 
             // request
              'request-list',
-           
+             
+            
+            // Instructors
+            'instructor-list',
+            'instructor-create',
+            'instructor-edit',
+            'instructor-delete',
+
+            // students
+            'student-review-list',
+            'student-review-create',
+            'student-review-edit',
+            'student-review-delete',
+   
         ];
         
 
