@@ -160,7 +160,7 @@
                                     </p>
                                     <div class="instructor-info small mb-3">
                                         <i class="bi bi-person me-1"></i>
-                                        <span>By {{ $product->instructor ?? 'Industry Expert' }}</span>
+                                        <span>By Industry Expert</span>
                                     </div>
                                     <div class="course-meta mb-3">
                                         <span><i class="bi bi-clock me-1"></i>{{ $product->duration }}
