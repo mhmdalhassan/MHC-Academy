@@ -58,7 +58,13 @@ class PermissionTableSeeder extends Seeder
             'footer-edit',
             'footer-delete',
 
+            // home service
+            'service-list',
+            'service-create',
+            'service-edit',
+            'service-delete',
 
+          
 
             // Instructors
             'instructor-list',

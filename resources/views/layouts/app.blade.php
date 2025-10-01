@@ -666,6 +666,21 @@
                         @endcan
 
 
+
+
+                    @can('service-list')
+                        <a href="{{ route('services.index') }}"
+                        class="menu-item {{ request()->routeIs('services.*') ? 'active' : '' }}">
+                            <i class="fas fa-cogs"></i>
+                            <span class="menu-text">Manage Services</span>
+                        </a>
+                    @endcan
+
+
+
+
+
+
                         {{-- =========================Student Reviews======================= --}}
 
                         @can('student-review-list')
