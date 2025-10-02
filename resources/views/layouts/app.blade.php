@@ -668,6 +668,16 @@
 
 
 
+                    @can('image-list')
+                        <a href="{{ route('home-banner.index') }}"
+                        class="menu-item {{ request()->routeIs('home-banner.*') ? 'active' : '' }}">
+                            <i class="fas fa-image"></i>
+                            <span class="menu-text">Manage Image</span>
+                        </a>
+                    @endcan
+
+
+
                     @can('service-list')
                         <a href="{{ route('services.index') }}"
                         class="menu-item {{ request()->routeIs('services.*') ? 'active' : '' }}">
@@ -675,7 +685,6 @@
                             <span class="menu-text">Manage Services</span>
                         </a>
                     @endcan
-
 
 
 

@@ -78,6 +78,13 @@ class PermissionTableSeeder extends Seeder
             'student-review-edit',
             'student-review-delete',
 
+
+            //Home image
+            'image-list',
+            'image-create',
+            'image-edit',
+            'image-delete',
+
         ];
 
 
