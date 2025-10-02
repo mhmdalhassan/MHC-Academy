@@ -10,16 +10,27 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\ContactController;
 use App\Models\Feature;
+use App\Models\HeroSection;
+use App\Models\HomeStatistic;
+use App\Models\CourseTrack;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\InternalCourseController;
 use App\Http\Controllers\FooterController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\StudentReviewController;
+use App\Http\Controllers\HeroSectionController;
+use App\Http\Controllers\HomeStatisticController;
+use App\Http\Controllers\CourseTrackController;
+
 
 
 Route::get('/', function () {
     $features = Feature::where('is_active', true)->get();
-    return view('welcome', compact('features'));
+    $heroSection = HeroSection::latest()->first();
+    $homeStatistic = HomeStatistic::latest()->first(); // <--- fetch the latest
+    $courseTracks = CourseTrack::latest()->get(); // <--- fetch all course tracks
+
+    return view('welcome', compact('features', 'heroSection', 'homeStatistic', 'courseTracks'));
 });
 
 
@@ -70,6 +81,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('footer', FooterController::class);
     Route::resource('instructors', InstructorController::class);
     Route::resource('student-reviews', StudentReviewController::class);
+    Route::resource('hero-sections', HeroSectionController::class);
+    Route::resource('home-statistics', HomeStatisticController::class);
+    Route::resource('course-tracks', CourseTrackController::class);
+
 });
 
 
