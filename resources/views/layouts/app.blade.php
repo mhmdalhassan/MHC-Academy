@@ -741,21 +741,11 @@
                                         </a>
                                     @endcan
 
-                                    @can('new-track-list')
-                                        <a href="{{ route('new-tracks.index') }}"
-                                            class="submenu-item {{ request()->routeIs('new-tracks.*') ? 'active' : '' }}">
-                                            <i class="fas fa-layer-group"></i>
-                                            <span class="menu-text">Manage New Tracks</span>
-                                        </a>
-                                    @endcan
 
 
                                 </div>
                             </div>
                         @endcanany
-
-
-
 
 
                         {{-- =========================logout======================= --}}

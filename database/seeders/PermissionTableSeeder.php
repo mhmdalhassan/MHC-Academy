@@ -59,6 +59,13 @@ class PermissionTableSeeder extends Seeder
             'footer-edit',
             'footer-delete',
 
+            // home service
+            'service-list',
+            'service-create',
+            'service-edit',
+            'service-delete',
+
+
 
             // Instructors
             'instructor-list',
@@ -104,6 +111,12 @@ class PermissionTableSeeder extends Seeder
             'new-track-delete',
 
 
+
+            //Home image
+            'image-list',
+            'image-create',
+            'image-edit',
+            'image-delete',
 
         ];
 

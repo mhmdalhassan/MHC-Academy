@@ -4,7 +4,7 @@
     <div class="row mb-2">
         <div class="col-lg-12 d-flex justify-content-between align-items-center">
             <h2>Add New Footer</h2>
-            <a class="btn btn-secondary btn-sm" href="{{ route('footers.index') }}"><i class="fa fa-arrow-left"></i>
+            <a class="btn btn-secondary btn-sm" href="{{ route('footer.index') }}"><i class="fa fa-arrow-left"></i>
                 Back</a>
         </div>
     </div>
