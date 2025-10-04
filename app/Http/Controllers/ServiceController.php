@@ -35,24 +35,19 @@ class ServiceController extends Controller
             'paragraph' => 'nullable|string',
             'cards.*.title' => 'required|string|max:255',
             'cards.*.description' => 'nullable|string',
-            'cards.*.image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            // [{'cards.image','cards.tittle','description'}]=>
+            'cards.*.icon' => 'nullable|string|max:255', // new field
         ]);
 
         $data = $request->only('header', 'paragraph');
 
-        
         $cards = [];
         if ($request->has('cards')) {
             foreach ($request->cards as $card) {
-                $cardData = [
+                $cards[] = [
                     'title' => $card['title'],
                     'description' => $card['description'] ?? null,
+                    'icon' => $card['icon'] ?? null,
                 ];
-                if (!empty($card['image'])) {
-                    $cardData['image'] = $card['image']->store('services', 'public');
-                }
-                $cards[] = $cardData;
             }
         }
         $data['cards'] = $cards;
@@ -79,7 +74,7 @@ class ServiceController extends Controller
             'paragraph' => 'nullable|string',
             'cards.*.title' => 'required|string|max:255',
             'cards.*.description' => 'nullable|string',
-            'cards.*.image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'cards.*.icon' => 'nullable|string|max:255',
         ]);
 
         $data = $request->only('header', 'paragraph');
@@ -87,16 +82,11 @@ class ServiceController extends Controller
         $cards = [];
         if ($request->has('cards')) {
             foreach ($request->cards as $card) {
-                $cardData = [
+                $cards[] = [
                     'title' => $card['title'],
                     'description' => $card['description'] ?? null,
+                    'icon' => $card['icon'] ?? null,
                 ];
-                if (!empty($card['image'])) {
-                    $cardData['image'] = $card['image']->store('services', 'public');
-                } else if (!empty($card['old_image'])) {
-                    $cardData['image'] = $card['old_image'];
-                }
-                $cards[] = $cardData;
             }
         }
         $data['cards'] = $cards;

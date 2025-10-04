@@ -303,7 +303,7 @@
 
 
                         <!-- Instructor Tab -->
-                        <div class="tab-pane fade" id="instructor" role="tabpanel">
+                        <div class="tab-pane fade " id="instructor" role="tabpanel">
                             <div class="course-instructor">
                                 <h3 class="fw-bold mb-4">Meet Your Instructor</h3>
 
@@ -371,7 +371,7 @@
                                                         height="80">
                                                     <div>
                                                         <h5 class="fw-bold mb-0">{{ $review->name }}</h5>
-                                                        <small class="text-muted">{{ $review->title }}</small>
+                                                        <small class="text-white">{{ $review->title }}</small>
                                                     </div>
                                                 </div>
                                                 <p>{{ $review->details }}</p>
@@ -380,7 +380,7 @@
                                                         <i
                                                             class="bi bi-star{{ $i <= $review->rate ? '-fill text-warning' : '' }}"></i>
                                                     @endfor
-                                                    <small class="text-muted">{{ $review->rate }}/5</small>
+                                                    <small class="text-white">{{ $review->rate }}/5</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -460,7 +460,7 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="cta-section py-5">
+    <section class="cta-section rounded-4 mb-2 py-5">
         <div class="container text-center">
             <h2 class="fw-bold mb-3">Ready to Start Learning?</h2>
             <p class="lead mb-4">Join thousands of students who have transformed their careers</p>

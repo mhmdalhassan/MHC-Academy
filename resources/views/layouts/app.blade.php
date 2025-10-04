@@ -741,6 +741,23 @@
                                         </a>
                                     @endcan
 
+                                    @can('service-list')
+                                        <a href="{{ route('services.index') }}"
+                                            class="submenu-item {{ request()->routeIs('services.*') ? 'active' : '' }}">
+                                            <i class="fas fa-code"></i>
+                                            <span class="menu-text">Manage Home services</span>
+                                        </a>
+                                    @endcan
+
+
+                                    @can('image-list')
+                                        <a href="{{ route('home-banner.index') }}"
+                                            class="submenu-item {{ request()->routeIs('home-banner.*') ? 'active' : '' }}">
+                                            <i class="fas fa-code"></i>
+                                            <span class="menu-text">Manage Home banner</span>
+                                        </a>
+                                    @endcan
+
 
 
                                 </div>
