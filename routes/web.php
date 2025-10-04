@@ -18,6 +18,7 @@ use App\Http\Controllers\RequestController;
 use App\Http\Controllers\InternalCourseController;
 use App\Http\Controllers\FooterController;
 use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StudentReviewController;
 use App\Http\Controllers\HeroSectionController;
 use App\Http\Controllers\HomeStatisticController;
@@ -25,6 +26,7 @@ use App\Http\Controllers\CourseTrackController;
 use App\Http\Controllers\NewTrackController;
 
 
+use App\Http\Controllers\ImageController;
 
 
 Route::get('/', function () {
@@ -83,15 +85,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('features', FeatureController::class);
     Route::resource('internal-courses', InternalCourseController::class);
     Route::resource('footer', FooterController::class);
+    Route::resource('services', ServiceController::class);
     Route::resource('instructors', InstructorController::class);
     Route::resource('student-reviews', StudentReviewController::class);
     Route::resource('hero-sections', HeroSectionController::class);
     Route::resource('home-statistics', HomeStatisticController::class);
     Route::resource('course-tracks', CourseTrackController::class);
     Route::resource('new-tracks', NewTrackController::class);
+    Route::resource('home-banner', ImageController::class)->parameters([
+        'home-banner' => 'image'
+    ]);
 
 });
-
-
-
 
