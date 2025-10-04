@@ -14,6 +14,8 @@ use App\Models\HeroSection;
 use App\Models\HomeStatistic;
 use App\Models\CourseTrack;
 use App\Models\NewTrack;
+use App\Models\Service; // ✅ add this
+use App\Models\Image;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\InternalCourseController;
 use App\Http\Controllers\FooterController;
@@ -29,15 +31,29 @@ use App\Http\Controllers\NewTrackController;
 use App\Http\Controllers\ImageController;
 
 
+
 Route::get('/', function () {
     $features = Feature::where('is_active', true)->get();
     $heroSection = HeroSection::latest()->first();
     $homeStatistic = HomeStatistic::latest()->first();
     $courseTracks = CourseTrack::latest()->get();
-    $newTracks = NewTrack::latest()->get(); // ✅ fetch new tracks
+    $newTracks = NewTrack::latest()->get();
+    $serviceSection = Service::latest()->first();
 
-    return view('welcome', compact('features', 'heroSection', 'homeStatistic', 'courseTracks', 'newTracks'));
+    // Fetch the latest banner image
+    $bannerImage = Image::latest()->first();
+
+    return view('welcome', compact(
+        'features',
+        'heroSection',
+        'homeStatistic',
+        'courseTracks',
+        'newTracks',
+        'serviceSection',
+        'bannerImage'
+    ));
 });
+
 
 
 
