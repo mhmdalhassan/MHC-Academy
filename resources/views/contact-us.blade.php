@@ -1,4 +1,8 @@
 @extends('client.app')
+@php
+    use Anhskohbo\NoCaptcha\Facades\NoCaptcha;
+@endphp
+
 
 @section('content')
     <!-- Hero Section -->
@@ -24,6 +28,7 @@
         </div>
     </section>
 
+    {{-- form --}}
     <div class="container">
         <div class="row g-5 mb-5">
             <!-- Contact Form -->
@@ -117,6 +122,13 @@
                                         required>{{ old('description') }}</textarea>
                                 </div>
                             </div>
+
+                            <div class="col-12 mb-3">
+                                {!! NoCaptcha::display() !!}
+                                {!! NoCaptcha::renderJs() !!}
+
+                            </div>
+
 
                             <div class="col-12">
                                 <button type="submit" class="btn btn-info w-100 py-3 fw-bold fs-5">
@@ -374,7 +386,6 @@
                 easing: 'ease-in-out'
             });
 
-            // Form validation
             const forms = document.querySelectorAll('.needs-validation');
             Array.from(forms).forEach(form => {
                 form.addEventListener('submit', event => {
@@ -387,4 +398,6 @@
             });
         });
     </script>
+
+    {!! NoCaptcha::renderJs() !!}
 @endpush

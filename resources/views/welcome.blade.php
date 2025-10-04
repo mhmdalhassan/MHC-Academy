@@ -10,8 +10,9 @@
                 {{-- <div class="col-lg-6 col-md-12 text-center text-lg-start mb-4 mb-lg-0"></div> --}}
                 <div class="col-lg-6 col-md-12 text-center text-lg-start mb-4 mb-lg-0 ps-lg-4">
 
-                    <h1 class="display-4 fw-bold mb-3">
-                        {{ $heroSection->header ?? 'Welcome to MH-Code Academy' }}
+                    <h1 class="display-4 fw-bold mb-3"><span class="text-info fw-bold">
+                            {{ $heroSection->header ?? 'Welcome to MH-Code Academy' }}
+                        </span>
                     </h1>
 
                     <p class="lead mb-4">
@@ -165,35 +166,39 @@
 
 
 
-    {{-- ================== SECTION 2 ================== --}}
-    <section class="mh-section about-section">
-        <div class="p-4 p-md-5">
-            <div class="row align-items-center">
-                <!-- LEFT: Text -->
-                <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right" data-aos-duration="1200">
-                    <h2 class="fw-bold mb-3">About Us</h2>
-                    <p class="lead">
-                        At <span class="text-info fw-bold">MH-Code Academy</span>, we aim to provide high-quality courses,
-                        hands-on training, and career guidance. Our mission is to prepare students
-                        for a successful journey in the world of technology.
-                    </p>
-                    <ul class="list-unstyled mt-3">
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-info me-2"></i> Career-focused learning
-                            paths</li>
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-info me-2"></i> Project-based courses</li>
-                        <li><i class="bi bi-check-circle-fill text-info me-2"></i> Mentorship and community support</li>
-                    </ul>
-                </div>
+    {{-- ================== SECTION 2: New Tracks ================== --}}
+    @foreach($newTracks as $track)
+        <section class="mh-section about-section">
+            <div class="p-4 p-md-5">
+                <div class="row align-items-center">
+                    <!-- LEFT: Text -->
+                    <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right" data-aos-duration="1200">
+                        <h2 class="fw-bold mb-3"><span class="text-info fw-bold">{{ $track->title }}</span></h2>
+                        <p class="lead">
+                            {!! nl2br(e($track->introduction)) !!}
+                        </p>
+                        @if(!empty($track->points))
+                            <ul class="list-unstyled mt-3">
+                                @foreach($track->points as $point)
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-info me-2"></i>{{ $point }}</li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </div>
 
-                <!-- RIGHT: Image -->
-                <div class="col-lg-6 text-center" data-aos="fade-left" data-aos-duration="1200">
-                    <img src="{{ asset('images/homePage.jpg') }}" alt="Coding Education"
-                        class="img-fluid rounded-4 shadow-lg" loading="lazy"
-                        style="max-height: 400px; width: 100%; object-fit: cover;">
+                    <!-- RIGHT: Image -->
+                    <div class="col-lg-6 text-center" data-aos="fade-left" data-aos-duration="1200">
+                        @if(!empty($track->image))
+                            <img src="{{ asset('storage/' . $track->image) }}" alt="{{ $track->title }}"
+                                class="img-fluid rounded-4 shadow-lg" loading="lazy"
+                                style="max-height: 400px; width: 100%; object-fit: cover;">
+                        @endif
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endforeach
+
 
 
 
@@ -808,251 +813,251 @@
 
 
     <!-- {{-- ================== STYLES ================== --}}
-                                                <style>
-                                                    /* track-card base */
-                                                    .track-card {
-                                                        background: rgba(255, 255, 255, 0.02);
-                                                        transition: transform .35s ease, box-shadow .35s ease;
-                                                        box-shadow: 0 10px 30px rgba(47, 79, 163, 0.12);
-                                                        /* shadow base with #2f4fa3 hue */
-                                                        cursor: pointer;
-                                                        min-height: 320px;
-                                                    }
+                                                        <style>
+                                                            /* track-card base */
+                                                            .track-card {
+                                                                background: rgba(255, 255, 255, 0.02);
+                                                                transition: transform .35s ease, box-shadow .35s ease;
+                                                                box-shadow: 0 10px 30px rgba(47, 79, 163, 0.12);
+                                                                /* shadow base with #2f4fa3 hue */
+                                                                cursor: pointer;
+                                                                min-height: 320px;
+                                                            }
 
-                                                    .track-card .card-front,
-                                                    .track-card .card-back {
-                                                        width: 100%;
-                                                        height: 100%;
-                                                        position: relative;
-                                                        transition: opacity .28s ease, transform .28s ease, visibility .28s ease;
-                                                    }
+                                                            .track-card .card-front,
+                                                            .track-card .card-back {
+                                                                width: 100%;
+                                                                height: 100%;
+                                                                position: relative;
+                                                                transition: opacity .28s ease, transform .28s ease, visibility .28s ease;
+                                                            }
 
-                                                    /* front shows by default */
-                                                    .track-card .card-front {
-                                                        z-index: 2;
-                                                    }
+                                                            /* front shows by default */
+                                                            .track-card .card-front {
+                                                                z-index: 2;
+                                                            }
 
-                                                    .track-card .card-back {
-                                                        position: absolute;
-                                                        top: 0;
-                                                        left: 0;
-                                                        z-index: 1;
-                                                        opacity: 0;
-                                                        visibility: hidden;
-                                                        background: rgba(0, 0, 0, 0.6);
-                                                    }
+                                                            .track-card .card-back {
+                                                                position: absolute;
+                                                                top: 0;
+                                                                left: 0;
+                                                                z-index: 1;
+                                                                opacity: 0;
+                                                                visibility: hidden;
+                                                                background: rgba(0, 0, 0, 0.6);
+                                                            }
 
-                                                    /* hover: scale + swap views */
-                                                    .track-card:hover {
-                                                        transform: scale(1.1);
-                                                        box-shadow: 0 18px 40px rgba(47, 79, 163, 0.26);
-                                                    }
+                                                            /* hover: scale + swap views */
+                                                            .track-card:hover {
+                                                                transform: scale(1.1);
+                                                                box-shadow: 0 18px 40px rgba(47, 79, 163, 0.26);
+                                                            }
 
-                                                    .track-card:hover .card-front {
-                                                        opacity: 0;
-                                                        visibility: hidden;
-                                                        transform: scale(0.98);
-                                                    }
+                                                            .track-card:hover .card-front {
+                                                                opacity: 0;
+                                                                visibility: hidden;
+                                                                transform: scale(0.98);
+                                                            }
 
-                                                    .track-card:hover .card-back {
-                                                        opacity: 1;
-                                                        visibility: visible;
-                                                        z-index: 3;
-                                                        transform: none;
-                                                    }
+                                                            .track-card:hover .card-back {
+                                                                opacity: 1;
+                                                                visibility: visible;
+                                                                z-index: 3;
+                                                                transform: none;
+                                                            }
 
-                                                    /* titles on front */
-                                                    .track-card .track-title {
-                                                        color: #fff;
-                                                    }
+                                                            /* titles on front */
+                                                            .track-card .track-title {
+                                                                color: #fff;
+                                                            }
 
-                                                    /* back content */
-                                                    .track-card .card-back h5 {
-                                                        margin-bottom: 6px;
-                                                    }
+                                                            /* back content */
+                                                            .track-card .card-back h5 {
+                                                                margin-bottom: 6px;
+                                                            }
 
-                                                    .track-card .card-back p {
-                                                        font-size: 0.95rem;
-                                                        color: #ffe8cc;
-                                                    }
+                                                            .track-card .card-back p {
+                                                                font-size: 0.95rem;
+                                                                color: #ffe8cc;
+                                                            }
 
-                                                    /* responsive tweaks */
-                                                    @media (max-width: 576px) {
-                                                        .track-card {
-                                                            min-height: 260px;
-                                                        }
+                                                            /* responsive tweaks */
+                                                            @media (max-width: 576px) {
+                                                                .track-card {
+                                                                    min-height: 260px;
+                                                                }
 
-                                                        .track-card img {
-                                                            max-height: 140px;
-                                                        }
-                                                    }
-
-
-
-                                                    @media (max-width: 576px) {
-
-                                                        /* phones */
-                                                        .banner-text {
-                                                            font-size: 1.5rem;
-                                                            /* أصغر من display-4 */
-                                                        }
-
-                                                        .banner-text-small {
-                                                            font-size: 1rem;
-                                                            /* أصغر من lead */
-                                                        }
-                                                    }
-
-
-                                                    .hero-section {
-                                                        overflow-x: hidden;
-                                                        padding-left: 0;
-                                                        padding-right: 0;
-                                                    }
-
-
-                                                    .feature-card {
-                                                        background: rgba(255, 255, 255, 0.05);
-                                                        color: #fff;
-                                                        border-radius: 1rem;
-                                                        transition: all 0.4s ease;
-                                                        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-                                                    }
-
-                                                    .feature-card i {
-                                                        transition: color 0.4s ease, transform 0.4s ease;
-                                                    }
-
-                                                    .feature-card:hover {
-                                                        transform: scale(1.05);
-                                                        background: #000;
-                                                        color: #ff8c00 !important;
-                                                    }
-
-                                                    .feature-card:hover i {
-                                                        color: #ff8c00 !important;
-                                                        transform: rotate(-10deg) scale(1.2);
-                                                    }
+                                                                .track-card img {
+                                                                    max-height: 140px;
+                                                                }
+                                                            }
 
 
 
-                                                    .service-card {
-                                                        background: rgba(255, 255, 255, 0.05);
-                                                        color: #fff;
-                                                        border-radius: 1rem;
-                                                        transition: all 0.4s ease;
-                                                    }
+                                                            @media (max-width: 576px) {
 
-                                                    .service-card i {
-                                                        transition: color 0.4s ease, transform 0.4s ease;
-                                                    }
+                                                                /* phones */
+                                                                .banner-text {
+                                                                    font-size: 1.5rem;
+                                                                    /* أصغر من display-4 */
+                                                                }
 
-                                                    .service-card:hover {
-                                                        transform: scale(1.1);
-                                                        background: #000;
-                                                        color: #ff8c00 !important;
-                                                        /* نصوص برتقالي */
-                                                    }
+                                                                .banner-text-small {
+                                                                    font-size: 1rem;
+                                                                    /* أصغر من lead */
+                                                                }
+                                                            }
 
-                                                    .service-card:hover i {
-                                                        color: #ff8c00 !important;
-                                                        transform: rotate(-10deg) scale(1.2);
-                                                    }
 
-                                                    .svg-tech {
-                                                        max-width: 100%;
-                                                        height: auto;
-                                                    }
+                                                            .hero-section {
+                                                                overflow-x: hidden;
+                                                                padding-left: 0;
+                                                                padding-right: 0;
+                                                            }
 
-                                                    .trace {
-                                                        stroke-dasharray: 200;
-                                                        stroke-dashoffset: 200;
-                                                        animation: draw 2s ease forwards;
-                                                    }
 
-                                                    @keyframes draw {
-                                                        to {
-                                                            stroke-dashoffset: 0;
-                                                        }
-                                                    }
+                                                            .feature-card {
+                                                                background: rgba(255, 255, 255, 0.05);
+                                                                color: #fff;
+                                                                border-radius: 1rem;
+                                                                transition: all 0.4s ease;
+                                                                box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+                                                            }
 
-                                                    .pulse {
-                                                        animation: pulse 2s ease-in-out infinite;
-                                                    }
+                                                            .feature-card i {
+                                                                transition: color 0.4s ease, transform 0.4s ease;
+                                                            }
 
-                                                    .pulse.delay1 {
-                                                        animation-delay: .4s;
-                                                    }
+                                                            .feature-card:hover {
+                                                                transform: scale(1.05);
+                                                                background: #000;
+                                                                color: #ff8c00 !important;
+                                                            }
 
-                                                    .pulse.delay2 {
-                                                        animation-delay: .8s;
-                                                    }
+                                                            .feature-card:hover i {
+                                                                color: #ff8c00 !important;
+                                                                transform: rotate(-10deg) scale(1.2);
+                                                            }
 
-                                                    .pulse.delay3 {
-                                                        animation-delay: 1.2s;
-                                                    }
 
-                                                    @keyframes pulse {
 
-                                                        0%,
-                                                        100% {
-                                                            transform: scale(1);
-                                                            opacity: .9;
-                                                        }
+                                                            .service-card {
+                                                                background: rgba(255, 255, 255, 0.05);
+                                                                color: #fff;
+                                                                border-radius: 1rem;
+                                                                transition: all 0.4s ease;
+                                                            }
 
-                                                        50% {
-                                                            transform: scale(1.3);
-                                                            opacity: .5;
-                                                        }
-                                                    }
+                                                            .service-card i {
+                                                                transition: color 0.4s ease, transform 0.4s ease;
+                                                            }
 
-                                                    .ring {
-                                                        transform-origin: center;
-                                                        animation: spin 10s linear infinite;
-                                                    }
+                                                            .service-card:hover {
+                                                                transform: scale(1.1);
+                                                                background: #000;
+                                                                color: #ff8c00 !important;
+                                                                /* نصوص برتقالي */
+                                                            }
 
-                                                    @keyframes spin {
-                                                        to {
-                                                            transform: rotate(360deg);
-                                                        }
-                                                    }
+                                                            .service-card:hover i {
+                                                                color: #ff8c00 !important;
+                                                                transform: rotate(-10deg) scale(1.2);
+                                                            }
 
-                                                    .animated-line .content {
-                                                        transition: all .35s ease;
-                                                        font-size: 1.1rem;
-                                                        font-weight: 500;
-                                                    }
+                                                            .svg-tech {
+                                                                max-width: 100%;
+                                                                height: auto;
+                                                            }
 
-                                                    .animated-line .content.fade-out {
-                                                        opacity: 0;
-                                                        transform: translateY(-8px);
-                                                    }
+                                                            .trace {
+                                                                stroke-dasharray: 200;
+                                                                stroke-dashoffset: 200;
+                                                                animation: draw 2s ease forwards;
+                                                            }
 
-                                                    /* Scroll animations */
-                                                    [data-animate] {
-                                                        opacity: 0;
-                                                        transform: translateY(40px);
-                                                        transition: all 1s ease;
-                                                    }
+                                                            @keyframes draw {
+                                                                to {
+                                                                    stroke-dashoffset: 0;
+                                                                }
+                                                            }
 
-                                                    [data-animate].visible {
-                                                        opacity: 1;
-                                                        transform: translateY(0);
-                                                    }
+                                                            .pulse {
+                                                                animation: pulse 2s ease-in-out infinite;
+                                                            }
 
-                                                    [data-animate="fade-right"] {
-                                                        transform: translateX(-40px);
-                                                    }
+                                                            .pulse.delay1 {
+                                                                animation-delay: .4s;
+                                                            }
 
-                                                    [data-animate="fade-left"] {
-                                                        transform: translateX(40px);
-                                                    }
+                                                            .pulse.delay2 {
+                                                                animation-delay: .8s;
+                                                            }
 
-                                                    </> {
-                                                            {
-                                                            --==================SCRIPTS==================--
-                                                        }
-                                                    } -->
+                                                            .pulse.delay3 {
+                                                                animation-delay: 1.2s;
+                                                            }
+
+                                                            @keyframes pulse {
+
+                                                                0%,
+                                                                100% {
+                                                                    transform: scale(1);
+                                                                    opacity: .9;
+                                                                }
+
+                                                                50% {
+                                                                    transform: scale(1.3);
+                                                                    opacity: .5;
+                                                                }
+                                                            }
+
+                                                            .ring {
+                                                                transform-origin: center;
+                                                                animation: spin 10s linear infinite;
+                                                            }
+
+                                                            @keyframes spin {
+                                                                to {
+                                                                    transform: rotate(360deg);
+                                                                }
+                                                            }
+
+                                                            .animated-line .content {
+                                                                transition: all .35s ease;
+                                                                font-size: 1.1rem;
+                                                                font-weight: 500;
+                                                            }
+
+                                                            .animated-line .content.fade-out {
+                                                                opacity: 0;
+                                                                transform: translateY(-8px);
+                                                            }
+
+                                                            /* Scroll animations */
+                                                            [data-animate] {
+                                                                opacity: 0;
+                                                                transform: translateY(40px);
+                                                                transition: all 1s ease;
+                                                            }
+
+                                                            [data-animate].visible {
+                                                                opacity: 1;
+                                                                transform: translateY(0);
+                                                            }
+
+                                                            [data-animate="fade-right"] {
+                                                                transform: translateX(-40px);
+                                                            }
+
+                                                            [data-animate="fade-left"] {
+                                                                transform: translateX(40px);
+                                                            }
+
+                                                            </> {
+                                                                    {
+                                                                    --==================SCRIPTS==================--
+                                                                }
+                                                            } -->
 
     <script> // Animated text lines
 

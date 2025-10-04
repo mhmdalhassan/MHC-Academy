@@ -97,6 +97,14 @@ class PermissionTableSeeder extends Seeder
             'course-track-delete',
 
 
+            // New Tracks Section
+            'new-track-list',
+            'new-track-create',
+            'new-track-edit',
+            'new-track-delete',
+
+
+
         ];
 
 
