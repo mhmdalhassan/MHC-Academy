@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Instructor;
+use App\Models\StudentReview;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -73,8 +75,11 @@ class ProductController extends Controller
 
     public function create(): View
     {
-        return view('products.create');
+        $instructors = Instructor::all();
+        $studentReviews = StudentReview::all(); // list of all reviews
+        return view('products.create', compact('instructors', 'studentReviews'));
     }
+
 
     public function store(Request $request): RedirectResponse
     {
@@ -91,10 +96,13 @@ class ProductController extends Controller
             'enrolled_count' => 'nullable|integer|min:0',
             'welcome_video_url' => 'nullable|url',
             'overview_video_url' => 'nullable|url',
-            'core_concepts' => 'nullable|array',  // expects array input
+            'core_concepts' => 'nullable|array',
             'core_concepts.*' => 'string',
-        ]);
 
+            'instructor_id' => 'nullable|exists:instructors,id',
+            'student_review_ids' => 'nullable|array',
+            'student_review_ids.*' => 'exists:student_reviews,id',
+        ]);
 
         $data = $request->only([
             'name',
@@ -108,9 +116,12 @@ class ProductController extends Controller
             'enrolled_count',
             'welcome_video_url',
             'overview_video_url',
-            'core_concepts'
+            'core_concepts',
+            'instructor_id',
         ]);
 
+        // ✅ HERE — explicitly assign student_review_ids as JSON array
+        $data['student_review_ids'] = $request->student_review_ids ?? [];
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('products', 'public');
@@ -122,15 +133,25 @@ class ProductController extends Controller
             ->with('success', 'Product created successfully.');
     }
 
-    public function show(Product $product): View
+
+
+    public function show(Product $product)
     {
+        $product->load('instructor', 'studentReviews'); // eager load instructor and student reviews
         return view('products.show', compact('product'));
     }
 
+
+
     public function edit(Product $product): View
     {
-        return view('products.edit', compact('product'));
+        $instructors = Instructor::all();
+        $studentReviews = StudentReview::all();
+
+        return view('products.edit', compact('product', 'instructors', 'studentReviews'));
     }
+
+
 
     public function update(Request $request, Product $product): RedirectResponse
     {
@@ -147,8 +168,12 @@ class ProductController extends Controller
             'enrolled_count' => 'nullable|integer|min:0',
             'welcome_video_url' => 'nullable|url',
             'overview_video_url' => 'nullable|url',
-            'core_concepts' => 'nullable|array',  // expects array input
+            'core_concepts' => 'nullable|array',
             'core_concepts.*' => 'string',
+
+            'instructor_id' => 'nullable|exists:instructors,id',
+            'student_review_ids' => 'nullable|array',
+            'student_review_ids.*' => 'exists:student_reviews,id',
         ]);
 
         $data = $request->only([
@@ -163,7 +188,9 @@ class ProductController extends Controller
             'enrolled_count',
             'welcome_video_url',
             'overview_video_url',
-            'core_concepts'
+            'core_concepts',
+            'instructor_id',
+            'student_review_ids', // ✅ update JSON array
         ]);
 
         if ($request->hasFile('image')) {
@@ -178,6 +205,7 @@ class ProductController extends Controller
         return redirect()->route('products.index')
             ->with('success', 'Product updated successfully.');
     }
+
 
     public function destroy(Product $product): RedirectResponse
     {

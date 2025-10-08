@@ -19,4 +19,10 @@ class Instructor extends Model
         'students_graduated',
         'rating',
     ];
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
 }

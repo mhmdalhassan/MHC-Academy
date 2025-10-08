@@ -1,4 +1,8 @@
 @extends('client.app')
+@php
+    use Anhskohbo\NoCaptcha\Facades\NoCaptcha;
+@endphp
+
 
 @section('content')
     <!-- Hero Section -->
@@ -24,6 +28,7 @@
         </div>
     </section>
 
+    {{-- form --}}
     <div class="container">
         <div class="row g-5 mb-5">
             <!-- Contact Form -->
@@ -118,6 +123,13 @@
                                 </div>
                             </div>
 
+                            <div class="col-12 mb-3">
+                                {!! NoCaptcha::display() !!}
+                                {!! NoCaptcha::renderJs() !!}
+
+                            </div>
+
+
                             <div class="col-12">
                                 <button type="submit" class="btn btn-info w-100 py-3 fw-bold fs-5">
                                     <i class="bi bi-send-fill me-2"></i>Send Message
@@ -187,33 +199,35 @@
                 </div>
 
                 <!-- Instructors -->
+                <!-- Instructors -->
                 <div class="p-4 rounded-3 shadow-lg instructors-card">
                     <h3 class="text-info mb-4 fw-bold">
                         <i class="bi bi-people-fill me-2"></i>Meet Your Instructors
                     </h3>
 
                     @php
-                        $instructors = [
-                            ['name' => 'Mohammad Hasan', 'role' => 'Senior in AI & Cybersecurity', 'image' => 'https://i.pravatar.cc/150?img=59'],
-                            ['name' => 'Hassan Awad', 'role' => 'Full Stack Developer & Mentor', 'image' => 'https://i.pravatar.cc/150?img=12'],
-                            ['name' => 'Bilal Saleh', 'role' => 'Backend Developer & Instructor', 'image' => 'https://i.pravatar.cc/150?img=68'],
-                        ];
+                        use App\Models\Instructor;
 
+                        // Fetch top 3 instructors with highest students_graduated
+                        $instructors = Instructor::orderByDesc('students_graduated')->take(3)->get();
                     @endphp
 
                     @foreach($instructors as $index => $inst)
                         <div class="instructor-card p-3 rounded-2 mb-3" data-aos="zoom-in" data-aos-delay="{{ $index * 100 }}">
                             <div class="d-flex align-items-center">
-                                <img src="{{ $inst['image'] }}" class="instructor-image rounded-circle me-3"
-                                    alt="{{ $inst['name'] }}" loading="lazy">
+                                <img src="{{ $inst->image ? asset('storage/' . $inst->image) : 'https://via.placeholder.com/150' }}"
+                                    class="instructor-image rounded-circle me-3" alt="{{ $inst->name }}"
+                                    style="width: 90px; height: 90px; object-fit: cover;" loading="lazy">
                                 <div>
-                                    <h6 class="text-warning mb-1">{{ $inst['name'] }}</h6>
-                                    <p class="text-light small mb-0">{{ $inst['role'] }}</p>
+                                    <h6 class="text-warning mb-1">{{ $inst->name }}</h6>
+                                    <p class="text-light small mb-0">{{ $inst->title }}</p>
+                                    <small class="text-info">{{ $inst->email }}</small>
                                 </div>
                             </div>
                         </div>
                     @endforeach
                 </div>
+
             </div>
         </div>
 
@@ -372,7 +386,6 @@
                 easing: 'ease-in-out'
             });
 
-            // Form validation
             const forms = document.querySelectorAll('.needs-validation');
             Array.from(forms).forEach(form => {
                 form.addEventListener('submit', event => {
@@ -385,4 +398,6 @@
             });
         });
     </script>
+
+    {!! NoCaptcha::renderJs() !!}
 @endpush

@@ -303,58 +303,95 @@
 
 
                         <!-- Instructor Tab -->
-                        <div class="tab-pane fade" id="instructor" role="tabpanel">
+                        <div class="tab-pane fade " id="instructor" role="tabpanel">
                             <div class="course-instructor">
                                 <h3 class="fw-bold mb-4">Meet Your Instructor</h3>
-                                <div class="instructor-card">
-                                    <div class="row g-4 align-items-center">
-                                        <div class="col-md-3 text-center">
-                                            <img src="https://via.placeholder.com/150" alt="Instructor"
-                                                class="instructor-avatar rounded-circle mb-3">
-                                            <div class="instructor-rating">
-                                                <div class="rating-stars">
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-fill"></i>
+
+                                @if($product->instructor)
+                                    <div class="instructor-card">
+                                        <div class="row g-4 align-items-center">
+                                            <div class="col-md-3 text-center">
+                                                <img src="{{ asset('storage/' . $product->instructor->image) }}"
+                                                    alt="{{ $product->instructor->name }}"
+                                                    class="instructor-avatar rounded-circle mb-3" width="150" height="150">
+
+                                                <div class="instructor-rating">
+                                                    <div class="rating-stars">
+                                                        @for($i = 1; $i <= 5; $i++)
+                                                            <i
+                                                                class="bi {{ $i <= round($product->instructor->rating) ? 'bi-star-fill text-warning' : 'bi-star text-muted' }}"></i>
+                                                        @endfor
+                                                    </div>
+                                                    <small class="text-white">
+                                                        {{ number_format($product->instructor->rating, 1) }}/5.0 rating
+                                                    </small>
                                                 </div>
-                                                <small class="text-muted">4.9/5.0 rating</small>
                                             </div>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <h4 class="fw-bold">John Doe</h4>
-                                            <p class="text-accent fw-bold">Senior Developer at Tech Company</p>
-                                            <p class="mb-3">With over 10 years of experience in software development and
-                                                mentoring,
-                                                John has helped thousands of students launch their tech careers.</p>
-                                            <div class="instructor-stats row g-3">
-                                                <div class="col-auto">
-                                                    <span class="fw-bold">15,000+</span>
-                                                    <small class="d-block text-muted">Students</small>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <span class="fw-bold">8</span>
-                                                    <small class="d-block text-muted">Courses</small>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <span class="fw-bold">4.9</span>
-                                                    <small class="d-block text-muted">Average Rating</small>
+
+                                            <div class="col-md-9">
+                                                <h4 class="fw-bold">{{ $product->instructor->name }}</h4>
+                                                <p class="text-accent fw-bold">{{ $product->instructor->title }}</p>
+                                                <p class="mb-3">{{ $product->instructor->description }}</p>
+
+                                                <div class="instructor-stats row g-3">
+                                                    <div class="col-auto">
+                                                        <span
+                                                            class="fw-bold">{{ number_format($product->instructor->students_graduated) }}+</span>
+                                                        <small class="d-block text-white">Students</small>
+                                                    </div>
+
+                                                    <div class="col-auto">
+                                                        <span
+                                                            class="fw-bold">{{ number_format($product->instructor->rating, 1) }}</span>
+                                                        <small class="d-block text-white">Average Rating</small>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                @else
+                                    <p class="text-white">No instructor assigned for this course.</p>
+                                @endif
                             </div>
                         </div>
 
+
+                        <!-- Reviews Tab -->
                         <!-- Reviews Tab -->
                         <div class="tab-pane fade" id="reviews" role="tabpanel">
                             <div class="course-reviews">
                                 <h3 class="fw-bold mb-4">Student Reviews</h3>
-                                <!-- Reviews content would go here -->
+                                <div class="row g-4">
+                                    @forelse ($product->studentReviews as $review)
+                                        <div class="col-md-6">
+                                            <div class="review-card p-3 border rounded h-100">
+                                                <div class="d-flex align-items-center mb-3">
+                                                    <img src="{{ $review->image ? asset('storage/' . $review->image) : 'https://via.placeholder.com/80' }}"
+                                                        alt="{{ $review->name }}" class="rounded-circle me-3" width="80"
+                                                        height="80">
+                                                    <div>
+                                                        <h5 class="fw-bold mb-0">{{ $review->name }}</h5>
+                                                        <small class="text-white">{{ $review->title }}</small>
+                                                    </div>
+                                                </div>
+                                                <p>{{ $review->details }}</p>
+                                                <div class="review-rating">
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        <i
+                                                            class="bi bi-star{{ $i <= $review->rate ? '-fill text-warning' : '' }}"></i>
+                                                    @endfor
+                                                    <small class="text-white">{{ $review->rate }}/5</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @empty
+                                        <p>No reviews yet.</p>
+                                    @endforelse
+                                </div>
                             </div>
                         </div>
+
+
                     </div>
                 </div>
 
@@ -423,7 +460,7 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="cta-section py-5">
+    <section class="cta-section rounded-4 mb-2 py-5">
         <div class="container text-center">
             <h2 class="fw-bold mb-3">Ready to Start Learning?</h2>
             <p class="lead mb-4">Join thousands of students who have transformed their careers</p>

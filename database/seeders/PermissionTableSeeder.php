@@ -14,6 +14,7 @@ class PermissionTableSeeder extends Seeder
     {
         $permissions = [
             // Roles
+
             'role-list',
             'role-create',
             'role-edit',
@@ -77,6 +78,38 @@ class PermissionTableSeeder extends Seeder
             'student-review-create',
             'student-review-edit',
             'student-review-delete',
+
+            // Hero Section
+            'hero-section-list',
+            'hero-section-create',
+            'hero-section-edit',
+            'hero-section-delete',
+
+            // Statistics Home Section
+            'home-statistic-list',
+            'home-statistic-create',
+            'home-statistic-edit',
+            'home-statistic-delete',
+
+            // Statistics Home Section
+            'home-statistic-list',
+            'home-statistic-create',
+            'home-statistic-edit',
+            'home-statistic-delete',
+
+            // Course Tracks Section
+            'course-track-list',
+            'course-track-create',
+            'course-track-edit',
+            'course-track-delete',
+
+
+            // New Tracks Section
+            'new-track-list',
+            'new-track-create',
+            'new-track-edit',
+            'new-track-delete',
+
 
 
             //Home image

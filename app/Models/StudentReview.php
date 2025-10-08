@@ -16,4 +16,10 @@ class StudentReview extends Model
         'title',
         'details',
     ];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
 }

@@ -10,19 +10,42 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\ContactController;
 use App\Models\Feature;
+use App\Models\HeroSection;
+use App\Models\HomeStatistic;
+use App\Models\CourseTrack;
+use App\Models\NewTrack;
+use App\Models\Service; // ✅ add this
+use App\Models\Image;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\InternalCourseController;
 use App\Http\Controllers\FooterController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StudentReviewController;
-use App\Http\Controllers\ImageController;
 
 
 Route::get('/', function () {
     $features = Feature::where('is_active', true)->get();
-    return view('welcome', compact('features'));
+    $heroSection = HeroSection::latest()->first();
+    $homeStatistic = HomeStatistic::latest()->first();
+    $courseTracks = CourseTrack::latest()->get();
+    $newTracks = NewTrack::latest()->get();
+    $serviceSection = Service::latest()->first();
+
+    // Fetch the latest banner image
+    $bannerImage = Image::latest()->first();
+
+    return view('welcome', compact(
+        'features',
+        'heroSection',
+        'homeStatistic',
+        'courseTracks',
+        'newTracks',
+        'serviceSection',
+        'bannerImage'
+    ));
 });
+
 
 
 
@@ -73,7 +96,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('services', ServiceController::class);
     Route::resource('instructors', InstructorController::class);
     Route::resource('student-reviews', StudentReviewController::class);
-   Route::resource('home-banner', ImageController::class)->parameters([
-    'home-banner' => 'image']); 
-
 });
+
+
+
+

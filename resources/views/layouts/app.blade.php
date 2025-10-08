@@ -505,6 +505,29 @@
                 image-rendering: -webkit-optimize-contrast;
             }
         }
+
+        /* Submenu Items (Home Page Manage) */
+        .submenu-item {
+            padding: 10px 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition);
+            border-left: 3px solid transparent;
+            font-size: 14px;
+        }
+
+        .submenu-item:hover {
+            background-color: var(--sidebar-hover);
+            border-left-color: var(--sidebar-hover);
+        }
+
+        .submenu-item.active {
+            background-color: var(--sidebar-active);
+            border-left-color: var(--text-light);
+        }
     </style>
 </head>
 
@@ -597,15 +620,53 @@
                             </a>
                         @endcan
 
-                        {{-- =========================Manage Products======================= --}}
+                        {{-- =========================Manage Product Page======================= --}}
+                        @canany(['product-list', 'internal-course-list', 'instructor-list', 'student-review-list'])
+                            <div class="menu-dropdown">
+                                <a href="#" class="menu-item dropdown-toggle" data-bs-toggle="collapse"
+                                    data-bs-target="#productPageMenu"
+                                    aria-expanded="{{ request()->routeIs('products.*') || request()->routeIs('internal-courses.*') || request()->routeIs('instructors.*') || request()->routeIs('student-reviews.*') ? 'true' : 'false' }}">
+                                    <i class="fas fa-box-open"></i>
+                                    <span class="menu-text">Manage Product Page</span>
+                                </a>
+                                <div id="productPageMenu"
+                                    class="collapse {{ request()->routeIs('products.*') || request()->routeIs('internal-courses.*') || request()->routeIs('instructors.*') || request()->routeIs('student-reviews.*') ? 'show' : '' }}">
 
-                        @can('product-list')
-                            <a href="{{ route('products.index') }}"
-                                class="menu-item {{ request()->routeIs('products.*') ? 'active' : '' }}">
-                                <i class="fas fa-box"></i>
-                                <span class="menu-text">Manage Products</span>
-                            </a>
-                        @endcan
+                                    @can('product-list')
+                                        <a href="{{ route('products.index') }}"
+                                            class="submenu-item {{ request()->routeIs('products.*') ? 'active' : '' }}">
+                                            <i class="fas fa-box"></i>
+                                            <span class="menu-text">Manage Products</span>
+                                        </a>
+                                    @endcan
+
+                                    @can('internal-course-list')
+                                        <a href="{{ route('internal-courses.index') }}"
+                                            class="submenu-item {{ request()->routeIs('internal-courses.*') ? 'active' : '' }}">
+                                            <i class="fas fa-chalkboard-teacher"></i>
+                                            <span class="menu-text">Manage Internal Courses</span>
+                                        </a>
+                                    @endcan
+
+                                    @can('instructor-list')
+                                        <a href="{{ route('instructors.index') }}"
+                                            class="submenu-item {{ request()->routeIs('instructors.*') ? 'active' : '' }}">
+                                            <i class="fas fa-chalkboard-teacher"></i>
+                                            <span class="menu-text">Manage Instructors</span>
+                                        </a>
+                                    @endcan
+
+                                    @can('student-review-list')
+                                        <a href="{{ route('student-reviews.index') }}"
+                                            class="submenu-item {{ request()->routeIs('student-reviews.*') ? 'active' : '' }}">
+                                            <i class="fas fa-user-graduate"></i>
+                                            <span class="menu-text">Manage Student Reviews</span>
+                                        </a>
+                                    @endcan
+                                </div>
+                            </div>
+                        @endcanany
+
 
                         {{-- =========================Manage Blogs======================= --}}
 
@@ -628,79 +689,80 @@
                             </a>
                         @endcan
 
-                        {{-- =========================Manage Features======================= --}}
+                        {{-- =========================Home Page Manage======================= --}}
+                        @canany(['feature-list', 'footer-list', 'hero-section-list', 'home-statistic-list', 'course-track-list'])
+                            <div class="menu-dropdown">
+                                <a href="#" class="menu-item dropdown-toggle" data-bs-toggle="collapse"
+                                    data-bs-target="#homePageMenu"
+                                    aria-expanded="{{ request()->routeIs('features.*') || request()->routeIs('footer.*') || request()->routeIs('hero-sections.*') || request()->routeIs('home-statistics.*') || request()->routeIs('course-tracks.*') ? 'true' : 'false' }}">
+                                    <i class="fas fa-home"></i>
+                                    <span class="menu-text">Manage Home Page </span>
+                                </a>
+                                <div id="homePageMenu"
+                                    class="collapse {{ request()->routeIs('features.*') || request()->routeIs('footer.*') || request()->routeIs('hero-sections.*') || request()->routeIs('home-statistics.*') || request()->routeIs('course-tracks.*') ? 'show' : '' }}">
 
-                        @can('feature-list')
-                            <a href="{{ route('features.index') }}"
-                                class="menu-item {{ request()->routeIs('features.*') ? 'active' : '' }}">
-                                <i class="fas fa-star"></i>
-                                <span class="menu-text">Manage Features</span>
-                            </a>
-                        @endcan
+                                    @can('feature-list')
+                                        <a href="{{ route('features.index') }}"
+                                            class="submenu-item {{ request()->routeIs('features.*') ? 'active' : '' }}">
+                                            <i class="fas fa-star"></i>
+                                            <span class="menu-text">Manage Features</span>
+                                        </a>
+                                    @endcan
 
-                        @can('internal-course-list')
-                            <a href="{{ route('internal-courses.index') }}"
-                                class="menu-item {{ request()->routeIs('internal-courses.*') ? 'active' : '' }}">
-                                <i class="fas fa-chalkboard-teacher"></i>
-                                <span class="menu-text">Manage Internal Courses</span>
-                            </a>
-                        @endcan
+                                    @can('footer-list')
+                                        <a href="{{ route('footer.index') }}"
+                                            class="submenu-item {{ request()->routeIs('footer.*') ? 'active' : '' }}">
+                                            <i class="fas fa-shoe-prints"></i>
+                                            <span class="menu-text">Manage Footer</span>
+                                        </a>
+                                    @endcan
 
-                        @can('footer-list')
-                            <a href="{{ route('footer.index') }}"
-                                class="menu-item {{ request()->routeIs('footer.*') ? 'active' : '' }}">
-                                <i class="fas fa-shoe-prints"></i> {{-- you can change this icon --}}
-                                <span class="menu-text">Manage Footer</span>
-                            </a>
-                        @endcan
+                                    @can('hero-section-list')
+                                        <a href="{{ route('hero-sections.index') }}"
+                                            class="submenu-item {{ request()->routeIs('hero-sections.*') ? 'active' : '' }}">
+                                            <i class="fas fa-heading"></i>
+                                            <span class="menu-text">Manage Hero Section</span>
+                                        </a>
+                                    @endcan
 
+                                    @can('home-statistic-list')
+                                        <a href="{{ route('home-statistics.index') }}"
+                                            class="submenu-item {{ request()->routeIs('home-statistics.*') ? 'active' : '' }}">
+                                            <i class="fas fa-chart-line"></i>
+                                            <span class="menu-text">Manage Home Statistics</span>
+                                        </a>
+                                    @endcan
 
-                        {{-- =========================Manage instructors======================= --}}
+                                    @can('course-track-list')
+                                        <a href="{{ route('course-tracks.index') }}"
+                                            class="submenu-item {{ request()->routeIs('course-tracks.*') ? 'active' : '' }}">
+                                            <i class="fas fa-graduation-cap"></i>
+                                            <span class="menu-text">Manage Course Tracks</span>
+                                        </a>
+                                    @endcan
 
-                        @can('instructor-list')
-                            <a href="{{ route('instructors.index') }}"
-                                class="menu-item {{ request()->routeIs('instructors.*') ? 'active' : '' }}">
-                                <i class="fas fa-chalkboard-teacher"></i>
-                                <span class="menu-text">Manage instructors</span>
-                            </a>
-                        @endcan
-
-
-
-
-                    @can('image-list')
-                        <a href="{{ route('home-banner.index') }}"
-                        class="menu-item {{ request()->routeIs('home-banner.*') ? 'active' : '' }}">
-                            <i class="fas fa-image"></i>
-                            <span class="menu-text">Manage Image</span>
-                        </a>
-                    @endcan
-
-
-
-                    @can('service-list')
-                        <a href="{{ route('services.index') }}"
-                        class="menu-item {{ request()->routeIs('services.*') ? 'active' : '' }}">
-                            <i class="fas fa-cogs"></i>
-                            <span class="menu-text">Manage Services</span>
-                        </a>
-                    @endcan
-
-
-
-
-
-                        {{-- =========================Student Reviews======================= --}}
-
-                        @can('student-review-list')
-                            <a href="{{ route('student-reviews.index') }}"
-                                class="menu-item {{ request()->routeIs('student-reviews.*') ? 'active' : '' }}">
-                                <i class="fas fa-user-graduate"></i>
-                                <span class="menu-text">Manage Student Reviews</span>
-                            </a>
-                        @endcan
+                                    @can('service-list')
+                                        <a href="{{ route('services.index') }}"
+                                            class="submenu-item {{ request()->routeIs('services.*') ? 'active' : '' }}">
+                                            <i class="fas fa-code"></i>
+                                            <span class="menu-text">Manage Home services</span>
+                                        </a>
+                                    @endcan
 
 
+                                    @can('image-list')
+                                        <a href="{{ route('home-banner.index') }}"
+                                            class="submenu-item {{ request()->routeIs('home-banner.*') ? 'active' : '' }}">
+                                            <i class="fas fa-code"></i>
+                                            <span class="menu-text">Manage Home banner</span>
+                                        </a>
+                                    @endcan
+
+
+
+                                </div>
+                            </div>
+                        @endcanany
 
 
                         {{-- =========================logout======================= --}}
