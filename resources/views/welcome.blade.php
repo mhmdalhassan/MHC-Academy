@@ -370,13 +370,13 @@
 
             <!-- Intro -->
             <div class="text-center mb-5" data-aos="fade-down" data-aos-duration="1000">
-                <h3 class="fw-bold mb-2">{{ $homeStatistic->title }}</h3>
-                <p class="lead">{{ $homeStatistic->introduction }}</p>
+                <h3 class="fw-bold mb-2">{{ $homeStatistic->title??'' }}</h3>
+                <p class="lead">{{ $homeStatistic->introduction??'' }}</p>
             </div>
 
             <!-- Stats grid -->
             <div class="row g-4 text-center">
-                @foreach($homeStatistic->cards as $index => $card)
+                @foreach($homeStatistic->cards??[] as $index => $card)
                     <div class="col-12 col-md-4" data-aos="fade-up" data-aos-duration="{{ 1000 + ($index * 200) }}">
                         <div class="stat-card rounded-4 p-4 shadow h-100">
                             <h2 class="counter fw-bold mb-2" data-target="{{ $card['card_number'] ?? 0 }}">0</h2>
